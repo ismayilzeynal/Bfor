@@ -1,0 +1,4394 @@
+[
+  {
+    "id": "aud-00001",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00001",
+    "old_value": null,
+    "new_value": {
+      "status": "pending_approval",
+      "type": "transfer"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.128.31"
+  },
+  {
+    "id": "aud-00002",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00002",
+    "old_value": null,
+    "new_value": {
+      "status": "pending_approval",
+      "type": "discount"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.8.168"
+  },
+  {
+    "id": "aud-00003",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00003",
+    "old_value": null,
+    "new_value": {
+      "status": "pending_approval",
+      "type": "bundle"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.160.173"
+  },
+  {
+    "id": "aud-00004",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00004",
+    "old_value": null,
+    "new_value": {
+      "status": "pending_approval",
+      "type": "discount"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.112.187"
+  },
+  {
+    "id": "aud-00005",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00005",
+    "old_value": null,
+    "new_value": {
+      "status": "pending_approval",
+      "type": "transfer"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.113.138"
+  },
+  {
+    "id": "aud-00006",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00006",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T17:30:00Z",
+    "ip_address": "10.0.24.185"
+  },
+  {
+    "id": "aud-00007",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00007",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-14T19:30:00Z",
+    "ip_address": "10.0.154.65"
+  },
+  {
+    "id": "aud-00008",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00009",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "converted_to_task"
+    },
+    "created_at": "2026-05-14T21:30:00Z",
+    "ip_address": "10.0.181.58"
+  },
+  {
+    "id": "aud-00009",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00014",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-15T00:30:00Z",
+    "ip_address": "10.0.27.47"
+  },
+  {
+    "id": "aud-00010",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00016",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-14T10:30:00Z",
+    "ip_address": "10.0.92.154"
+  },
+  {
+    "id": "aud-00011",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00018",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-14T21:30:00Z",
+    "ip_address": "10.0.65.185"
+  },
+  {
+    "id": "aud-00012",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00019",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T10:30:00Z",
+    "ip_address": "10.0.46.26"
+  },
+  {
+    "id": "aud-00013",
+    "user_id": "u-008",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00020",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-14T21:30:00Z",
+    "ip_address": "10.0.99.73"
+  },
+  {
+    "id": "aud-00014",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00021",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-15T03:30:00Z",
+    "ip_address": "10.0.76.200"
+  },
+  {
+    "id": "aud-00015",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00023",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-15T09:30:00Z",
+    "ip_address": "10.0.193.142"
+  },
+  {
+    "id": "aud-00016",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00025",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.97.131"
+  },
+  {
+    "id": "aud-00017",
+    "user_id": "u-008",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00026",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-14T23:30:00Z",
+    "ip_address": "10.0.127.153"
+  },
+  {
+    "id": "aud-00018",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00027",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T18:30:00Z",
+    "ip_address": "10.0.132.120"
+  },
+  {
+    "id": "aud-00019",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00028",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "converted_to_task"
+    },
+    "created_at": "2026-05-14T17:30:00Z",
+    "ip_address": "10.0.40.107"
+  },
+  {
+    "id": "aud-00020",
+    "user_id": "u-008",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00030",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-15T06:30:00Z",
+    "ip_address": "10.0.117.60"
+  },
+  {
+    "id": "aud-00021",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00031",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T23:30:00Z",
+    "ip_address": "10.0.126.13"
+  },
+  {
+    "id": "aud-00022",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00032",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "converted_to_task"
+    },
+    "created_at": "2026-05-15T06:30:00Z",
+    "ip_address": "10.0.44.85"
+  },
+  {
+    "id": "aud-00023",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00033",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "converted_to_task"
+    },
+    "created_at": "2026-05-15T03:30:00Z",
+    "ip_address": "10.0.134.6"
+  },
+  {
+    "id": "aud-00024",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00034",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-14T19:30:00Z",
+    "ip_address": "10.0.171.102"
+  },
+  {
+    "id": "aud-00025",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00040",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-15T02:30:00Z",
+    "ip_address": "10.0.128.110"
+  },
+  {
+    "id": "aud-00026",
+    "user_id": "u-008",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00044",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "rejected"
+    },
+    "created_at": "2026-05-15T05:30:00Z",
+    "ip_address": "10.0.179.181"
+  },
+  {
+    "id": "aud-00027",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00046",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "converted_to_task"
+    },
+    "created_at": "2026-05-14T19:30:00Z",
+    "ip_address": "10.0.34.25"
+  },
+  {
+    "id": "aud-00028",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00050",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-15T02:30:00Z",
+    "ip_address": "10.0.105.128"
+  },
+  {
+    "id": "aud-00029",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "rec-00055",
+    "old_value": {
+      "status": "pending_approval"
+    },
+    "new_value": {
+      "status": "approved"
+    },
+    "created_at": "2026-05-14T18:30:00Z",
+    "ip_address": "10.0.171.106"
+  },
+  {
+    "id": "aud-00030",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00021",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-13T15:30:00Z",
+    "ip_address": "10.0.143.166"
+  },
+  {
+    "id": "aud-00031",
+    "user_id": "u-008",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00022",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T22:30:00Z",
+    "ip_address": "10.0.3.33"
+  },
+  {
+    "id": "aud-00032",
+    "user_id": "u-011",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00023",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T22:30:00Z",
+    "ip_address": "10.0.20.24"
+  },
+  {
+    "id": "aud-00033",
+    "user_id": "u-011",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00024",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T07:30:00Z",
+    "ip_address": "10.0.175.77"
+  },
+  {
+    "id": "aud-00034",
+    "user_id": "u-011",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00025",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T14:30:00Z",
+    "ip_address": "10.0.126.23"
+  },
+  {
+    "id": "aud-00035",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00039",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T08:30:00Z",
+    "ip_address": "10.0.139.77"
+  },
+  {
+    "id": "aud-00036",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00040",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-14T06:30:00Z",
+    "ip_address": "10.0.83.164"
+  },
+  {
+    "id": "aud-00037",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "t-00041",
+    "old_value": {
+      "status": "in_progress"
+    },
+    "new_value": {
+      "status": "completed"
+    },
+    "created_at": "2026-05-15T06:30:00Z",
+    "ip_address": "10.0.159.59"
+  },
+  {
+    "id": "aud-00038",
+    "user_id": "u-002",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-519",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T11:30:00Z",
+    "ip_address": "10.0.156.79"
+  },
+  {
+    "id": "aud-00039",
+    "user_id": "u-007",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-026",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T11:30:00Z",
+    "ip_address": "10.0.55.152"
+  },
+  {
+    "id": "aud-00040",
+    "user_id": "u-012",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-070",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T07:30:00Z",
+    "ip_address": "10.0.133.40"
+  },
+  {
+    "id": "aud-00041",
+    "user_id": "u-011",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-675",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T05:30:00Z",
+    "ip_address": "10.0.70.85"
+  },
+  {
+    "id": "aud-00042",
+    "user_id": "u-005",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-604",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T01:30:00Z",
+    "ip_address": "10.0.127.34"
+  },
+  {
+    "id": "aud-00043",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-359",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T17:30:00Z",
+    "ip_address": "10.0.43.30"
+  },
+  {
+    "id": "aud-00044",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-496",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T22:30:00Z",
+    "ip_address": "10.0.65.46"
+  },
+  {
+    "id": "aud-00045",
+    "user_id": "u-002",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-441",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T16:30:00Z",
+    "ip_address": "10.0.31.29"
+  },
+  {
+    "id": "aud-00046",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-883",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T04:30:00Z",
+    "ip_address": "10.0.95.180"
+  },
+  {
+    "id": "aud-00047",
+    "user_id": "u-002",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-313",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T14:30:00Z",
+    "ip_address": "10.0.79.199"
+  },
+  {
+    "id": "aud-00048",
+    "user_id": "u-011",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-827",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T00:30:00Z",
+    "ip_address": "10.0.28.172"
+  },
+  {
+    "id": "aud-00049",
+    "user_id": "u-012",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-163",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-28T07:30:00Z",
+    "ip_address": "10.0.177.20"
+  },
+  {
+    "id": "aud-00050",
+    "user_id": "u-009",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-912",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T07:30:00Z",
+    "ip_address": "10.0.150.91"
+  },
+  {
+    "id": "aud-00051",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-257",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T13:30:00Z",
+    "ip_address": "10.0.192.98"
+  },
+  {
+    "id": "aud-00052",
+    "user_id": "u-002",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-684",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T00:30:00Z",
+    "ip_address": "10.0.122.154"
+  },
+  {
+    "id": "aud-00053",
+    "user_id": "u-009",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-829",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T00:30:00Z",
+    "ip_address": "10.0.170.30"
+  },
+  {
+    "id": "aud-00054",
+    "user_id": "u-006",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-193",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T19:30:00Z",
+    "ip_address": "10.0.118.97"
+  },
+  {
+    "id": "aud-00055",
+    "user_id": "u-004",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-831",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T21:30:00Z",
+    "ip_address": "10.0.133.57"
+  },
+  {
+    "id": "aud-00056",
+    "user_id": "u-006",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-831",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-07T19:30:00Z",
+    "ip_address": "10.0.142.138"
+  },
+  {
+    "id": "aud-00057",
+    "user_id": "u-006",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-443",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T04:30:00Z",
+    "ip_address": "10.0.34.106"
+  },
+  {
+    "id": "aud-00058",
+    "user_id": "u-008",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-235",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T10:30:00Z",
+    "ip_address": "10.0.172.13"
+  },
+  {
+    "id": "aud-00059",
+    "user_id": "u-003",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-995",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T06:30:00Z",
+    "ip_address": "10.0.82.54"
+  },
+  {
+    "id": "aud-00060",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-720",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T11:30:00Z",
+    "ip_address": "10.0.101.126"
+  },
+  {
+    "id": "aud-00061",
+    "user_id": "u-009",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-296",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T21:30:00Z",
+    "ip_address": "10.0.102.52"
+  },
+  {
+    "id": "aud-00062",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-182",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T15:30:00Z",
+    "ip_address": "10.0.92.44"
+  },
+  {
+    "id": "aud-00063",
+    "user_id": "u-006",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-731",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T18:30:00Z",
+    "ip_address": "10.0.52.41"
+  },
+  {
+    "id": "aud-00064",
+    "user_id": "u-002",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-413",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T08:30:00Z",
+    "ip_address": "10.0.59.145"
+  },
+  {
+    "id": "aud-00065",
+    "user_id": "u-005",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-122",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T05:30:00Z",
+    "ip_address": "10.0.84.164"
+  },
+  {
+    "id": "aud-00066",
+    "user_id": "u-001",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-933",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T03:30:00Z",
+    "ip_address": "10.0.93.122"
+  },
+  {
+    "id": "aud-00067",
+    "user_id": "u-007",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-239",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T17:30:00Z",
+    "ip_address": "10.0.198.110"
+  },
+  {
+    "id": "aud-00068",
+    "user_id": "u-007",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-896",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T19:30:00Z",
+    "ip_address": "10.0.63.166"
+  },
+  {
+    "id": "aud-00069",
+    "user_id": "u-006",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-974",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T04:30:00Z",
+    "ip_address": "10.0.4.14"
+  },
+  {
+    "id": "aud-00070",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-269",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T13:30:00Z",
+    "ip_address": "10.0.34.174"
+  },
+  {
+    "id": "aud-00071",
+    "user_id": "u-002",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-823",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T21:30:00Z",
+    "ip_address": "10.0.195.77"
+  },
+  {
+    "id": "aud-00072",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-412",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T14:30:00Z",
+    "ip_address": "10.0.173.54"
+  },
+  {
+    "id": "aud-00073",
+    "user_id": "u-006",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-978",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T22:30:00Z",
+    "ip_address": "10.0.167.190"
+  },
+  {
+    "id": "aud-00074",
+    "user_id": "u-003",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-621",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T23:30:00Z",
+    "ip_address": "10.0.114.127"
+  },
+  {
+    "id": "aud-00075",
+    "user_id": "u-003",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-713",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T10:30:00Z",
+    "ip_address": "10.0.183.52"
+  },
+  {
+    "id": "aud-00076",
+    "user_id": "u-010",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-228",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T01:30:00Z",
+    "ip_address": "10.0.92.93"
+  },
+  {
+    "id": "aud-00077",
+    "user_id": "u-002",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-269",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T02:30:00Z",
+    "ip_address": "10.0.92.124"
+  },
+  {
+    "id": "aud-00078",
+    "user_id": "u-011",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-196",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T11:30:00Z",
+    "ip_address": "10.0.107.121"
+  },
+  {
+    "id": "aud-00079",
+    "user_id": "u-001",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-394",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-30T03:30:00Z",
+    "ip_address": "10.0.25.16"
+  },
+  {
+    "id": "aud-00080",
+    "user_id": "u-009",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-894",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T04:30:00Z",
+    "ip_address": "10.0.5.107"
+  },
+  {
+    "id": "aud-00081",
+    "user_id": "u-012",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-001",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T18:30:00Z",
+    "ip_address": "10.0.163.1"
+  },
+  {
+    "id": "aud-00082",
+    "user_id": "u-007",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-893",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T15:30:00Z",
+    "ip_address": "10.0.79.78"
+  },
+  {
+    "id": "aud-00083",
+    "user_id": "u-002",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-332",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T23:30:00Z",
+    "ip_address": "10.0.108.113"
+  },
+  {
+    "id": "aud-00084",
+    "user_id": "u-004",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-757",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T08:30:00Z",
+    "ip_address": "10.0.162.26"
+  },
+  {
+    "id": "aud-00085",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-553",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T21:30:00Z",
+    "ip_address": "10.0.18.193"
+  },
+  {
+    "id": "aud-00086",
+    "user_id": "u-010",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-756",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T11:30:00Z",
+    "ip_address": "10.0.184.2"
+  },
+  {
+    "id": "aud-00087",
+    "user_id": "u-010",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-913",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T06:30:00Z",
+    "ip_address": "10.0.141.23"
+  },
+  {
+    "id": "aud-00088",
+    "user_id": "u-012",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-393",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T21:30:00Z",
+    "ip_address": "10.0.94.153"
+  },
+  {
+    "id": "aud-00089",
+    "user_id": "u-001",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-242",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T10:30:00Z",
+    "ip_address": "10.0.93.169"
+  },
+  {
+    "id": "aud-00090",
+    "user_id": "u-001",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-864",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T00:30:00Z",
+    "ip_address": "10.0.158.154"
+  },
+  {
+    "id": "aud-00091",
+    "user_id": "u-011",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-851",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-21T07:30:00Z",
+    "ip_address": "10.0.98.141"
+  },
+  {
+    "id": "aud-00092",
+    "user_id": "u-012",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-563",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T02:30:00Z",
+    "ip_address": "10.0.43.175"
+  },
+  {
+    "id": "aud-00093",
+    "user_id": "u-002",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-766",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T04:30:00Z",
+    "ip_address": "10.0.40.42"
+  },
+  {
+    "id": "aud-00094",
+    "user_id": "u-011",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-817",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T20:30:00Z",
+    "ip_address": "10.0.10.86"
+  },
+  {
+    "id": "aud-00095",
+    "user_id": "u-002",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-932",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T08:30:00Z",
+    "ip_address": "10.0.74.38"
+  },
+  {
+    "id": "aud-00096",
+    "user_id": "u-001",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-317",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T15:30:00Z",
+    "ip_address": "10.0.57.177"
+  },
+  {
+    "id": "aud-00097",
+    "user_id": "u-009",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-257",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T04:30:00Z",
+    "ip_address": "10.0.192.72"
+  },
+  {
+    "id": "aud-00098",
+    "user_id": "u-001",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-226",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T05:30:00Z",
+    "ip_address": "10.0.7.40"
+  },
+  {
+    "id": "aud-00099",
+    "user_id": "u-007",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-393",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T00:30:00Z",
+    "ip_address": "10.0.128.24"
+  },
+  {
+    "id": "aud-00100",
+    "user_id": "u-006",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-123",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T12:30:00Z",
+    "ip_address": "10.0.9.45"
+  },
+  {
+    "id": "aud-00101",
+    "user_id": "u-004",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-394",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T19:30:00Z",
+    "ip_address": "10.0.62.48"
+  },
+  {
+    "id": "aud-00102",
+    "user_id": "u-012",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-214",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T01:30:00Z",
+    "ip_address": "10.0.79.179"
+  },
+  {
+    "id": "aud-00103",
+    "user_id": "u-007",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-816",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-08T20:30:00Z",
+    "ip_address": "10.0.106.38"
+  },
+  {
+    "id": "aud-00104",
+    "user_id": "u-005",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-877",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T09:30:00Z",
+    "ip_address": "10.0.136.95"
+  },
+  {
+    "id": "aud-00105",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-747",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T14:30:00Z",
+    "ip_address": "10.0.144.145"
+  },
+  {
+    "id": "aud-00106",
+    "user_id": "u-001",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-081",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T07:30:00Z",
+    "ip_address": "10.0.105.124"
+  },
+  {
+    "id": "aud-00107",
+    "user_id": "u-010",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-030",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T10:30:00Z",
+    "ip_address": "10.0.8.8"
+  },
+  {
+    "id": "aud-00108",
+    "user_id": "u-012",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-001",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T10:30:00Z",
+    "ip_address": "10.0.6.70"
+  },
+  {
+    "id": "aud-00109",
+    "user_id": "u-005",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-692",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T22:30:00Z",
+    "ip_address": "10.0.91.65"
+  },
+  {
+    "id": "aud-00110",
+    "user_id": "u-012",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-858",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T15:30:00Z",
+    "ip_address": "10.0.9.135"
+  },
+  {
+    "id": "aud-00111",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-923",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T21:30:00Z",
+    "ip_address": "10.0.75.91"
+  },
+  {
+    "id": "aud-00112",
+    "user_id": "u-001",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-753",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T20:30:00Z",
+    "ip_address": "10.0.148.198"
+  },
+  {
+    "id": "aud-00113",
+    "user_id": "u-012",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-380",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T19:30:00Z",
+    "ip_address": "10.0.18.34"
+  },
+  {
+    "id": "aud-00114",
+    "user_id": "u-006",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-934",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T22:30:00Z",
+    "ip_address": "10.0.3.148"
+  },
+  {
+    "id": "aud-00115",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-598",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T10:30:00Z",
+    "ip_address": "10.0.132.180"
+  },
+  {
+    "id": "aud-00116",
+    "user_id": "u-006",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-976",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T04:30:00Z",
+    "ip_address": "10.0.186.150"
+  },
+  {
+    "id": "aud-00117",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-722",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T00:30:00Z",
+    "ip_address": "10.0.179.50"
+  },
+  {
+    "id": "aud-00118",
+    "user_id": "u-004",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-983",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T10:30:00Z",
+    "ip_address": "10.0.39.193"
+  },
+  {
+    "id": "aud-00119",
+    "user_id": "u-003",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-754",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T16:30:00Z",
+    "ip_address": "10.0.52.83"
+  },
+  {
+    "id": "aud-00120",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-696",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T20:30:00Z",
+    "ip_address": "10.0.55.33"
+  },
+  {
+    "id": "aud-00121",
+    "user_id": "u-011",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-864",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T11:30:00Z",
+    "ip_address": "10.0.133.61"
+  },
+  {
+    "id": "aud-00122",
+    "user_id": "u-010",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-984",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T21:30:00Z",
+    "ip_address": "10.0.93.104"
+  },
+  {
+    "id": "aud-00123",
+    "user_id": "u-002",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-144",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T12:30:00Z",
+    "ip_address": "10.0.46.125"
+  },
+  {
+    "id": "aud-00124",
+    "user_id": "u-010",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-906",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T00:30:00Z",
+    "ip_address": "10.0.98.138"
+  },
+  {
+    "id": "aud-00125",
+    "user_id": "u-006",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-755",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T12:30:00Z",
+    "ip_address": "10.0.3.190"
+  },
+  {
+    "id": "aud-00126",
+    "user_id": "u-001",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-895",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T18:30:00Z",
+    "ip_address": "10.0.165.11"
+  },
+  {
+    "id": "aud-00127",
+    "user_id": "u-003",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-139",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T16:30:00Z",
+    "ip_address": "10.0.47.7"
+  },
+  {
+    "id": "aud-00128",
+    "user_id": "u-004",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-711",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-15T01:30:00Z",
+    "ip_address": "10.0.147.1"
+  },
+  {
+    "id": "aud-00129",
+    "user_id": "u-001",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-577",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T06:30:00Z",
+    "ip_address": "10.0.30.114"
+  },
+  {
+    "id": "aud-00130",
+    "user_id": "u-006",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-458",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T16:30:00Z",
+    "ip_address": "10.0.45.168"
+  },
+  {
+    "id": "aud-00131",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-216",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T21:30:00Z",
+    "ip_address": "10.0.194.94"
+  },
+  {
+    "id": "aud-00132",
+    "user_id": "u-001",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-348",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T05:30:00Z",
+    "ip_address": "10.0.51.4"
+  },
+  {
+    "id": "aud-00133",
+    "user_id": "u-002",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-758",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T11:30:00Z",
+    "ip_address": "10.0.44.72"
+  },
+  {
+    "id": "aud-00134",
+    "user_id": "u-002",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-047",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T15:30:00Z",
+    "ip_address": "10.0.38.98"
+  },
+  {
+    "id": "aud-00135",
+    "user_id": "u-001",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-413",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T06:30:00Z",
+    "ip_address": "10.0.193.47"
+  },
+  {
+    "id": "aud-00136",
+    "user_id": "u-011",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-834",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T21:30:00Z",
+    "ip_address": "10.0.58.160"
+  },
+  {
+    "id": "aud-00137",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-778",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T06:30:00Z",
+    "ip_address": "10.0.149.154"
+  },
+  {
+    "id": "aud-00138",
+    "user_id": "u-002",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-068",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T17:30:00Z",
+    "ip_address": "10.0.129.51"
+  },
+  {
+    "id": "aud-00139",
+    "user_id": "u-001",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-998",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T08:30:00Z",
+    "ip_address": "10.0.11.44"
+  },
+  {
+    "id": "aud-00140",
+    "user_id": "u-009",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-995",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T13:30:00Z",
+    "ip_address": "10.0.121.51"
+  },
+  {
+    "id": "aud-00141",
+    "user_id": "u-003",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-341",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-08T19:30:00Z",
+    "ip_address": "10.0.25.95"
+  },
+  {
+    "id": "aud-00142",
+    "user_id": "u-011",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-253",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T18:30:00Z",
+    "ip_address": "10.0.154.46"
+  },
+  {
+    "id": "aud-00143",
+    "user_id": "u-004",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-621",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T01:30:00Z",
+    "ip_address": "10.0.78.130"
+  },
+  {
+    "id": "aud-00144",
+    "user_id": "u-008",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-757",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T03:30:00Z",
+    "ip_address": "10.0.12.100"
+  },
+  {
+    "id": "aud-00145",
+    "user_id": "u-004",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-559",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T14:30:00Z",
+    "ip_address": "10.0.160.29"
+  },
+  {
+    "id": "aud-00146",
+    "user_id": "u-011",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-368",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-15T06:30:00Z",
+    "ip_address": "10.0.123.189"
+  },
+  {
+    "id": "aud-00147",
+    "user_id": "u-002",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-509",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T18:30:00Z",
+    "ip_address": "10.0.14.135"
+  },
+  {
+    "id": "aud-00148",
+    "user_id": "u-001",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-035",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T23:30:00Z",
+    "ip_address": "10.0.17.163"
+  },
+  {
+    "id": "aud-00149",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-480",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T23:30:00Z",
+    "ip_address": "10.0.175.172"
+  },
+  {
+    "id": "aud-00150",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-726",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T20:30:00Z",
+    "ip_address": "10.0.156.64"
+  },
+  {
+    "id": "aud-00151",
+    "user_id": "u-007",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-287",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T00:30:00Z",
+    "ip_address": "10.0.7.19"
+  },
+  {
+    "id": "aud-00152",
+    "user_id": "u-009",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-276",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T21:30:00Z",
+    "ip_address": "10.0.69.68"
+  },
+  {
+    "id": "aud-00153",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-870",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T19:30:00Z",
+    "ip_address": "10.0.172.45"
+  },
+  {
+    "id": "aud-00154",
+    "user_id": "u-011",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-625",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T09:30:00Z",
+    "ip_address": "10.0.151.7"
+  },
+  {
+    "id": "aud-00155",
+    "user_id": "u-004",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-366",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T02:30:00Z",
+    "ip_address": "10.0.2.36"
+  },
+  {
+    "id": "aud-00156",
+    "user_id": "u-012",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-955",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-28T00:30:00Z",
+    "ip_address": "10.0.100.86"
+  },
+  {
+    "id": "aud-00157",
+    "user_id": "u-010",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-600",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T09:30:00Z",
+    "ip_address": "10.0.100.40"
+  },
+  {
+    "id": "aud-00158",
+    "user_id": "u-010",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-299",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T08:30:00Z",
+    "ip_address": "10.0.142.122"
+  },
+  {
+    "id": "aud-00159",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-764",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T05:30:00Z",
+    "ip_address": "10.0.78.97"
+  },
+  {
+    "id": "aud-00160",
+    "user_id": "u-006",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-982",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T04:30:00Z",
+    "ip_address": "10.0.113.128"
+  },
+  {
+    "id": "aud-00161",
+    "user_id": "u-001",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-992",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T06:30:00Z",
+    "ip_address": "10.0.178.17"
+  },
+  {
+    "id": "aud-00162",
+    "user_id": "u-003",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-347",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T09:30:00Z",
+    "ip_address": "10.0.182.16"
+  },
+  {
+    "id": "aud-00163",
+    "user_id": "u-006",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-883",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T10:30:00Z",
+    "ip_address": "10.0.120.162"
+  },
+  {
+    "id": "aud-00164",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-917",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-21T22:30:00Z",
+    "ip_address": "10.0.87.68"
+  },
+  {
+    "id": "aud-00165",
+    "user_id": "u-003",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-654",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T16:30:00Z",
+    "ip_address": "10.0.52.29"
+  },
+  {
+    "id": "aud-00166",
+    "user_id": "u-007",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-358",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T17:30:00Z",
+    "ip_address": "10.0.30.135"
+  },
+  {
+    "id": "aud-00167",
+    "user_id": "u-012",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-309",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T17:30:00Z",
+    "ip_address": "10.0.69.168"
+  },
+  {
+    "id": "aud-00168",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-222",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T07:30:00Z",
+    "ip_address": "10.0.67.49"
+  },
+  {
+    "id": "aud-00169",
+    "user_id": "u-003",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-203",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T02:30:00Z",
+    "ip_address": "10.0.193.91"
+  },
+  {
+    "id": "aud-00170",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-597",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-07T20:30:00Z",
+    "ip_address": "10.0.106.39"
+  },
+  {
+    "id": "aud-00171",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-011",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T22:30:00Z",
+    "ip_address": "10.0.193.30"
+  },
+  {
+    "id": "aud-00172",
+    "user_id": "u-010",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-870",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T22:30:00Z",
+    "ip_address": "10.0.134.129"
+  },
+  {
+    "id": "aud-00173",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-488",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T20:30:00Z",
+    "ip_address": "10.0.17.188"
+  },
+  {
+    "id": "aud-00174",
+    "user_id": "u-004",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-379",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T21:30:00Z",
+    "ip_address": "10.0.77.115"
+  },
+  {
+    "id": "aud-00175",
+    "user_id": "u-010",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-868",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-21T20:30:00Z",
+    "ip_address": "10.0.23.98"
+  },
+  {
+    "id": "aud-00176",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-978",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T19:30:00Z",
+    "ip_address": "10.0.3.4"
+  },
+  {
+    "id": "aud-00177",
+    "user_id": "u-012",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-227",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-30T06:30:00Z",
+    "ip_address": "10.0.158.67"
+  },
+  {
+    "id": "aud-00178",
+    "user_id": "u-007",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-066",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T16:30:00Z",
+    "ip_address": "10.0.141.193"
+  },
+  {
+    "id": "aud-00179",
+    "user_id": "u-010",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-143",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-15T02:30:00Z",
+    "ip_address": "10.0.48.163"
+  },
+  {
+    "id": "aud-00180",
+    "user_id": "u-008",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-630",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T01:30:00Z",
+    "ip_address": "10.0.68.117"
+  },
+  {
+    "id": "aud-00181",
+    "user_id": "u-003",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-448",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T02:30:00Z",
+    "ip_address": "10.0.123.81"
+  },
+  {
+    "id": "aud-00182",
+    "user_id": "u-012",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-655",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-20T12:30:00Z",
+    "ip_address": "10.0.105.113"
+  },
+  {
+    "id": "aud-00183",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-070",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T03:30:00Z",
+    "ip_address": "10.0.90.112"
+  },
+  {
+    "id": "aud-00184",
+    "user_id": "u-010",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-808",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-08T20:30:00Z",
+    "ip_address": "10.0.105.2"
+  },
+  {
+    "id": "aud-00185",
+    "user_id": "u-002",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-511",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T16:30:00Z",
+    "ip_address": "10.0.128.76"
+  },
+  {
+    "id": "aud-00186",
+    "user_id": "u-012",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-206",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T23:30:00Z",
+    "ip_address": "10.0.58.65"
+  },
+  {
+    "id": "aud-00187",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-685",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T20:30:00Z",
+    "ip_address": "10.0.49.198"
+  },
+  {
+    "id": "aud-00188",
+    "user_id": "u-003",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-873",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T08:30:00Z",
+    "ip_address": "10.0.181.168"
+  },
+  {
+    "id": "aud-00189",
+    "user_id": "u-009",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-996",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T01:30:00Z",
+    "ip_address": "10.0.162.68"
+  },
+  {
+    "id": "aud-00190",
+    "user_id": "u-007",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-800",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T14:30:00Z",
+    "ip_address": "10.0.150.29"
+  },
+  {
+    "id": "aud-00191",
+    "user_id": "u-011",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-298",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T23:30:00Z",
+    "ip_address": "10.0.164.137"
+  },
+  {
+    "id": "aud-00192",
+    "user_id": "u-009",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-977",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T05:30:00Z",
+    "ip_address": "10.0.18.101"
+  },
+  {
+    "id": "aud-00193",
+    "user_id": "u-003",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-420",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T04:30:00Z",
+    "ip_address": "10.0.50.138"
+  },
+  {
+    "id": "aud-00194",
+    "user_id": "u-005",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-626",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T01:30:00Z",
+    "ip_address": "10.0.97.137"
+  },
+  {
+    "id": "aud-00195",
+    "user_id": "u-010",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-045",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-28T08:30:00Z",
+    "ip_address": "10.0.153.152"
+  },
+  {
+    "id": "aud-00196",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-988",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T12:30:00Z",
+    "ip_address": "10.0.87.138"
+  },
+  {
+    "id": "aud-00197",
+    "user_id": "u-006",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-820",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T23:30:00Z",
+    "ip_address": "10.0.37.80"
+  },
+  {
+    "id": "aud-00198",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-187",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T03:30:00Z",
+    "ip_address": "10.0.160.199"
+  },
+  {
+    "id": "aud-00199",
+    "user_id": "u-010",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-528",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T04:30:00Z",
+    "ip_address": "10.0.29.172"
+  },
+  {
+    "id": "aud-00200",
+    "user_id": "u-005",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-957",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T18:30:00Z",
+    "ip_address": "10.0.120.120"
+  },
+  {
+    "id": "aud-00201",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-587",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T23:30:00Z",
+    "ip_address": "10.0.28.23"
+  },
+  {
+    "id": "aud-00202",
+    "user_id": "u-004",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-407",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T16:30:00Z",
+    "ip_address": "10.0.62.111"
+  },
+  {
+    "id": "aud-00203",
+    "user_id": "u-011",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-025",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T07:30:00Z",
+    "ip_address": "10.0.24.12"
+  },
+  {
+    "id": "aud-00204",
+    "user_id": "u-004",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-309",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-30T21:30:00Z",
+    "ip_address": "10.0.95.137"
+  },
+  {
+    "id": "aud-00205",
+    "user_id": "u-011",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-947",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T05:30:00Z",
+    "ip_address": "10.0.177.10"
+  },
+  {
+    "id": "aud-00206",
+    "user_id": "u-010",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-201",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-30T02:30:00Z",
+    "ip_address": "10.0.144.190"
+  },
+  {
+    "id": "aud-00207",
+    "user_id": "u-007",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-937",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T11:30:00Z",
+    "ip_address": "10.0.11.97"
+  },
+  {
+    "id": "aud-00208",
+    "user_id": "u-005",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-930",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T12:30:00Z",
+    "ip_address": "10.0.107.149"
+  },
+  {
+    "id": "aud-00209",
+    "user_id": "u-004",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-818",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T02:30:00Z",
+    "ip_address": "10.0.168.29"
+  },
+  {
+    "id": "aud-00210",
+    "user_id": "u-008",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-203",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T07:30:00Z",
+    "ip_address": "10.0.94.81"
+  },
+  {
+    "id": "aud-00211",
+    "user_id": "u-011",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-266",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T16:30:00Z",
+    "ip_address": "10.0.24.14"
+  },
+  {
+    "id": "aud-00212",
+    "user_id": "u-006",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-833",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T10:30:00Z",
+    "ip_address": "10.0.131.89"
+  },
+  {
+    "id": "aud-00213",
+    "user_id": "u-002",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-228",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T05:30:00Z",
+    "ip_address": "10.0.14.124"
+  },
+  {
+    "id": "aud-00214",
+    "user_id": "u-010",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-358",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T16:30:00Z",
+    "ip_address": "10.0.142.149"
+  },
+  {
+    "id": "aud-00215",
+    "user_id": "u-010",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-268",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T17:30:00Z",
+    "ip_address": "10.0.68.122"
+  },
+  {
+    "id": "aud-00216",
+    "user_id": "u-012",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-545",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-08T20:30:00Z",
+    "ip_address": "10.0.180.192"
+  },
+  {
+    "id": "aud-00217",
+    "user_id": "u-007",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-691",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-28T18:30:00Z",
+    "ip_address": "10.0.176.119"
+  },
+  {
+    "id": "aud-00218",
+    "user_id": "u-004",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-164",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T22:30:00Z",
+    "ip_address": "10.0.189.68"
+  },
+  {
+    "id": "aud-00219",
+    "user_id": "u-012",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-772",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T09:30:00Z",
+    "ip_address": "10.0.19.30"
+  },
+  {
+    "id": "aud-00220",
+    "user_id": "u-009",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-106",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T05:30:00Z",
+    "ip_address": "10.0.149.166"
+  },
+  {
+    "id": "aud-00221",
+    "user_id": "u-007",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-084",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T02:30:00Z",
+    "ip_address": "10.0.16.190"
+  },
+  {
+    "id": "aud-00222",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-247",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T14:30:00Z",
+    "ip_address": "10.0.116.157"
+  },
+  {
+    "id": "aud-00223",
+    "user_id": "u-004",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-004",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T01:30:00Z",
+    "ip_address": "10.0.62.58"
+  },
+  {
+    "id": "aud-00224",
+    "user_id": "u-006",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-980",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T06:30:00Z",
+    "ip_address": "10.0.67.28"
+  },
+  {
+    "id": "aud-00225",
+    "user_id": "u-003",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-463",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T14:30:00Z",
+    "ip_address": "10.0.109.7"
+  },
+  {
+    "id": "aud-00226",
+    "user_id": "u-004",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-363",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T00:30:00Z",
+    "ip_address": "10.0.189.100"
+  },
+  {
+    "id": "aud-00227",
+    "user_id": "u-012",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-556",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T03:30:00Z",
+    "ip_address": "10.0.123.91"
+  },
+  {
+    "id": "aud-00228",
+    "user_id": "u-012",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-044",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-21T16:30:00Z",
+    "ip_address": "10.0.155.6"
+  },
+  {
+    "id": "aud-00229",
+    "user_id": "u-012",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-658",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T10:30:00Z",
+    "ip_address": "10.0.86.2"
+  },
+  {
+    "id": "aud-00230",
+    "user_id": "u-006",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-486",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T11:30:00Z",
+    "ip_address": "10.0.103.115"
+  },
+  {
+    "id": "aud-00231",
+    "user_id": "u-002",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-844",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T10:30:00Z",
+    "ip_address": "10.0.137.132"
+  },
+  {
+    "id": "aud-00232",
+    "user_id": "u-011",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-389",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T18:30:00Z",
+    "ip_address": "10.0.199.24"
+  },
+  {
+    "id": "aud-00233",
+    "user_id": "u-007",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-345",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T14:30:00Z",
+    "ip_address": "10.0.137.81"
+  },
+  {
+    "id": "aud-00234",
+    "user_id": "u-009",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-831",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T13:30:00Z",
+    "ip_address": "10.0.179.128"
+  },
+  {
+    "id": "aud-00235",
+    "user_id": "u-010",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-178",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T22:30:00Z",
+    "ip_address": "10.0.87.12"
+  },
+  {
+    "id": "aud-00236",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-972",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T18:30:00Z",
+    "ip_address": "10.0.136.57"
+  },
+  {
+    "id": "aud-00237",
+    "user_id": "u-003",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-456",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-29T08:30:00Z",
+    "ip_address": "10.0.164.194"
+  },
+  {
+    "id": "aud-00238",
+    "user_id": "u-007",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-452",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T07:30:00Z",
+    "ip_address": "10.0.71.78"
+  },
+  {
+    "id": "aud-00239",
+    "user_id": "u-003",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-346",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-28T10:30:00Z",
+    "ip_address": "10.0.70.78"
+  },
+  {
+    "id": "aud-00240",
+    "user_id": "u-005",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-824",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-23T17:30:00Z",
+    "ip_address": "10.0.76.65"
+  },
+  {
+    "id": "aud-00241",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-934",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T17:30:00Z",
+    "ip_address": "10.0.178.78"
+  },
+  {
+    "id": "aud-00242",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-406",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T08:30:00Z",
+    "ip_address": "10.0.37.123"
+  },
+  {
+    "id": "aud-00243",
+    "user_id": "u-002",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-478",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T15:30:00Z",
+    "ip_address": "10.0.31.15"
+  },
+  {
+    "id": "aud-00244",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-495",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T03:30:00Z",
+    "ip_address": "10.0.74.29"
+  },
+  {
+    "id": "aud-00245",
+    "user_id": "u-010",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-351",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T13:30:00Z",
+    "ip_address": "10.0.189.93"
+  },
+  {
+    "id": "aud-00246",
+    "user_id": "u-007",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-217",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T05:30:00Z",
+    "ip_address": "10.0.91.9"
+  },
+  {
+    "id": "aud-00247",
+    "user_id": "u-007",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-311",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T11:30:00Z",
+    "ip_address": "10.0.67.127"
+  },
+  {
+    "id": "aud-00248",
+    "user_id": "u-006",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-068",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T08:30:00Z",
+    "ip_address": "10.0.167.91"
+  },
+  {
+    "id": "aud-00249",
+    "user_id": "u-008",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-240",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-27T17:30:00Z",
+    "ip_address": "10.0.13.118"
+  },
+  {
+    "id": "aud-00250",
+    "user_id": "u-004",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-033",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-15T01:30:00Z",
+    "ip_address": "10.0.14.85"
+  },
+  {
+    "id": "aud-00251",
+    "user_id": "u-009",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-298",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-15T08:30:00Z",
+    "ip_address": "10.0.71.199"
+  },
+  {
+    "id": "aud-00252",
+    "user_id": "u-001",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-105",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-21T08:30:00Z",
+    "ip_address": "10.0.173.14"
+  },
+  {
+    "id": "aud-00253",
+    "user_id": "u-010",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-204",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T04:30:00Z",
+    "ip_address": "10.0.68.41"
+  },
+  {
+    "id": "aud-00254",
+    "user_id": "u-012",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-540",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T23:30:00Z",
+    "ip_address": "10.0.134.54"
+  },
+  {
+    "id": "aud-00255",
+    "user_id": "u-010",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-572",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-13T21:30:00Z",
+    "ip_address": "10.0.85.80"
+  },
+  {
+    "id": "aud-00256",
+    "user_id": "u-003",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-648",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-06T03:30:00Z",
+    "ip_address": "10.0.104.194"
+  },
+  {
+    "id": "aud-00257",
+    "user_id": "u-012",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-348",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T07:30:00Z",
+    "ip_address": "10.0.43.145"
+  },
+  {
+    "id": "aud-00258",
+    "user_id": "u-001",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-043",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T03:30:00Z",
+    "ip_address": "10.0.142.89"
+  },
+  {
+    "id": "aud-00259",
+    "user_id": "u-005",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-127",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T19:30:00Z",
+    "ip_address": "10.0.80.193"
+  },
+  {
+    "id": "aud-00260",
+    "user_id": "u-004",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-417",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T15:30:00Z",
+    "ip_address": "10.0.119.176"
+  },
+  {
+    "id": "aud-00261",
+    "user_id": "u-002",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-034",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T18:30:00Z",
+    "ip_address": "10.0.17.134"
+  },
+  {
+    "id": "aud-00262",
+    "user_id": "u-011",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-620",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T01:30:00Z",
+    "ip_address": "10.0.167.137"
+  },
+  {
+    "id": "aud-00263",
+    "user_id": "u-005",
+    "action": "reassigned",
+    "entity_type": "task",
+    "entity_id": "x-744",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T15:30:00Z",
+    "ip_address": "10.0.99.74"
+  },
+  {
+    "id": "aud-00264",
+    "user_id": "u-001",
+    "action": "status_changed",
+    "entity_type": "task",
+    "entity_id": "x-410",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-26T21:30:00Z",
+    "ip_address": "10.0.113.84"
+  },
+  {
+    "id": "aud-00265",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-208",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T07:30:00Z",
+    "ip_address": "10.0.177.151"
+  },
+  {
+    "id": "aud-00266",
+    "user_id": "u-008",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-129",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T02:30:00Z",
+    "ip_address": "10.0.106.34"
+  },
+  {
+    "id": "aud-00267",
+    "user_id": "u-002",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-357",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T18:30:00Z",
+    "ip_address": "10.0.95.65"
+  },
+  {
+    "id": "aud-00268",
+    "user_id": "u-009",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-747",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T11:30:00Z",
+    "ip_address": "10.0.8.17"
+  },
+  {
+    "id": "aud-00269",
+    "user_id": "u-007",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-083",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-12T07:30:00Z",
+    "ip_address": "10.0.149.59"
+  },
+  {
+    "id": "aud-00270",
+    "user_id": "u-011",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-151",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T07:30:00Z",
+    "ip_address": "10.0.41.5"
+  },
+  {
+    "id": "aud-00271",
+    "user_id": "u-008",
+    "action": "status_changed",
+    "entity_type": "transfer",
+    "entity_id": "x-465",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T16:30:00Z",
+    "ip_address": "10.0.112.187"
+  },
+  {
+    "id": "aud-00272",
+    "user_id": "u-010",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-397",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T18:30:00Z",
+    "ip_address": "10.0.70.149"
+  },
+  {
+    "id": "aud-00273",
+    "user_id": "u-012",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-415",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T06:30:00Z",
+    "ip_address": "10.0.149.150"
+  },
+  {
+    "id": "aud-00274",
+    "user_id": "u-005",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-669",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T03:30:00Z",
+    "ip_address": "10.0.63.53"
+  },
+  {
+    "id": "aud-00275",
+    "user_id": "u-007",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-938",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T22:30:00Z",
+    "ip_address": "10.0.2.105"
+  },
+  {
+    "id": "aud-00276",
+    "user_id": "u-009",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-279",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-15T17:30:00Z",
+    "ip_address": "10.0.158.88"
+  },
+  {
+    "id": "aud-00277",
+    "user_id": "u-011",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-914",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T10:30:00Z",
+    "ip_address": "10.0.89.152"
+  },
+  {
+    "id": "aud-00278",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-187",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T15:30:00Z",
+    "ip_address": "10.0.87.115"
+  },
+  {
+    "id": "aud-00279",
+    "user_id": "u-002",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-851",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-03T20:30:00Z",
+    "ip_address": "10.0.113.85"
+  },
+  {
+    "id": "aud-00280",
+    "user_id": "u-008",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-750",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T00:30:00Z",
+    "ip_address": "10.0.195.1"
+  },
+  {
+    "id": "aud-00281",
+    "user_id": "u-003",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-781",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T05:30:00Z",
+    "ip_address": "10.0.71.153"
+  },
+  {
+    "id": "aud-00282",
+    "user_id": "u-001",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-233",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-10T02:30:00Z",
+    "ip_address": "10.0.131.146"
+  },
+  {
+    "id": "aud-00283",
+    "user_id": "u-003",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-841",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-22T15:30:00Z",
+    "ip_address": "10.0.12.49"
+  },
+  {
+    "id": "aud-00284",
+    "user_id": "u-010",
+    "action": "rejected",
+    "entity_type": "recommendation",
+    "entity_id": "x-376",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-07T03:30:00Z",
+    "ip_address": "10.0.198.155"
+  },
+  {
+    "id": "aud-00285",
+    "user_id": "u-008",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-876",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-14T07:30:00Z",
+    "ip_address": "10.0.139.73"
+  },
+  {
+    "id": "aud-00286",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-884",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T19:30:00Z",
+    "ip_address": "10.0.111.110"
+  },
+  {
+    "id": "aud-00287",
+    "user_id": "u-009",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-020",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-19T17:30:00Z",
+    "ip_address": "10.0.104.70"
+  },
+  {
+    "id": "aud-00288",
+    "user_id": "u-006",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-973",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-18T12:30:00Z",
+    "ip_address": "10.0.16.15"
+  },
+  {
+    "id": "aud-00289",
+    "user_id": "u-007",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-455",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-25T00:30:00Z",
+    "ip_address": "10.0.103.125"
+  },
+  {
+    "id": "aud-00290",
+    "user_id": "u-007",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-864",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T15:30:00Z",
+    "ip_address": "10.0.55.83"
+  },
+  {
+    "id": "aud-00291",
+    "user_id": "u-009",
+    "action": "converted_to_task",
+    "entity_type": "recommendation",
+    "entity_id": "x-921",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T09:30:00Z",
+    "ip_address": "10.0.152.92"
+  },
+  {
+    "id": "aud-00292",
+    "user_id": "u-004",
+    "action": "approved",
+    "entity_type": "transfer",
+    "entity_id": "x-591",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-05T22:30:00Z",
+    "ip_address": "10.0.178.121"
+  },
+  {
+    "id": "aud-00293",
+    "user_id": "u-012",
+    "action": "created",
+    "entity_type": "data_issue",
+    "entity_id": "x-797",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-02T05:30:00Z",
+    "ip_address": "10.0.70.39"
+  },
+  {
+    "id": "aud-00294",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "discount",
+    "entity_id": "x-094",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-24T19:30:00Z",
+    "ip_address": "10.0.11.111"
+  },
+  {
+    "id": "aud-00295",
+    "user_id": "u-003",
+    "action": "activated",
+    "entity_type": "discount",
+    "entity_id": "x-284",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-04T01:30:00Z",
+    "ip_address": "10.0.159.164"
+  },
+  {
+    "id": "aud-00296",
+    "user_id": "u-003",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-597",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-11T10:30:00Z",
+    "ip_address": "10.0.132.153"
+  },
+  {
+    "id": "aud-00297",
+    "user_id": "u-005",
+    "action": "approved",
+    "entity_type": "recommendation",
+    "entity_id": "x-560",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T02:30:00Z",
+    "ip_address": "10.0.142.95"
+  },
+  {
+    "id": "aud-00298",
+    "user_id": "u-007",
+    "action": "resolved",
+    "entity_type": "data_issue",
+    "entity_id": "x-448",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-01T06:30:00Z",
+    "ip_address": "10.0.96.134"
+  },
+  {
+    "id": "aud-00299",
+    "user_id": "u-003",
+    "action": "updated",
+    "entity_type": "product",
+    "entity_id": "x-398",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-17T23:30:00Z",
+    "ip_address": "10.0.119.170"
+  },
+  {
+    "id": "aud-00300",
+    "user_id": "u-003",
+    "action": "completed",
+    "entity_type": "task",
+    "entity_id": "x-266",
+    "old_value": {
+      "status": "old"
+    },
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-04-16T23:30:00Z",
+    "ip_address": "10.0.162.9"
+  },
+  {
+    "id": "aud-00301",
+    "user_id": "u-005",
+    "action": "created",
+    "entity_type": "recommendation",
+    "entity_id": "x-458",
+    "old_value": null,
+    "new_value": {
+      "status": "new"
+    },
+    "created_at": "2026-05-09T07:30:00Z",
+    "ip_address": "10.0.138.73"
+  }
+]

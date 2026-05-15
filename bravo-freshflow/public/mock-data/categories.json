@@ -1,0 +1,82 @@
+[
+  {
+    "id": "c-001",
+    "name": "Süd məhsulları",
+    "parent_category_id": null,
+    "risk_weight": 0.85,
+    "is_perishable_category": true,
+    "icon": "Milk"
+  },
+  {
+    "id": "c-002",
+    "name": "Ət və toyuq",
+    "parent_category_id": null,
+    "risk_weight": 0.9,
+    "is_perishable_category": true,
+    "icon": "Beef"
+  },
+  {
+    "id": "c-003",
+    "name": "Meyvə-tərəvəz",
+    "parent_category_id": null,
+    "risk_weight": 0.8,
+    "is_perishable_category": true,
+    "icon": "Apple"
+  },
+  {
+    "id": "c-004",
+    "name": "Çörək və un məmulatları",
+    "parent_category_id": null,
+    "risk_weight": 0.65,
+    "is_perishable_category": true,
+    "icon": "Croissant"
+  },
+  {
+    "id": "c-005",
+    "name": "Hazır yeməklər",
+    "parent_category_id": null,
+    "risk_weight": 0.88,
+    "is_perishable_category": true,
+    "icon": "Salad"
+  },
+  {
+    "id": "c-006",
+    "name": "Dondurulmuş məhsullar",
+    "parent_category_id": null,
+    "risk_weight": 0.55,
+    "is_perishable_category": true,
+    "icon": "Snowflake"
+  },
+  {
+    "id": "c-007",
+    "name": "İçkilər",
+    "parent_category_id": null,
+    "risk_weight": 0.3,
+    "is_perishable_category": false,
+    "icon": "CupSoda"
+  },
+  {
+    "id": "c-008",
+    "name": "Qənnadı məhsulları",
+    "parent_category_id": null,
+    "risk_weight": 0.4,
+    "is_perishable_category": false,
+    "icon": "Cookie"
+  },
+  {
+    "id": "c-009",
+    "name": "Tərəvəz konservləri",
+    "parent_category_id": null,
+    "risk_weight": 0.25,
+    "is_perishable_category": false,
+    "icon": "Box"
+  },
+  {
+    "id": "c-010",
+    "name": "Quru ərzaq",
+    "parent_category_id": null,
+    "risk_weight": 0.2,
+    "is_perishable_category": false,
+    "icon": "Wheat"
+  }
+]

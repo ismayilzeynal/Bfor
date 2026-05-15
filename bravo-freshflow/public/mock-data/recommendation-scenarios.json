@@ -1,0 +1,3808 @@
+[
+  {
+    "id": "scen-00001",
+    "recommendation_id": "rec-00001",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 66,
+    "expected_recovered_value": 118.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00002",
+    "recommendation_id": "rec-00001",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 120,
+    "expected_recovered_value": 172.8,
+    "discount_cost": 43.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.4,
+    "net_saved_value": 8.4,
+    "confidence_score": 90.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00003",
+    "recommendation_id": "rec-00001",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 30,
+      "target_store_id": "s-002",
+      "target_velocity": 18
+    },
+    "expected_sold_quantity": 30,
+    "expected_recovered_value": 54.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -12.5,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00004",
+    "recommendation_id": "rec-00001",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 79.2,
+    "expected_recovered_value": 142.56,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 22.76,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00005",
+    "recommendation_id": "rec-00001",
+    "scenario_type": "combined",
+    "parameters": {
+      "discount_pct": 0.2,
+      "transfer_qty": 30,
+      "target_store_id": "s-002",
+      "target_velocity": 18
+    },
+    "expected_sold_quantity": 120,
+    "expected_recovered_value": 183.6,
+    "discount_cost": 32.4,
+    "transfer_cost": 9.5,
+    "operational_cost": 4.8,
+    "net_saved_value": -6.2,
+    "confidence_score": 89.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00006",
+    "recommendation_id": "rec-00002",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 12,
+    "expected_recovered_value": 96.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00007",
+    "recommendation_id": "rec-00002",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 28.8,
+    "expected_recovered_value": 161.28,
+    "discount_cost": 69.12,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.58,
+    "net_saved_value": -4.42,
+    "confidence_score": 90.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00008",
+    "recommendation_id": "rec-00002",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 16.8,
+    "expected_recovered_value": 114.24,
+    "discount_cost": 10.08,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 6.66,
+    "confidence_score": 85.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00009",
+    "recommendation_id": "rec-00002",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 14.4,
+    "expected_recovered_value": 115.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 18.2,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00010",
+    "recommendation_id": "rec-00003",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 56,
+    "expected_recovered_value": 78.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00011",
+    "recommendation_id": "rec-00003",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 90,
+    "expected_recovered_value": 100.8,
+    "discount_cost": 25.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.8,
+    "net_saved_value": -4.6,
+    "confidence_score": 90.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00012",
+    "recommendation_id": "rec-00003",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 78.4,
+    "expected_recovered_value": 98.78,
+    "discount_cost": 5.49,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 13.4,
+    "confidence_score": 85.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00013",
+    "recommendation_id": "rec-00003",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 67.2,
+    "expected_recovered_value": 94.08,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 14.68,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00014",
+    "recommendation_id": "rec-00004",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 18,
+    "expected_recovered_value": 63.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00015",
+    "recommendation_id": "rec-00004",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 37.8,
+    "expected_recovered_value": 99.23,
+    "discount_cost": 33.08,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.76,
+    "net_saved_value": 2.39,
+    "confidence_score": 90.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00016",
+    "recommendation_id": "rec-00004",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 25.2,
+    "expected_recovered_value": 74.97,
+    "discount_cost": 6.62,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 3.86,
+    "confidence_score": 85.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00017",
+    "recommendation_id": "rec-00004",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 21.6,
+    "expected_recovered_value": 75.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 11.6,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00018",
+    "recommendation_id": "rec-00005",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 140,
+    "expected_recovered_value": 210.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00019",
+    "recommendation_id": "rec-00005",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 200,
+    "expected_recovered_value": 255.0,
+    "discount_cost": 45.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 4.0,
+    "net_saved_value": -4.0,
+    "confidence_score": 90.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00020",
+    "recommendation_id": "rec-00005",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 80,
+      "target_store_id": "s-007",
+      "target_velocity": 50
+    },
+    "expected_sold_quantity": 80,
+    "expected_recovered_value": 120.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 12.0,
+    "operational_cost": 3.0,
+    "net_saved_value": -15.0,
+    "confidence_score": 86.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00021",
+    "recommendation_id": "rec-00005",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 168.0,
+    "expected_recovered_value": 252.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 41.0,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00022",
+    "recommendation_id": "rec-00005",
+    "scenario_type": "combined",
+    "parameters": {
+      "discount_pct": 0.1,
+      "transfer_qty": 60,
+      "target_store_id": "s-007",
+      "target_velocity": 50
+    },
+    "expected_sold_quantity": 200,
+    "expected_recovered_value": 279.0,
+    "discount_cost": 21.0,
+    "transfer_cost": 11.0,
+    "operational_cost": 5.8,
+    "net_saved_value": 4.2,
+    "confidence_score": 89.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00023",
+    "recommendation_id": "rec-00006",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 42.15,
+    "expected_recovered_value": 92.73,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 75.0,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00024",
+    "recommendation_id": "rec-00006",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 78,
+    "expected_recovered_value": 128.7,
+    "discount_cost": 42.9,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.56,
+    "net_saved_value": -8.49,
+    "confidence_score": 74.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00025",
+    "recommendation_id": "rec-00006",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 39,
+      "target_store_id": "s-007",
+      "target_velocity": 11
+    },
+    "expected_sold_quantity": 39,
+    "expected_recovered_value": 85.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.95,
+    "operational_cost": 3.0,
+    "net_saved_value": -12.95,
+    "confidence_score": 70.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00026",
+    "recommendation_id": "rec-00006",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 59.01,
+    "expected_recovered_value": 116.84,
+    "discount_cost": 6.49,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 16.12,
+    "confidence_score": 69.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00027",
+    "recommendation_id": "rec-00006",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 50.58,
+    "expected_recovered_value": 111.28,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 17.55,
+    "confidence_score": 71.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00028",
+    "recommendation_id": "rec-00007",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 1.1,
+    "expected_recovered_value": 1.65,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 78.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00029",
+    "recommendation_id": "rec-00007",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 2.64,
+    "expected_recovered_value": 2.77,
+    "discount_cost": 1.19,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.05,
+    "net_saved_value": -0.12,
+    "confidence_score": 77.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00030",
+    "recommendation_id": "rec-00007",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 1.54,
+    "expected_recovered_value": 1.96,
+    "discount_cost": 0.17,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.36,
+    "confidence_score": 72.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00031",
+    "recommendation_id": "rec-00007",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 1.32,
+    "expected_recovered_value": 1.98,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -0.67,
+    "confidence_score": 74.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00032",
+    "recommendation_id": "rec-00008",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 295.83,
+    "expected_recovered_value": 887.49,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 87.0,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00033",
+    "recommendation_id": "rec-00008",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 94,
+    "expected_recovered_value": 282.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -606.49,
+    "confidence_score": 83.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00034",
+    "recommendation_id": "rec-00008",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 94,
+    "expected_recovered_value": 253.8,
+    "discount_cost": 28.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.88,
+    "net_saved_value": -663.77,
+    "confidence_score": 86.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00035",
+    "recommendation_id": "rec-00009",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 13.74,
+    "expected_recovered_value": 27.48,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 85.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00036",
+    "recommendation_id": "rec-00009",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 18,
+    "expected_recovered_value": 27.0,
+    "discount_cost": 9.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.36,
+    "net_saved_value": -9.84,
+    "confidence_score": 85.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00037",
+    "recommendation_id": "rec-00009",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 9,
+      "target_store_id": "s-002",
+      "target_velocity": 4
+    },
+    "expected_sold_quantity": 9,
+    "expected_recovered_value": 18.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.45,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.45,
+    "confidence_score": 81.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00038",
+    "recommendation_id": "rec-00009",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 18,
+    "expected_recovered_value": 32.4,
+    "discount_cost": 1.8,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 1.62,
+    "confidence_score": 79.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00039",
+    "recommendation_id": "rec-00009",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 16.49,
+    "expected_recovered_value": 32.98,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 4.5,
+    "confidence_score": 82.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00040",
+    "recommendation_id": "rec-00010",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 5.58,
+    "expected_recovered_value": 25.11,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 93.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00041",
+    "recommendation_id": "rec-00010",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 7.25,
+    "expected_recovered_value": 29.38,
+    "discount_cost": 3.26,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.15,
+    "net_saved_value": 0.86,
+    "confidence_score": 92.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00042",
+    "recommendation_id": "rec-00010",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 4,
+      "target_store_id": "s-004",
+      "target_velocity": 3
+    },
+    "expected_sold_quantity": 4,
+    "expected_recovered_value": 18.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.2,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.2,
+    "confidence_score": 88.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00043",
+    "recommendation_id": "rec-00010",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 7.81,
+    "expected_recovered_value": 31.64,
+    "discount_cost": 1.76,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 3.27,
+    "confidence_score": 87.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00044",
+    "recommendation_id": "rec-00010",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 6.7,
+    "expected_recovered_value": 30.13,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 4.02,
+    "confidence_score": 89.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00045",
+    "recommendation_id": "rec-00011",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 3.0,
+    "expected_recovered_value": 31.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 94.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00046",
+    "recommendation_id": "rec-00011",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 7.2,
+    "expected_recovered_value": 52.92,
+    "discount_cost": 22.68,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.14,
+    "net_saved_value": -1.4,
+    "confidence_score": 93.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00047",
+    "recommendation_id": "rec-00011",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 4.2,
+    "expected_recovered_value": 37.48,
+    "discount_cost": 3.31,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 1.18,
+    "confidence_score": 88.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00048",
+    "recommendation_id": "rec-00011",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 3.6,
+    "expected_recovered_value": 37.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 5.3,
+    "confidence_score": 91.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00049",
+    "recommendation_id": "rec-00012",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 13.16,
+    "expected_recovered_value": 63.17,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00050",
+    "recommendation_id": "rec-00012",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 21.06,
+    "expected_recovered_value": 85.91,
+    "discount_cost": 15.16,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.42,
+    "net_saved_value": 7.16,
+    "confidence_score": 90.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00051",
+    "recommendation_id": "rec-00012",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 20,
+      "target_store_id": "s-002",
+      "target_velocity": 5
+    },
+    "expected_sold_quantity": 20,
+    "expected_recovered_value": 96.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.0,
+    "operational_cost": 3.0,
+    "net_saved_value": 20.83,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00052",
+    "recommendation_id": "rec-00012",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 18.42,
+    "expected_recovered_value": 79.59,
+    "discount_cost": 4.42,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 10.5,
+    "confidence_score": 85.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00053",
+    "recommendation_id": "rec-00012",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 15.79,
+    "expected_recovered_value": 75.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 11.63,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00054",
+    "recommendation_id": "rec-00013",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 14.86,
+    "expected_recovered_value": 111.45,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 92.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00055",
+    "recommendation_id": "rec-00013",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 19.32,
+    "expected_recovered_value": 130.4,
+    "discount_cost": 14.49,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.39,
+    "net_saved_value": 4.07,
+    "confidence_score": 91.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00056",
+    "recommendation_id": "rec-00013",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 12,
+      "target_store_id": "s-002",
+      "target_velocity": 10
+    },
+    "expected_sold_quantity": 12,
+    "expected_recovered_value": 90.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.6,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.6,
+    "confidence_score": 87.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00057",
+    "recommendation_id": "rec-00013",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 20.8,
+    "expected_recovered_value": 140.43,
+    "discount_cost": 7.8,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 19.68,
+    "confidence_score": 86.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00058",
+    "recommendation_id": "rec-00013",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 17.83,
+    "expected_recovered_value": 133.74,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 21.29,
+    "confidence_score": 89.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00059",
+    "recommendation_id": "rec-00014",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 23.4,
+    "expected_recovered_value": 175.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00060",
+    "recommendation_id": "rec-00014",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 49.14,
+    "expected_recovered_value": 276.41,
+    "discount_cost": 92.14,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.98,
+    "net_saved_value": 7.79,
+    "confidence_score": 90.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00061",
+    "recommendation_id": "rec-00014",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 36,
+      "target_store_id": "s-006",
+      "target_velocity": 4
+    },
+    "expected_sold_quantity": 36,
+    "expected_recovered_value": 270.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.8,
+    "operational_cost": 3.0,
+    "net_saved_value": 81.7,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00062",
+    "recommendation_id": "rec-00014",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 32.76,
+    "expected_recovered_value": 221.13,
+    "discount_cost": 12.29,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 31.84,
+    "confidence_score": 85.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00063",
+    "recommendation_id": "rec-00014",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 28.08,
+    "expected_recovered_value": 210.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 34.1,
+    "confidence_score": 88.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00064",
+    "recommendation_id": "rec-00015",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 73.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00065",
+    "recommendation_id": "rec-00015",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 72.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00066",
+    "recommendation_id": "rec-00015",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.5,
+    "confidence_score": 67.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00067",
+    "recommendation_id": "rec-00015",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.0,
+    "confidence_score": 70.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00068",
+    "recommendation_id": "rec-00016",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 84.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00069",
+    "recommendation_id": "rec-00016",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 83.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00070",
+    "recommendation_id": "rec-00016",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.5,
+    "confidence_score": 78.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00071",
+    "recommendation_id": "rec-00016",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.0,
+    "confidence_score": 81.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00072",
+    "recommendation_id": "rec-00017",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 80.0,
+    "expected_recovered_value": 64.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 89.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00073",
+    "recommendation_id": "rec-00017",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 81,
+    "expected_recovered_value": 64.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -0.2,
+    "confidence_score": 86.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00074",
+    "recommendation_id": "rec-00017",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 81,
+    "expected_recovered_value": 58.32,
+    "discount_cost": 6.48,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.62,
+    "net_saved_value": -13.78,
+    "confidence_score": 88.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00075",
+    "recommendation_id": "rec-00018",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 24.58,
+    "expected_recovered_value": 14.75,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 84.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00076",
+    "recommendation_id": "rec-00018",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 39.33,
+    "expected_recovered_value": 20.06,
+    "discount_cost": 3.54,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.79,
+    "net_saved_value": 0.98,
+    "confidence_score": 83.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00077",
+    "recommendation_id": "rec-00018",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 27,
+      "target_store_id": "s-001",
+      "target_velocity": 24
+    },
+    "expected_sold_quantity": 27,
+    "expected_recovered_value": 16.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.35,
+    "operational_cost": 3.0,
+    "net_saved_value": -10.9,
+    "confidence_score": 79.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00078",
+    "recommendation_id": "rec-00018",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 34.41,
+    "expected_recovered_value": 18.58,
+    "discount_cost": 1.03,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 1.3,
+    "confidence_score": 78.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00079",
+    "recommendation_id": "rec-00018",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 29.5,
+    "expected_recovered_value": 17.7,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 1.95,
+    "confidence_score": 80.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00080",
+    "recommendation_id": "rec-00019",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 1076.4,
+    "expected_recovered_value": 3229.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 69.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00081",
+    "recommendation_id": "rec-00019",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 102,
+    "expected_recovered_value": 306.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -2924.2,
+    "confidence_score": 66.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00082",
+    "recommendation_id": "rec-00019",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 102,
+    "expected_recovered_value": 275.4,
+    "discount_cost": 30.6,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.04,
+    "net_saved_value": -2986.44,
+    "confidence_score": 68.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00083",
+    "recommendation_id": "rec-00020",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 27.42,
+    "expected_recovered_value": 142.58,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 94.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00084",
+    "recommendation_id": "rec-00020",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 57.58,
+    "expected_recovered_value": 224.57,
+    "discount_cost": 74.86,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.15,
+    "net_saved_value": 5.98,
+    "confidence_score": 93.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00085",
+    "recommendation_id": "rec-00020",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 42,
+      "target_store_id": "s-007",
+      "target_velocity": 18
+    },
+    "expected_sold_quantity": 42,
+    "expected_recovered_value": 218.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 10.1,
+    "operational_cost": 3.0,
+    "net_saved_value": 62.72,
+    "confidence_score": 89.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00086",
+    "recommendation_id": "rec-00020",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 38.39,
+    "expected_recovered_value": 179.66,
+    "discount_cost": 9.98,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 25.59,
+    "confidence_score": 88.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00087",
+    "recommendation_id": "rec-00020",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 32.9,
+    "expected_recovered_value": 171.1,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 27.52,
+    "confidence_score": 91.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00088",
+    "recommendation_id": "rec-00021",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 3.42,
+    "expected_recovered_value": 22.23,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 94.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00089",
+    "recommendation_id": "rec-00021",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 7.18,
+    "expected_recovered_value": 35.01,
+    "discount_cost": 11.67,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.14,
+    "net_saved_value": 0.97,
+    "confidence_score": 93.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00090",
+    "recommendation_id": "rec-00021",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-006",
+      "target_velocity": 3
+    },
+    "expected_sold_quantity": 6,
+    "expected_recovered_value": 39.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": 5.27,
+    "confidence_score": 89.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00091",
+    "recommendation_id": "rec-00021",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 4.79,
+    "expected_recovered_value": 28.01,
+    "discount_cost": 1.56,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 2.72,
+    "confidence_score": 88.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00092",
+    "recommendation_id": "rec-00021",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 4.1,
+    "expected_recovered_value": 26.68,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 3.45,
+    "confidence_score": 91.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00093",
+    "recommendation_id": "rec-00022",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 11.14,
+    "expected_recovered_value": 8.91,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 94.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00094",
+    "recommendation_id": "rec-00022",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 14.48,
+    "expected_recovered_value": 10.43,
+    "discount_cost": 1.16,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.29,
+    "net_saved_value": 0.07,
+    "confidence_score": 93.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00095",
+    "recommendation_id": "rec-00022",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 14,
+      "target_store_id": "s-003",
+      "target_velocity": 7
+    },
+    "expected_sold_quantity": 14,
+    "expected_recovered_value": 11.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.7,
+    "operational_cost": 3.0,
+    "net_saved_value": -9.41,
+    "confidence_score": 89.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00096",
+    "recommendation_id": "rec-00022",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 15.6,
+    "expected_recovered_value": 11.23,
+    "discount_cost": 0.62,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 0.19,
+    "confidence_score": 88.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00097",
+    "recommendation_id": "rec-00022",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 13.37,
+    "expected_recovered_value": 10.69,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.78,
+    "confidence_score": 91.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00098",
+    "recommendation_id": "rec-00023",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 3259.32,
+    "expected_recovered_value": 6192.71,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 85.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00099",
+    "recommendation_id": "rec-00023",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 110,
+    "expected_recovered_value": 177.65,
+    "discount_cost": 31.35,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.2,
+    "net_saved_value": -6048.61,
+    "confidence_score": 85.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00100",
+    "recommendation_id": "rec-00023",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 55,
+      "target_store_id": "s-005",
+      "target_velocity": 7
+    },
+    "expected_sold_quantity": 55,
+    "expected_recovered_value": 104.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 10.75,
+    "operational_cost": 3.0,
+    "net_saved_value": -13.75,
+    "confidence_score": 81.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00101",
+    "recommendation_id": "rec-00023",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 110,
+    "expected_recovered_value": 188.1,
+    "discount_cost": 10.45,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -6016.56,
+    "confidence_score": 79.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00102",
+    "recommendation_id": "rec-00023",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 110,
+    "expected_recovered_value": 209.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -5984.71,
+    "confidence_score": 82.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00103",
+    "recommendation_id": "rec-00024",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 4.0,
+    "expected_recovered_value": 23.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 81.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00104",
+    "recommendation_id": "rec-00024",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 9.6,
+    "expected_recovered_value": 39.65,
+    "discount_cost": 16.99,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.19,
+    "net_saved_value": -1.14,
+    "confidence_score": 80.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00105",
+    "recommendation_id": "rec-00024",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 5.6,
+    "expected_recovered_value": 28.08,
+    "discount_cost": 2.48,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 0.51,
+    "confidence_score": 75.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00106",
+    "recommendation_id": "rec-00024",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 4.8,
+    "expected_recovered_value": 28.32,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 3.72,
+    "confidence_score": 77.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00107",
+    "recommendation_id": "rec-00025",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 6.84,
+    "expected_recovered_value": 28.73,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 69.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00108",
+    "recommendation_id": "rec-00025",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 13.0,
+    "expected_recovered_value": 43.67,
+    "discount_cost": 10.92,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.26,
+    "net_saved_value": 3.76,
+    "confidence_score": 68.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00109",
+    "recommendation_id": "rec-00025",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 9,
+      "target_store_id": "s-006",
+      "target_velocity": 2
+    },
+    "expected_sold_quantity": 8,
+    "expected_recovered_value": 33.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.45,
+    "operational_cost": 3.0,
+    "net_saved_value": -6.58,
+    "confidence_score": 64.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00110",
+    "recommendation_id": "rec-00025",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 9.58,
+    "expected_recovered_value": 36.2,
+    "discount_cost": 2.01,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 3.96,
+    "confidence_score": 63.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00111",
+    "recommendation_id": "rec-00025",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 8.21,
+    "expected_recovered_value": 34.47,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 4.75,
+    "confidence_score": 66.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00112",
+    "recommendation_id": "rec-00026",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 5.4,
+    "expected_recovered_value": 5.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 75.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00113",
+    "recommendation_id": "rec-00026",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 10.26,
+    "expected_recovered_value": 8.21,
+    "discount_cost": 2.05,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.21,
+    "net_saved_value": 0.55,
+    "confidence_score": 74.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00114",
+    "recommendation_id": "rec-00026",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-007",
+      "target_velocity": 2
+    },
+    "expected_sold_quantity": 6,
+    "expected_recovered_value": 6.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -10.9,
+    "confidence_score": 70.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00115",
+    "recommendation_id": "rec-00026",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 7.56,
+    "expected_recovered_value": 6.8,
+    "discount_cost": 0.38,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -0.47,
+    "confidence_score": 69.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00116",
+    "recommendation_id": "rec-00026",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 6.48,
+    "expected_recovered_value": 6.48,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.08,
+    "confidence_score": 71.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00117",
+    "recommendation_id": "rec-00027",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 19.3,
+    "expected_recovered_value": 308.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 69.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00118",
+    "recommendation_id": "rec-00027",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 36,
+    "expected_recovered_value": 432.0,
+    "discount_cost": 144.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.72,
+    "net_saved_value": -21.52,
+    "confidence_score": 68.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00119",
+    "recommendation_id": "rec-00027",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 18,
+      "target_store_id": "s-001",
+      "target_velocity": 5
+    },
+    "expected_sold_quantity": 18,
+    "expected_recovered_value": 288.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.9,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.9,
+    "confidence_score": 64.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00120",
+    "recommendation_id": "rec-00027",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 27.02,
+    "expected_recovered_value": 389.09,
+    "discount_cost": 21.62,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 57.17,
+    "confidence_score": 63.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00121",
+    "recommendation_id": "rec-00027",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 23.16,
+    "expected_recovered_value": 370.56,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 60.76,
+    "confidence_score": 66.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00122",
+    "recommendation_id": "rec-00028",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 1453.2,
+    "expected_recovered_value": 2906.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 77.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00123",
+    "recommendation_id": "rec-00028",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 100,
+    "expected_recovered_value": 180.0,
+    "discount_cost": 20.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.0,
+    "net_saved_value": -2748.4,
+    "confidence_score": 76.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00124",
+    "recommendation_id": "rec-00028",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 50,
+      "target_store_id": "s-003",
+      "target_velocity": 8
+    },
+    "expected_sold_quantity": 50,
+    "expected_recovered_value": 100.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 10.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -13.5,
+    "confidence_score": 72.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00125",
+    "recommendation_id": "rec-00028",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 100,
+    "expected_recovered_value": 180.0,
+    "discount_cost": 10.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -2737.9,
+    "confidence_score": 71.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00126",
+    "recommendation_id": "rec-00028",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 100,
+    "expected_recovered_value": 200.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -2707.4,
+    "confidence_score": 74.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00127",
+    "recommendation_id": "rec-00029",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 13.2,
+    "expected_recovered_value": 118.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 80.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00128",
+    "recommendation_id": "rec-00029",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 17.16,
+    "expected_recovered_value": 139.0,
+    "discount_cost": 15.44,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.34,
+    "net_saved_value": 4.41,
+    "confidence_score": 79.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00129",
+    "recommendation_id": "rec-00029",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 20,
+      "target_store_id": "s-004",
+      "target_velocity": 5
+    },
+    "expected_sold_quantity": 20,
+    "expected_recovered_value": 180.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.0,
+    "operational_cost": 3.0,
+    "net_saved_value": 49.2,
+    "confidence_score": 75.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00130",
+    "recommendation_id": "rec-00029",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 18.48,
+    "expected_recovered_value": 149.69,
+    "discount_cost": 8.32,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 21.07,
+    "confidence_score": 74.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00131",
+    "recommendation_id": "rec-00029",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 15.84,
+    "expected_recovered_value": 142.56,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 22.76,
+    "confidence_score": 77.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00132",
+    "recommendation_id": "rec-00030",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 87.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00133",
+    "recommendation_id": "rec-00030",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 86.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00134",
+    "recommendation_id": "rec-00030",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.5,
+    "confidence_score": 81.0,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00135",
+    "recommendation_id": "rec-00030",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.0,
+    "confidence_score": 83.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00136",
+    "recommendation_id": "rec-00031",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 59.16,
+    "expected_recovered_value": 136.07,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 76.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00137",
+    "recommendation_id": "rec-00031",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 23,
+    "expected_recovered_value": 52.9,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -84.17,
+    "confidence_score": 73.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00138",
+    "recommendation_id": "rec-00031",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 23,
+    "expected_recovered_value": 47.61,
+    "discount_cost": 5.29,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.46,
+    "net_saved_value": -94.21,
+    "confidence_score": 75.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00139",
+    "recommendation_id": "rec-00032",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.57,
+    "expected_recovered_value": 7.69,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 78.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00140",
+    "recommendation_id": "rec-00032",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 1.37,
+    "expected_recovered_value": 12.93,
+    "discount_cost": 5.54,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.03,
+    "net_saved_value": -0.34,
+    "confidence_score": 77.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00141",
+    "recommendation_id": "rec-00032",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.8,
+    "expected_recovered_value": 9.16,
+    "discount_cost": 0.81,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -0.85,
+    "confidence_score": 72.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00142",
+    "recommendation_id": "rec-00032",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.68,
+    "expected_recovered_value": 9.23,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.54,
+    "confidence_score": 75.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00143",
+    "recommendation_id": "rec-00033",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 45.0,
+    "expected_recovered_value": 630.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 76.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00144",
+    "recommendation_id": "rec-00033",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 9,
+    "expected_recovered_value": 113.4,
+    "discount_cost": 12.6,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.18,
+    "net_saved_value": -529.38,
+    "confidence_score": 75.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00145",
+    "recommendation_id": "rec-00033",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 4,
+      "target_store_id": "s-006",
+      "target_velocity": 13
+    },
+    "expected_sold_quantity": 4,
+    "expected_recovered_value": 56.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.2,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.2,
+    "confidence_score": 71.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00146",
+    "recommendation_id": "rec-00033",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 9,
+    "expected_recovered_value": 113.4,
+    "discount_cost": 6.3,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -524.4,
+    "confidence_score": 70.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00147",
+    "recommendation_id": "rec-00033",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 9,
+    "expected_recovered_value": 126.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -505.0,
+    "confidence_score": 73.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00148",
+    "recommendation_id": "rec-00034",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 22.15,
+    "expected_recovered_value": 143.97,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 84.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00149",
+    "recommendation_id": "rec-00034",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 11,
+    "expected_recovered_value": 64.35,
+    "discount_cost": 7.15,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.22,
+    "net_saved_value": -86.99,
+    "confidence_score": 83.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00150",
+    "recommendation_id": "rec-00034",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 5,
+      "target_store_id": "s-005",
+      "target_velocity": 8
+    },
+    "expected_sold_quantity": 5,
+    "expected_recovered_value": 32.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.25,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.25,
+    "confidence_score": 79.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00151",
+    "recommendation_id": "rec-00034",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 11,
+    "expected_recovered_value": 64.35,
+    "discount_cost": 3.58,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -84.7,
+    "confidence_score": 78.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00152",
+    "recommendation_id": "rec-00034",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 11,
+    "expected_recovered_value": 71.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -73.47,
+    "confidence_score": 81.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00153",
+    "recommendation_id": "rec-00035",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 5.2,
+    "expected_recovered_value": 21.84,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 85.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00154",
+    "recommendation_id": "rec-00035",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 6.76,
+    "expected_recovered_value": 25.55,
+    "discount_cost": 2.84,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.14,
+    "net_saved_value": 0.74,
+    "confidence_score": 85.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00155",
+    "recommendation_id": "rec-00035",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-006",
+      "target_velocity": 3
+    },
+    "expected_sold_quantity": 6,
+    "expected_recovered_value": 25.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -8.14,
+    "confidence_score": 81.0,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00156",
+    "recommendation_id": "rec-00035",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 7.28,
+    "expected_recovered_value": 27.52,
+    "discount_cost": 1.53,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 2.65,
+    "confidence_score": 79.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00157",
+    "recommendation_id": "rec-00035",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 6.24,
+    "expected_recovered_value": 26.21,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 3.37,
+    "confidence_score": 82.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00158",
+    "recommendation_id": "rec-00036",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 1189.84,
+    "expected_recovered_value": 4164.44,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 77.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00159",
+    "recommendation_id": "rec-00036",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 139,
+    "expected_recovered_value": 486.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -3678.94,
+    "confidence_score": 74.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00160",
+    "recommendation_id": "rec-00036",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 139,
+    "expected_recovered_value": 437.85,
+    "discount_cost": 48.65,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.78,
+    "net_saved_value": -3778.02,
+    "confidence_score": 76.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00161",
+    "recommendation_id": "rec-00037",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 20.41,
+    "expected_recovered_value": 118.38,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 92.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00162",
+    "recommendation_id": "rec-00037",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 32.66,
+    "expected_recovered_value": 160.99,
+    "discount_cost": 28.41,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.65,
+    "net_saved_value": 13.55,
+    "confidence_score": 91.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00163",
+    "recommendation_id": "rec-00037",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 39,
+      "target_store_id": "s-006",
+      "target_velocity": 3
+    },
+    "expected_sold_quantity": 39,
+    "expected_recovered_value": 226.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.95,
+    "operational_cost": 3.0,
+    "net_saved_value": 94.87,
+    "confidence_score": 87.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00164",
+    "recommendation_id": "rec-00037",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 28.57,
+    "expected_recovered_value": 149.16,
+    "discount_cost": 8.29,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 20.99,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00165",
+    "recommendation_id": "rec-00037",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 24.49,
+    "expected_recovered_value": 142.05,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 22.68,
+    "confidence_score": 89.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00166",
+    "recommendation_id": "rec-00038",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 4.86,
+    "expected_recovered_value": 58.32,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 84.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00167",
+    "recommendation_id": "rec-00038",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 6.32,
+    "expected_recovered_value": 68.23,
+    "discount_cost": 7.58,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.13,
+    "net_saved_value": 2.21,
+    "confidence_score": 83.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00168",
+    "recommendation_id": "rec-00038",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-006",
+      "target_velocity": 4
+    },
+    "expected_sold_quantity": 8,
+    "expected_recovered_value": 96.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": 26.18,
+    "confidence_score": 79.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00169",
+    "recommendation_id": "rec-00038",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 6.8,
+    "expected_recovered_value": 73.48,
+    "discount_cost": 4.08,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 9.58,
+    "confidence_score": 78.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00170",
+    "recommendation_id": "rec-00038",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 5.83,
+    "expected_recovered_value": 69.98,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 10.66,
+    "confidence_score": 81.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00171",
+    "recommendation_id": "rec-00039",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 217.0,
+    "expected_recovered_value": 499.1,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 85.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00172",
+    "recommendation_id": "rec-00039",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 83,
+    "expected_recovered_value": 190.9,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -309.2,
+    "confidence_score": 82.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00173",
+    "recommendation_id": "rec-00039",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 83,
+    "expected_recovered_value": 171.81,
+    "discount_cost": 19.09,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.66,
+    "net_saved_value": -348.04,
+    "confidence_score": 84.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00174",
+    "recommendation_id": "rec-00040",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 7.44,
+    "expected_recovered_value": 66.96,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 80.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00175",
+    "recommendation_id": "rec-00040",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 14.14,
+    "expected_recovered_value": 101.78,
+    "discount_cost": 25.44,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.28,
+    "net_saved_value": 9.09,
+    "confidence_score": 79.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00176",
+    "recommendation_id": "rec-00040",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-007",
+      "target_velocity": 2
+    },
+    "expected_sold_quantity": 8,
+    "expected_recovered_value": 72.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -6.46,
+    "confidence_score": 75.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00177",
+    "recommendation_id": "rec-00040",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 10.42,
+    "expected_recovered_value": 84.37,
+    "discount_cost": 4.69,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 11.22,
+    "confidence_score": 74.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00178",
+    "recommendation_id": "rec-00040",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 8.93,
+    "expected_recovered_value": 80.35,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 12.39,
+    "confidence_score": 77.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00179",
+    "recommendation_id": "rec-00041",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 3.43,
+    "expected_recovered_value": 7.89,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00180",
+    "recommendation_id": "rec-00041",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 8.23,
+    "expected_recovered_value": 13.25,
+    "discount_cost": 5.68,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.16,
+    "net_saved_value": -0.48,
+    "confidence_score": 85.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00181",
+    "recommendation_id": "rec-00041",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 4.8,
+    "expected_recovered_value": 9.39,
+    "discount_cost": 0.83,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -0.83,
+    "confidence_score": 80.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00182",
+    "recommendation_id": "rec-00041",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 4.12,
+    "expected_recovered_value": 9.47,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.58,
+    "confidence_score": 83.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00183",
+    "recommendation_id": "rec-00042",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 6.5,
+    "expected_recovered_value": 13.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 82.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00184",
+    "recommendation_id": "rec-00042",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 8.45,
+    "expected_recovered_value": 15.21,
+    "discount_cost": 1.69,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.17,
+    "net_saved_value": 0.35,
+    "confidence_score": 81.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00185",
+    "recommendation_id": "rec-00042",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-007",
+      "target_velocity": 1
+    },
+    "expected_sold_quantity": 5,
+    "expected_recovered_value": 10.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -14.5,
+    "confidence_score": 77.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00186",
+    "recommendation_id": "rec-00042",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 9.1,
+    "expected_recovered_value": 16.38,
+    "discount_cost": 0.91,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 0.97,
+    "confidence_score": 76.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00187",
+    "recommendation_id": "rec-00042",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 7.8,
+    "expected_recovered_value": 15.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 1.6,
+    "confidence_score": 79.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00188",
+    "recommendation_id": "rec-00043",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 12.28,
+    "expected_recovered_value": 196.48,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 72.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00189",
+    "recommendation_id": "rec-00043",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 17,
+    "expected_recovered_value": 231.2,
+    "discount_cost": 40.8,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.34,
+    "net_saved_value": -6.42,
+    "confidence_score": 71.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00190",
+    "recommendation_id": "rec-00043",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 8,
+      "target_store_id": "s-003",
+      "target_velocity": 9
+    },
+    "expected_sold_quantity": 8,
+    "expected_recovered_value": 128.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.4,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.4,
+    "confidence_score": 67.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00191",
+    "recommendation_id": "rec-00043",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 17,
+    "expected_recovered_value": 244.8,
+    "discount_cost": 13.6,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 33.22,
+    "confidence_score": 66.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00192",
+    "recommendation_id": "rec-00043",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 14.74,
+    "expected_recovered_value": 235.78,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 38.3,
+    "confidence_score": 68.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00193",
+    "recommendation_id": "rec-00044",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 14.19,
+    "expected_recovered_value": 53.92,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 75.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00194",
+    "recommendation_id": "rec-00044",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 26.96,
+    "expected_recovered_value": 81.96,
+    "discount_cost": 20.49,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.54,
+    "net_saved_value": 7.01,
+    "confidence_score": 74.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00195",
+    "recommendation_id": "rec-00044",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 33,
+      "target_store_id": "s-006",
+      "target_velocity": 1
+    },
+    "expected_sold_quantity": 33,
+    "expected_recovered_value": 125.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.65,
+    "operational_cost": 3.0,
+    "net_saved_value": 58.83,
+    "confidence_score": 70.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00196",
+    "recommendation_id": "rec-00044",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 19.87,
+    "expected_recovered_value": 67.94,
+    "discount_cost": 3.77,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 8.75,
+    "confidence_score": 69.0,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00197",
+    "recommendation_id": "rec-00044",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 17.03,
+    "expected_recovered_value": 64.71,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 9.78,
+    "confidence_score": 71.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00198",
+    "recommendation_id": "rec-00045",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 396.72,
+    "expected_recovered_value": 1190.16,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 72.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00199",
+    "recommendation_id": "rec-00045",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 154,
+    "expected_recovered_value": 462.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -729.16,
+    "confidence_score": 69.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00200",
+    "recommendation_id": "rec-00045",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 154,
+    "expected_recovered_value": 415.8,
+    "discount_cost": 46.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 3.08,
+    "net_saved_value": -823.64,
+    "confidence_score": 71.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00201",
+    "recommendation_id": "rec-00046",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 92.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00202",
+    "recommendation_id": "rec-00046",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 91.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00203",
+    "recommendation_id": "rec-00046",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.5,
+    "confidence_score": 86.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00204",
+    "recommendation_id": "rec-00046",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.0,
+    "confidence_score": 89.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00205",
+    "recommendation_id": "rec-00047",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 20.58,
+    "expected_recovered_value": 45.28,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 84.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00206",
+    "recommendation_id": "rec-00047",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 39.1,
+    "expected_recovered_value": 68.82,
+    "discount_cost": 17.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.78,
+    "net_saved_value": 5.56,
+    "confidence_score": 83.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00207",
+    "recommendation_id": "rec-00047",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 22,
+      "target_store_id": "s-007",
+      "target_velocity": 5
+    },
+    "expected_sold_quantity": 22,
+    "expected_recovered_value": 48.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.1,
+    "operational_cost": 3.0,
+    "net_saved_value": -8.98,
+    "confidence_score": 79.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00208",
+    "recommendation_id": "rec-00047",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 28.81,
+    "expected_recovered_value": 57.05,
+    "discount_cost": 3.17,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 7.1,
+    "confidence_score": 78.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00209",
+    "recommendation_id": "rec-00047",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 24.7,
+    "expected_recovered_value": 54.33,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 8.06,
+    "confidence_score": 80.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00210",
+    "recommendation_id": "rec-00048",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.86,
+    "expected_recovered_value": 7.74,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 76.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00211",
+    "recommendation_id": "rec-00048",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.2
+    },
+    "expected_sold_quantity": 1.63,
+    "expected_recovered_value": 11.76,
+    "discount_cost": 2.94,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.03,
+    "net_saved_value": 1.05,
+    "confidence_score": 75.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00212",
+    "recommendation_id": "rec-00048",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-007",
+      "target_velocity": 1
+    },
+    "expected_sold_quantity": 2,
+    "expected_recovered_value": 18.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -1.24,
+    "confidence_score": 71.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00213",
+    "recommendation_id": "rec-00048",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 1.2,
+    "expected_recovered_value": 9.75,
+    "discount_cost": 0.54,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -0.03,
+    "confidence_score": 70.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00214",
+    "recommendation_id": "rec-00048",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 1.03,
+    "expected_recovered_value": 9.29,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.55,
+    "confidence_score": 73.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00215",
+    "recommendation_id": "rec-00049",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 4.0,
+    "expected_recovered_value": 6.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 94.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00216",
+    "recommendation_id": "rec-00049",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.1
+    },
+    "expected_sold_quantity": 5.2,
+    "expected_recovered_value": 7.49,
+    "discount_cost": 0.83,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.1,
+    "net_saved_value": 0.15,
+    "confidence_score": 94.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00217",
+    "recommendation_id": "rec-00049",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 10,
+      "target_store_id": "s-006",
+      "target_velocity": 3
+    },
+    "expected_sold_quantity": 6,
+    "expected_recovered_value": 9.6,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.5,
+    "operational_cost": 3.0,
+    "net_saved_value": -8.3,
+    "confidence_score": 90.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00218",
+    "recommendation_id": "rec-00049",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 5.6,
+    "expected_recovered_value": 8.06,
+    "discount_cost": 0.45,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -0.28,
+    "confidence_score": 88.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00219",
+    "recommendation_id": "rec-00049",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 4.8,
+    "expected_recovered_value": 7.68,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 0.28,
+    "confidence_score": 91.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00220",
+    "recommendation_id": "rec-00050",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 79.8,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00221",
+    "recommendation_id": "rec-00050",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 79.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00222",
+    "recommendation_id": "rec-00050",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.5,
+    "confidence_score": 73.8,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00223",
+    "recommendation_id": "rec-00050",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 0.0,
+    "expected_recovered_value": 0.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.0,
+    "confidence_score": 76.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00224",
+    "recommendation_id": "rec-00051",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 25.0,
+    "expected_recovered_value": 17.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 83.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00225",
+    "recommendation_id": "rec-00051",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 24,
+    "expected_recovered_value": 12.6,
+    "discount_cost": 4.2,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.48,
+    "net_saved_value": -9.58,
+    "confidence_score": 82.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00226",
+    "recommendation_id": "rec-00051",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 12,
+      "target_store_id": "s-006",
+      "target_velocity": 9
+    },
+    "expected_sold_quantity": 12,
+    "expected_recovered_value": 8.4,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.6,
+    "operational_cost": 3.0,
+    "net_saved_value": -11.6,
+    "confidence_score": 78.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00227",
+    "recommendation_id": "rec-00051",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 24,
+    "expected_recovered_value": 15.12,
+    "discount_cost": 0.84,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -4.72,
+    "confidence_score": 77.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00228",
+    "recommendation_id": "rec-00051",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 24,
+    "expected_recovered_value": 16.8,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -1.7,
+    "confidence_score": 80.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00229",
+    "recommendation_id": "rec-00052",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 18.86,
+    "expected_recovered_value": 30.18,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 80.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00230",
+    "recommendation_id": "rec-00052",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 39.61,
+    "expected_recovered_value": 47.53,
+    "discount_cost": 15.84,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.79,
+    "net_saved_value": 0.72,
+    "confidence_score": 79.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00231",
+    "recommendation_id": "rec-00052",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 22,
+      "target_store_id": "s-004",
+      "target_velocity": 17
+    },
+    "expected_sold_quantity": 22,
+    "expected_recovered_value": 35.2,
+    "discount_cost": 0.0,
+    "transfer_cost": 9.1,
+    "operational_cost": 3.0,
+    "net_saved_value": -7.08,
+    "confidence_score": 75.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00232",
+    "recommendation_id": "rec-00052",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 26.4,
+    "expected_recovered_value": 38.02,
+    "discount_cost": 2.11,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 4.23,
+    "confidence_score": 74.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00233",
+    "recommendation_id": "rec-00052",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 22.63,
+    "expected_recovered_value": 36.21,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 5.04,
+    "confidence_score": 77.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00234",
+    "recommendation_id": "rec-00053",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 11.97,
+    "expected_recovered_value": 47.88,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 92.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00235",
+    "recommendation_id": "rec-00053",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.15
+    },
+    "expected_sold_quantity": 19.15,
+    "expected_recovered_value": 65.12,
+    "discount_cost": 11.49,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.38,
+    "net_saved_value": 5.36,
+    "confidence_score": 91.6,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00236",
+    "recommendation_id": "rec-00053",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 14,
+      "target_store_id": "s-001",
+      "target_velocity": 2
+    },
+    "expected_sold_quantity": 14,
+    "expected_recovered_value": 56.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 8.7,
+    "operational_cost": 3.0,
+    "net_saved_value": -3.58,
+    "confidence_score": 87.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00237",
+    "recommendation_id": "rec-00053",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 16.76,
+    "expected_recovered_value": 60.33,
+    "discount_cost": 3.35,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 7.6,
+    "confidence_score": 86.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00238",
+    "recommendation_id": "rec-00053",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 14.36,
+    "expected_recovered_value": 57.46,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 8.58,
+    "confidence_score": 89.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00239",
+    "recommendation_id": "rec-00054",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 48.02,
+    "expected_recovered_value": 158.47,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 79.2,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00240",
+    "recommendation_id": "rec-00054",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.25
+    },
+    "expected_sold_quantity": 100.84,
+    "expected_recovered_value": 249.58,
+    "discount_cost": 83.19,
+    "transfer_cost": 0.0,
+    "operational_cost": 2.02,
+    "net_saved_value": 5.91,
+    "confidence_score": 78.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00241",
+    "recommendation_id": "rec-00054",
+    "scenario_type": "transfer",
+    "parameters": {
+      "transfer_qty": 70,
+      "target_store_id": "s-007",
+      "target_velocity": 5
+    },
+    "expected_sold_quantity": 70,
+    "expected_recovered_value": 231.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 11.5,
+    "operational_cost": 3.0,
+    "net_saved_value": 58.03,
+    "confidence_score": 74.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00242",
+    "recommendation_id": "rec-00054",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.1
+    },
+    "expected_sold_quantity": 67.23,
+    "expected_recovered_value": 199.67,
+    "discount_cost": 11.09,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": 28.61,
+    "confidence_score": 73.2,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00243",
+    "recommendation_id": "rec-00054",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 57.62,
+    "expected_recovered_value": 190.16,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": 30.69,
+    "confidence_score": 76.0,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00244",
+    "recommendation_id": "rec-00055",
+    "scenario_type": "no_action",
+    "parameters": {},
+    "expected_sold_quantity": 2.5,
+    "expected_recovered_value": 2.5,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.0,
+    "net_saved_value": 0.0,
+    "confidence_score": 74.4,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00245",
+    "recommendation_id": "rec-00055",
+    "scenario_type": "discount",
+    "parameters": {
+      "discount_pct": 0.3
+    },
+    "expected_sold_quantity": 6.0,
+    "expected_recovered_value": 4.2,
+    "discount_cost": 1.8,
+    "transfer_cost": 0.0,
+    "operational_cost": 0.12,
+    "net_saved_value": -0.22,
+    "confidence_score": 73.6,
+    "is_recommended": false
+  },
+  {
+    "id": "scen-00246",
+    "recommendation_id": "rec-00055",
+    "scenario_type": "bundle",
+    "parameters": {
+      "bundle_discount_pct": 0.15
+    },
+    "expected_sold_quantity": 3.5,
+    "expected_recovered_value": 2.98,
+    "discount_cost": 0.26,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.5,
+    "net_saved_value": -1.29,
+    "confidence_score": 68.4,
+    "is_recommended": true
+  },
+  {
+    "id": "scen-00247",
+    "recommendation_id": "rec-00055",
+    "scenario_type": "shelf_visibility",
+    "parameters": {},
+    "expected_sold_quantity": 3.0,
+    "expected_recovered_value": 3.0,
+    "discount_cost": 0.0,
+    "transfer_cost": 0.0,
+    "operational_cost": 1.0,
+    "net_saved_value": -0.5,
+    "confidence_score": 71.2,
+    "is_recommended": false
+  }
+]

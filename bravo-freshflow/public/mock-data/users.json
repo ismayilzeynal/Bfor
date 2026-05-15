@@ -1,0 +1,122 @@
+[
+  {
+    "id": "u-001",
+    "full_name": "Aysel Məmmədova",
+    "email": "aysel.m@bravo.az",
+    "role": "ceo",
+    "store_id": null,
+    "department": "Executive",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-001",
+    "is_active": true
+  },
+  {
+    "id": "u-002",
+    "full_name": "Rəşad Hüseynov",
+    "email": "rashad.h@bravo.az",
+    "role": "coo",
+    "store_id": null,
+    "department": "Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-002",
+    "is_active": true
+  },
+  {
+    "id": "u-003",
+    "full_name": "Nigar Quliyeva",
+    "email": "nigar.q@bravo.az",
+    "role": "cfo",
+    "store_id": null,
+    "department": "Finance",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-003",
+    "is_active": true
+  },
+  {
+    "id": "u-004",
+    "full_name": "Elnur Babayev",
+    "email": "elnur.b@bravo.az",
+    "role": "cio",
+    "store_id": null,
+    "department": "IT",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-004",
+    "is_active": true
+  },
+  {
+    "id": "u-005",
+    "full_name": "Lalə İsmayılova",
+    "email": "lale.i@bravo.az",
+    "role": "category_manager",
+    "store_id": null,
+    "department": "Category Management",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-005",
+    "is_active": true
+  },
+  {
+    "id": "u-006",
+    "full_name": "Rüfət Əliyev",
+    "email": "rufat.a@bravo.az",
+    "role": "purchase_manager",
+    "store_id": null,
+    "department": "Purchasing",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-006",
+    "is_active": true
+  },
+  {
+    "id": "u-007",
+    "full_name": "Səbinə Cəfərova",
+    "email": "sabina.c@bravo.az",
+    "role": "logistics_manager",
+    "store_id": null,
+    "department": "Logistics",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-007",
+    "is_active": true
+  },
+  {
+    "id": "u-008",
+    "full_name": "Vüqar Rəhimov",
+    "email": "vuqar.r@bravo.az",
+    "role": "store_manager",
+    "store_id": "s-001",
+    "department": "Store Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-008",
+    "is_active": true
+  },
+  {
+    "id": "u-009",
+    "full_name": "Türkan Nəsibova",
+    "email": "turkan.n@bravo.az",
+    "role": "store_manager",
+    "store_id": "s-002",
+    "department": "Store Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-009",
+    "is_active": true
+  },
+  {
+    "id": "u-010",
+    "full_name": "Rəhim Süleymanov",
+    "email": "rahim.s@bravo.az",
+    "role": "supervisor",
+    "store_id": "s-001",
+    "department": "Store Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-010",
+    "is_active": true
+  },
+  {
+    "id": "u-011",
+    "full_name": "Kamran Hacıyev",
+    "email": "kamran.h@bravo.az",
+    "role": "employee",
+    "store_id": "s-001",
+    "department": "Store Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-011",
+    "is_active": true
+  },
+  {
+    "id": "u-012",
+    "full_name": "Ülviyyə Orucova",
+    "email": "ulviyye.o@bravo.az",
+    "role": "employee",
+    "store_id": "s-002",
+    "department": "Store Operations",
+    "avatar_url": "https://api.dicebear.com/7.x/avataaars/svg?seed=u-012",
+    "is_active": true
+  }
+]

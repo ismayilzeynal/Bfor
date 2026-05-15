@@ -1,0 +1,26 @@
+{
+  "version": "1.0.0",
+  "generated_at": "2026-05-15",
+  "source": "synthetic-v1",
+  "counts": {
+    "users": 12,
+    "stores": 8,
+    "categories": 10,
+    "suppliers": 14,
+    "products": 80,
+    "inventory-batches": 286,
+    "inventory-snapshots": 352,
+    "sales": 2226,
+    "waste-records": 105,
+    "risk-predictions": 55,
+    "recommendations": 55,
+    "recommendation-scenarios": 247,
+    "tasks": 87,
+    "transfers": 21,
+    "discounts": 29,
+    "audit-logs": 301,
+    "data-quality-issues": 18,
+    "notifications": 40,
+    "kpi-snapshots": 270
+  }
+}
