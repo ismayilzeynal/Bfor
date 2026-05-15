@@ -19,7 +19,8 @@ const ROUTE_SHORTCUTS: RouteShortcut[] = [
   { trigger: "d", href: "/executive", label: "Executive dashboard" },
   { trigger: "p", href: "/products", label: "Risky Products" },
   { trigger: "t", href: "/tasks", label: "Tasks" },
-  { trigger: "r", href: "/recommendations", label: "Recommendations" },
+  { trigger: "w", href: "/whatif-lab", label: "What-If Lab" },
+  { trigger: "a", href: "/analytics", label: "Analytics" },
 ];
 
 function isTypingTarget(target: EventTarget | null): boolean {

@@ -16,12 +16,12 @@ import { useNotificationsStore } from "@/store/notifications-store";
 import type { Notification } from "@/types";
 
 const ENTITY_ROUTES: Record<string, string> = {
-  recommendation: "/recommendations",
+  recommendation: "/products",
   task: "/tasks",
-  transfer: "/transfers",
-  discount: "/discounts",
+  transfer: "/tasks",
+  discount: "/tasks",
   product: "/products",
-  data_issue: "/data-quality",
+  data_issue: "/products",
 };
 
 export function NotificationsPopover() {

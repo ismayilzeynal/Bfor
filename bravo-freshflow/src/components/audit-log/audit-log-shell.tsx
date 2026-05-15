@@ -56,12 +56,12 @@ import { useAuditData } from "./use-audit-data";
 import { DiffViewer } from "./diff-viewer";
 
 const ENTITY_ROUTES: Record<AuditEntityType, (id: string) => string> = {
-  recommendation: () => "/recommendations",
+  recommendation: () => "/products",
   task: () => "/tasks",
-  transfer: () => "/transfers",
-  discount: () => "/discounts",
+  transfer: () => "/tasks",
+  discount: () => "/tasks",
   product: (id) => `/products/${id}`,
-  data_issue: () => "/data-quality",
+  data_issue: () => "/products",
 };
 
 const ENTITY_LABELS: Record<AuditEntityType, string> = {

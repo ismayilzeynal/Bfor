@@ -18,22 +18,22 @@ export const DEMO_SCENARIOS: DemoScenario[] = [
     roleId: "u-001",
   },
   {
-    id: "morning-approvals",
-    label: "Morning approvals queue",
-    emoji: "☕",
+    id: "risky-products",
+    label: "Risky products triage",
+    emoji: "📦",
     description:
-      "Pending high-priority recommendations awaiting review for the start of the shift.",
-    route: "/recommendations?tab=pending",
+      "Land on the risky products list with critical filter ready for triage.",
+    route: "/products?risk=critical",
     roleId: "u-001",
   },
   {
-    id: "employee-shift",
-    label: "Employee shift starts",
-    emoji: "👷",
+    id: "tasks-followup",
+    label: "Tasks follow-up",
+    emoji: "✅",
     description:
-      "Switch to an employee and land on their mobile task list with 3 queued tasks.",
-    route: "/my-tasks",
-    roleId: "u-010",
+      "Open the tasks queue to see approved AI actions in flight.",
+    route: "/tasks",
+    roleId: "u-001",
   },
   {
     id: "end-of-day",

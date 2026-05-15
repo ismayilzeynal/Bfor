@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { Compass, Home, ListChecks, PackageSearch } from "lucide-react";
+import { Compass, Home, ListTodo, PackageSearch } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const SUGGESTIONS = [
   { href: "/executive", label: "Executive dashboard", icon: Home },
   { href: "/products", label: "Risky Products", icon: PackageSearch },
-  { href: "/recommendations", label: "AI Recommendations", icon: ListChecks },
+  { href: "/tasks", label: "Tasks", icon: ListTodo },
 ];
 
 export default function NotFound() {

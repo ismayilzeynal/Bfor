@@ -21,12 +21,12 @@ import { useNotificationsStore } from "@/store/notifications-store";
 import { NotificationCard } from "./notification-card";
 
 const ENTITY_ROUTES: Record<string, (id: string) => string> = {
-  recommendation: () => "/recommendations",
+  recommendation: () => "/products",
   task: () => "/tasks",
-  transfer: () => "/transfers",
-  discount: () => "/discounts",
+  transfer: () => "/tasks",
+  discount: () => "/tasks",
   product: (id) => `/products/${id}`,
-  data_issue: () => "/data-quality",
+  data_issue: () => "/products",
 };
 
 const PRIORITIES: Priority[] = ["critical", "high", "medium", "low"];

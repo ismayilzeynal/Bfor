@@ -32,7 +32,7 @@ export function LatestRecommendationsCard({
           <Sparkles className="size-4 text-amber-500" aria-hidden />
           Latest AI Recommendations
         </CardTitle>
-        <Button variant="ghost" size="sm" onClick={() => router.push("/recommendations")}>
+        <Button variant="ghost" size="sm" onClick={() => router.push("/products")}>
           View all
           <ChevronRight className="ml-1 size-4" aria-hidden />
         </Button>
@@ -68,7 +68,7 @@ export function LatestRecommendationsCard({
                   variant="outline"
                   size="sm"
                   className="h-7"
-                  onClick={() => router.push(`/recommendations`)}
+                  onClick={() => router.push(`/products/${r.product_id}`)}
                 >
                   View
                 </Button>

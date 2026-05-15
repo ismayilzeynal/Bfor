@@ -139,7 +139,7 @@ export function CommandPalette() {
                 <CommandItem
                   key={t.id}
                   value={`task ${t.title}`}
-                  onSelect={() => go("/my-tasks")}
+                  onSelect={() => go("/tasks")}
                 >
                   <ListChecks className="mr-2 h-4 w-4 text-indigo-600" />
                   <span className="truncate">{t.title}</span>

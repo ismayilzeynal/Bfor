@@ -42,26 +42,21 @@ export const ROLE_DEFAULT_ROUTES: Record<Role, string> = {
   ceo: "/executive",
   coo: "/executive",
   cfo: "/executive",
-  cio: "/data-quality",
+  cio: "/executive",
   category_manager: "/products",
-  purchase_manager: "/recommendations",
-  logistics_manager: "/transfers",
-  store_manager: "/operations",
+  purchase_manager: "/products",
+  logistics_manager: "/tasks",
+  store_manager: "/products",
   supervisor: "/tasks",
-  employee: "/my-tasks",
+  employee: "/tasks",
 };
 
 const ALL_ROUTES = [
   "/executive",
-  "/operations",
   "/products",
-  "/recommendations",
   "/tasks",
-  "/my-tasks",
-  "/transfers",
-  "/discounts",
-  "/data-quality",
   "/whatif-lab",
+  "/analytics",
   "/notifications",
   "/audit-log",
   "/settings",
@@ -72,45 +67,12 @@ export const ROLE_ALLOWED_ROUTES: Record<Role, string[]> = {
   coo: ALL_ROUTES,
   cfo: ALL_ROUTES,
   cio: ALL_ROUTES,
-  category_manager: [
-    "/products",
-    "/recommendations",
-    "/whatif-lab",
-    "/notifications",
-    "/audit-log",
-    "/settings",
-  ],
-  purchase_manager: [
-    "/recommendations",
-    "/notifications",
-    "/audit-log",
-    "/settings",
-  ],
-  logistics_manager: [
-    "/transfers",
-    "/tasks",
-    "/notifications",
-    "/audit-log",
-    "/settings",
-  ],
-  store_manager: [
-    "/operations",
-    "/products",
-    "/recommendations",
-    "/tasks",
-    "/transfers",
-    "/discounts",
-    "/notifications",
-    "/settings",
-  ],
-  supervisor: [
-    "/operations",
-    "/tasks",
-    "/my-tasks",
-    "/notifications",
-    "/settings",
-  ],
-  employee: ["/my-tasks", "/notifications", "/settings"],
+  category_manager: ALL_ROUTES,
+  purchase_manager: ALL_ROUTES,
+  logistics_manager: ALL_ROUTES,
+  store_manager: ALL_ROUTES,
+  supervisor: ALL_ROUTES,
+  employee: ALL_ROUTES,
 };
 
 export interface NavItem {
@@ -131,33 +93,22 @@ export const NAV_GROUPS: NavGroup[] = [
     roles: "all",
     items: [
       { href: "/executive", label: "Executive", icon: "LayoutDashboard" },
-      { href: "/operations", label: "Operations", icon: "Activity" },
     ],
   },
   {
-    label: "Loss Prevention",
+    label: "Workflow",
     roles: "all",
     items: [
       { href: "/products", label: "Risky Products", icon: "PackageSearch" },
-      { href: "/recommendations", label: "Recommendations", icon: "Sparkles" },
       { href: "/whatif-lab", label: "What-If Lab", icon: "FlaskConical" },
-    ],
-  },
-  {
-    label: "Action Queue",
-    roles: "all",
-    items: [
       { href: "/tasks", label: "Tasks", icon: "ListTodo" },
-      { href: "/my-tasks", label: "My Tasks", icon: "ClipboardCheck" },
-      { href: "/transfers", label: "Transfers", icon: "Truck" },
-      { href: "/discounts", label: "Discounts", icon: "Percent" },
     ],
   },
   {
     label: "Insights",
     roles: "all",
     items: [
-      { href: "/data-quality", label: "Data Quality", icon: "Database" },
+      { href: "/analytics", label: "Analytics", icon: "BarChart3" },
     ],
   },
   {
@@ -312,7 +263,7 @@ export const SCENARIO_TYPE_LABELS: Record<ScenarioType, string> = {
   transfer: "Transfer",
   bundle: "Bundle",
   shelf_visibility: "Shelf Visibility",
-  combined: "Combined",
+  combined: "Discount + Transfer",
 };
 
 export const DATA_QUALITY_SEVERITY_LABELS: Record<DataQualitySeverity, string> = {

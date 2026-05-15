@@ -194,7 +194,6 @@ export function WhatIfSimulator({
           targetStoreAvgDailySales: target.avg_daily_sales,
         })
       : { ...calcNoAction(calcBaseline), scenarioType: "transfer" as ScenarioType, notViable: true, notViableReason: "No target store" };
-    const bundle = calcBundle(calcBaseline, { bundleDiscountPct: bundleDiscountPct / 100 });
     const combined = target
       ? calcCombined(calcBaseline, {
           discountPct: discountPct / 100,
@@ -202,24 +201,28 @@ export function WhatIfSimulator({
           targetStoreAvgDailySales: target.avg_daily_sales,
         })
       : { ...discount, scenarioType: "combined" as ScenarioType };
-    const shelfStub: ScenarioResult = {
+    const stub = (type: ScenarioType): ScenarioResult => ({
       ...noAction,
-      scenarioType: "shelf_visibility" as ScenarioType,
+      scenarioType: type,
       notViable: true,
       notViableReason: "disabled",
-    };
-    return { no_action: noAction, discount, transfer, bundle, shelf_visibility: shelfStub, combined } as Record<
-      ScenarioType,
-      ScenarioResult
-    >;
-  }, [calcBaseline, discountPct, transferQty, target, bundleDiscountPct]);
+    });
+    return {
+      no_action: noAction,
+      discount,
+      transfer,
+      bundle: stub("bundle" as ScenarioType),
+      shelf_visibility: stub("shelf_visibility" as ScenarioType),
+      combined,
+    } as Record<ScenarioType, ScenarioResult>;
+  }, [calcBaseline, discountPct, transferQty, target]);
 
   const recommendedType = useMemo<ScenarioType>(() => {
     let best: ScenarioType = "no_action";
     let bestVal = -Infinity;
     for (const [type, r] of Object.entries(results) as [ScenarioType, ScenarioResult][]) {
       if (r.notViable) continue;
-      if (type === "shelf_visibility") continue;
+      if (type === "shelf_visibility" || type === "bundle") continue;
       if (r.netSaved > bestVal) {
         bestVal = r.netSaved;
         best = type;
@@ -283,7 +286,7 @@ export function WhatIfSimulator({
   }
 
   const chartData = (Object.entries(results) as [ScenarioType, ScenarioResult][])
-    .filter(([type]) => type !== "shelf_visibility")
+    .filter(([type]) => type !== "shelf_visibility" && type !== "bundle")
     .map(([type, r]) => ({
       type,
       label: SCENARIO_TYPE_LABELS[type],
@@ -328,7 +331,7 @@ export function WhatIfSimulator({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         <ScenarioCard
           type="no_action"
           result={results.no_action}
@@ -365,7 +368,13 @@ export function WhatIfSimulator({
           isRecommended={recommendedType === "transfer"}
           isSelected={selected === "transfer"}
           onSelect={() => !results.transfer.notViable && setSelected("transfer")}
-          notViableReason={results.transfer.notViable ? results.transfer.notViableReason : undefined}
+          notViableReason={
+            baseline.daysToExpiry <= 1
+              ? "Expiry too close for transfer"
+              : results.transfer.notViable
+                ? results.transfer.notViableReason
+                : undefined
+          }
         >
           {candidateTargetStores.length > 0 ? (
             <>
@@ -411,49 +420,6 @@ export function WhatIfSimulator({
               No alternative target stores available.
             </Banner>
           )}
-        </ScenarioCard>
-        <ScenarioCard
-          type="bundle"
-          result={results.bundle}
-          isRecommended={recommendedType === "bundle"}
-          isSelected={selected === "bundle"}
-          onSelect={() => setSelected("bundle")}
-        >
-          {candidateCompanions.length > 0 ? (
-            <div className="space-y-1">
-              <label className="text-[10px] uppercase tracking-wide text-muted-foreground">Companion</label>
-              <Select
-                value={bundleCompanionId ?? undefined}
-                onValueChange={(v) => setBundleCompanionId(v)}
-              >
-                <SelectTrigger className="h-7 text-xs">
-                  <SelectValue placeholder="Pick a partner product" />
-                </SelectTrigger>
-                <SelectContent>
-                  {candidateCompanions.map((c) => (
-                    <SelectItem key={c.id} value={c.id}>
-                      {c.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-          ) : null}
-          <SliderRow
-            label="Bundle discount"
-            value={bundleDiscountPct}
-            onChange={setBundleDiscountPct}
-            min={5}
-            max={25}
-            step={5}
-            unit="%"
-            ticks={BUNDLE_STEPS}
-          />
-          {results.bundle.marginBreached ? (
-            <Banner tone="rose" icon={AlertTriangle}>
-              Margin breached
-            </Banner>
-          ) : null}
         </ScenarioCard>
       </div>
 
@@ -760,7 +726,11 @@ function CostHover({ result }: { result: ScenarioResult }) {
       </HoverCardTrigger>
       <HoverCardContent className="w-52 space-y-1 text-[11px]">
         <p className="font-medium">Cost breakdown</p>
-        <KV label="Discount" value={formatAZN(result.discountCost, { compact: true })} />
+        <KV
+          label="Discount"
+          value={formatAZN(result.discountCost, { compact: true })}
+          valueClassName="text-amber-700 dark:text-amber-400"
+        />
         <KV label="Transfer" value={formatAZN(result.transferCost, { compact: true })} />
         <KV label="Operational" value={formatAZN(result.operationalCost, { compact: true })} />
       </HoverCardContent>
@@ -777,11 +747,19 @@ function Mini({ label, value }: { label: string; value: string }) {
   );
 }
 
-function KV({ label, value }: { label: string; value: string }) {
+function KV({
+  label,
+  value,
+  valueClassName,
+}: {
+  label: string;
+  value: string;
+  valueClassName?: string;
+}) {
   return (
     <div className="flex items-center justify-between">
       <span className="text-muted-foreground">{label}</span>
-      <span className="font-medium tabular-nums">{value}</span>
+      <span className={cn("font-medium tabular-nums", valueClassName)}>{value}</span>
     </div>
   );
 }
@@ -911,7 +889,11 @@ function DetailPanel({
           <Card className="border-dashed">
             <CardContent className="space-y-1 p-2 text-xs">
               <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Cost breakdown</div>
-              <KV label="Discount" value={fmt(result.discountCost)} />
+              <KV
+                label="Discount"
+                value={fmt(result.discountCost)}
+                valueClassName="text-amber-700 dark:text-amber-400"
+              />
               <KV label="Transfer" value={fmt(result.transferCost)} />
               <KV label="Operational" value={fmt(result.operationalCost)} />
               <KV label="Total" value={fmt(totalCost)} />
