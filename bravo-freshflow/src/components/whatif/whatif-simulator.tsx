@@ -655,10 +655,23 @@ function ScenarioCard({
           </HoverCard>
         </div>
 
-        <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+        <div className="grid grid-cols-2 gap-1.5 text-[11px]">
           <Mini label="Sold" value={result.expectedSold.toFixed(0)} />
-          <Mini label="Recovered" value={formatAZN(result.recoveredValue, { compact: true })} />
-          <CostHover result={result} />
+          <Mini
+            label="Recovered"
+            value={formatAZN(result.recoveredValue, { compact: true })}
+            tone="text-emerald-700 dark:text-emerald-300"
+          />
+          <Mini
+            label="Discount cost"
+            value={formatAZN(result.discountCost, { compact: true })}
+            tone="text-amber-700 dark:text-amber-400"
+          />
+          <Mini
+            label="Transfer cost"
+            value={formatAZN(result.transferCost, { compact: true })}
+            tone="text-sky-700 dark:text-sky-300"
+          />
         </div>
 
         <div
@@ -738,11 +751,11 @@ function CostHover({ result }: { result: ScenarioResult }) {
   );
 }
 
-function Mini({ label, value }: { label: string; value: string }) {
+function Mini({ label, value, tone }: { label: string; value: string; tone?: string }) {
   return (
     <div className="rounded border bg-background p-1.5">
       <div className="text-[9px] uppercase tracking-wide text-muted-foreground">{label}</div>
-      <div className="text-xs font-semibold tabular-nums">{value}</div>
+      <div className={cn("text-xs font-semibold tabular-nums", tone)}>{value}</div>
     </div>
   );
 }

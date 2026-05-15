@@ -73,7 +73,7 @@ export function ManagerTable({
               <TableHead>Product</TableHead>
               <TableHead>Store</TableHead>
               <TableHead>Assignee</TableHead>
-              <TableHead>Type</TableHead>
+              <TableHead>Action</TableHead>
               <TableHead>Priority</TableHead>
               <TableHead>Deadline</TableHead>
               <TableHead>Status</TableHead>

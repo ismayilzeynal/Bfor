@@ -203,6 +203,18 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
               recommendation={bundle.recommendation}
               onApproveClick={() => setApproveOpen(true)}
               onRejectClick={() => setRejectOpen(true)}
+              onIgnoreClick={() => {
+                if (!bundle.recommendation) return;
+                reject({
+                  recommendation_id: bundle.recommendation.id,
+                  user_id: currentUser.id,
+                  note: "ignored",
+                  reason_codes: ["ignored"],
+                });
+                toast("Recommendation ignored", {
+                  description: bundle.product.name,
+                });
+              }}
               onCompareClick={scrollToWhatif}
             />
           </div>

@@ -142,14 +142,6 @@ export function RiskyProductsTable({
         },
       },
       {
-        id: "category",
-        header: "Category",
-        accessorFn: (r) => r.category?.name ?? "",
-        cell: ({ row }) => (
-          <span className="text-xs">{row.original.category?.name ?? "—"}</span>
-        ),
-      },
-      {
         id: "stock",
         header: () => <div className="text-right">Stock</div>,
         accessorFn: (r) => r.prediction.current_stock,
@@ -222,8 +214,18 @@ export function RiskyProductsTable({
         cell: ({ row }) => <RiskBadge level={row.original.prediction.risk_level} />,
       },
       {
+        id: "potential",
+        header: () => <div className="text-right">Potential Loss</div>,
+        accessorFn: (r) => r.prediction.predicted_loss_value,
+        cell: ({ row }) => (
+          <div className="text-right tabular-nums text-xs font-medium text-rose-700">
+            −{formatAZN(row.original.prediction.predicted_loss_value, { compact: true })}
+          </div>
+        ),
+      },
+      {
         id: "action",
-        header: "Action",
+        header: "AI Suggestion",
         accessorFn: (r) => r.recommendation?.recommendation_type ?? "",
         cell: ({ row }) =>
           row.original.recommendation ? (
@@ -231,32 +233,6 @@ export function RiskyProductsTable({
           ) : (
             <span className="text-xs text-muted-foreground">—</span>
           ),
-      },
-      {
-        id: "net",
-        header: () => <div className="text-right">Net Saved</div>,
-        accessorFn: (r) => r.recommendation?.net_saved_value ?? r.prediction.predicted_loss_value,
-        cell: ({ row }) => {
-          const r = row.original;
-          if (r.recommendation) {
-            const v = r.recommendation.net_saved_value;
-            return (
-              <div
-                className={cn(
-                  "text-right tabular-nums text-xs font-medium",
-                  v >= 0 ? "text-emerald-700" : "text-rose-700"
-                )}
-              >
-                {formatAZN(v, { compact: true, sign: true })}
-              </div>
-            );
-          }
-          return (
-            <div className="text-right tabular-nums text-xs text-rose-700">
-              −{formatAZN(r.prediction.predicted_loss_value, { compact: true })}
-            </div>
-          );
-        },
       },
       {
         id: "confidence",

@@ -189,7 +189,7 @@ export const RECOMMENDATION_TYPE_LABELS: Record<RecommendationType, string> = {
 
 export const TASK_STATUS_LABELS: Record<TaskStatus, string> = {
   pending: "Pending",
-  assigned: "Assigned",
+  assigned: "Approved",
   in_progress: "In Progress",
   completed: "Completed",
   rejected: "Rejected",

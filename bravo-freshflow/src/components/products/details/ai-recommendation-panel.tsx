@@ -5,8 +5,9 @@ import {
   CheckCircle2,
   ChevronDown,
   ChevronUp,
+  EyeOff,
+  FlaskConical,
   PlusCircle,
-  Scale,
   ShieldOff,
   Sparkles,
   XCircle,
@@ -36,6 +37,7 @@ interface Props {
   recommendation: Recommendation | undefined;
   onApproveClick: () => void;
   onRejectClick: () => void;
+  onIgnoreClick: () => void;
   onCompareClick: () => void;
 }
 
@@ -43,6 +45,7 @@ export function AiRecommendationPanel({
   recommendation,
   onApproveClick,
   onRejectClick,
+  onIgnoreClick,
   onCompareClick,
 }: Props) {
   const decision = useActionsStore((s) =>
@@ -111,7 +114,7 @@ export function AiRecommendationPanel({
             <Metric
               label="Cost"
               value={formatAZN(recommendation.expected_cost, { compact: true })}
-              tone="text-rose-700 dark:text-rose-300"
+              tone="text-amber-700 dark:text-amber-400"
             />
             <Metric
               label="Net saved"
@@ -162,8 +165,8 @@ export function AiRecommendationPanel({
               </div>
             </div>
           ) : (
-            <div className="flex flex-col gap-2">
-              <Button onClick={onApproveClick} className="w-full gap-1.5">
+            <div className="grid grid-cols-2 gap-2">
+              <Button onClick={onApproveClick} className="col-span-2 w-full gap-1.5">
                 <CheckCircle2 className="size-4" aria-hidden />
                 Approve
               </Button>
@@ -175,17 +178,25 @@ export function AiRecommendationPanel({
                 <ShieldOff className="size-4" aria-hidden />
                 Reject
               </Button>
+              <Button
+                variant="outline"
+                onClick={onIgnoreClick}
+                className="w-full gap-1.5"
+              >
+                <EyeOff className="size-4" aria-hidden />
+                Ignore
+              </Button>
             </div>
           )}
 
           <Button
-            variant="ghost"
+            variant="secondary"
             size="sm"
             onClick={onCompareClick}
             className="w-full gap-1.5 text-xs"
           >
-            <Scale className="size-3.5" aria-hidden />
-            Compare alternatives
+            <FlaskConical className="size-3.5" aria-hidden />
+            View What-If
           </Button>
         </CardContent>
       </Card>
