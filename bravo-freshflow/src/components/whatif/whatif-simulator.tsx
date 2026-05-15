@@ -6,7 +6,6 @@ import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
-  Eye,
   FlaskConical,
   Info,
   Layers,
@@ -53,7 +52,6 @@ import {
   calcCombined,
   calcDiscount,
   calcNoAction,
-  calcShelfVisibility,
   calcTransfer,
   type ScenarioBaseline,
   type ScenarioResult,
@@ -110,7 +108,7 @@ const SCENARIO_ICON: Record<ScenarioType, typeof Activity> = {
   discount: Percent,
   transfer: Truck,
   bundle: Layers,
-  shelf_visibility: Eye,
+  shelf_visibility: Activity,
   combined: Sparkles,
 };
 
@@ -119,7 +117,7 @@ const SCENARIO_DESC: Record<ScenarioType, string> = {
   discount: "Endirim tətbiq et və satış sürətini artır.",
   transfer: "Stoku daha tələbatlı filiala transfer et.",
   bundle: "Tamamlayıcı məhsulla paket aksiyası yarat.",
-  shelf_visibility: "Rəf görünüşünü və yerləşməsini artır.",
+  shelf_visibility: "",
   combined: "Endirim + transferi birləşdir, maksimum xilas.",
 };
 
@@ -132,8 +130,7 @@ const TOOLTIP_FORMULA: Record<ScenarioType, string> = {
     "expected_sold = min(qty, hədəf filialın sürəti × günlər). transfer_cost = 8 + 0.05 × qty.",
   bundle:
     "uplift = 1.4x, endirim yalnız paketlənmiş hissəyə (50%) tətbiq olunur.",
-  shelf_visibility:
-    "uplift = 1.2x. Yalnız əməliyyat xərci var (≈ ₼1).",
+  shelf_visibility: "",
   combined:
     "qty hissəsi hədəfə transfer, qalan endirimlə yerli satılır. Hər iki effekt cəmlənir.",
 };
@@ -198,7 +195,6 @@ export function WhatIfSimulator({
         })
       : { ...calcNoAction(calcBaseline), scenarioType: "transfer" as ScenarioType, notViable: true, notViableReason: "No target store" };
     const bundle = calcBundle(calcBaseline, { bundleDiscountPct: bundleDiscountPct / 100 });
-    const shelf = calcShelfVisibility(calcBaseline);
     const combined = target
       ? calcCombined(calcBaseline, {
           discountPct: discountPct / 100,
@@ -206,7 +202,13 @@ export function WhatIfSimulator({
           targetStoreAvgDailySales: target.avg_daily_sales,
         })
       : { ...discount, scenarioType: "combined" as ScenarioType };
-    return { no_action: noAction, discount, transfer, bundle, shelf_visibility: shelf, combined } as Record<
+    const shelfStub: ScenarioResult = {
+      ...noAction,
+      scenarioType: "shelf_visibility" as ScenarioType,
+      notViable: true,
+      notViableReason: "disabled",
+    };
+    return { no_action: noAction, discount, transfer, bundle, shelf_visibility: shelfStub, combined } as Record<
       ScenarioType,
       ScenarioResult
     >;
@@ -217,6 +219,7 @@ export function WhatIfSimulator({
     let bestVal = -Infinity;
     for (const [type, r] of Object.entries(results) as [ScenarioType, ScenarioResult][]) {
       if (r.notViable) continue;
+      if (type === "shelf_visibility") continue;
       if (r.netSaved > bestVal) {
         bestVal = r.netSaved;
         best = type;
@@ -280,6 +283,7 @@ export function WhatIfSimulator({
   }
 
   const chartData = (Object.entries(results) as [ScenarioType, ScenarioResult][])
+    .filter(([type]) => type !== "shelf_visibility")
     .map(([type, r]) => ({
       type,
       label: SCENARIO_TYPE_LABELS[type],
@@ -451,13 +455,6 @@ export function WhatIfSimulator({
             </Banner>
           ) : null}
         </ScenarioCard>
-        <ScenarioCard
-          type="shelf_visibility"
-          result={results.shelf_visibility}
-          isRecommended={recommendedType === "shelf_visibility"}
-          isSelected={selected === "shelf_visibility"}
-          onSelect={() => setSelected("shelf_visibility")}
-        />
       </div>
 
       <ScenarioCard

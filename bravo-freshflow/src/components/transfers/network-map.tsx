@@ -208,7 +208,13 @@ export function NetworkMap({ rows, stores, selectedStoreId, onSelectStore }: Pro
                   </text>
                 </g>
               </HoverCardTrigger>
-              <HoverCardContent side="top" className="w-56 p-2 text-xs">
+              <HoverCardContent
+                side="top"
+                align="center"
+                sideOffset={10}
+                avoidCollisions={false}
+                className="w-56 p-2 text-xs data-[side=left]:slide-in-from-bottom-1 data-[side=right]:slide-in-from-bottom-1 data-[side=top]:slide-in-from-bottom-1 data-[side=bottom]:slide-in-from-top-1"
+              >
                 <div className="font-semibold">{s.name}</div>
                 <div className="font-mono text-[10px] text-muted-foreground">{s.code}</div>
                 <div className="mt-1 text-muted-foreground">{s.address}</div>

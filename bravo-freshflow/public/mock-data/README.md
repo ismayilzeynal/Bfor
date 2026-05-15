@@ -9,7 +9,7 @@ All schemas conform to BRAVO_FRESHFLOW_SPEC.md section 7.
 | stores.json | 8 | 8 Bravo stores (7 in Bakı, 1 in Sumqayıt) with lat/lng |
 | categories.json | 10 | 10 product categories, first 6 perishable |
 | suppliers.json | 14 | Suppliers with risk scores 15–90 |
-| products.json | 80 | Includes 5 spotlight products (Qatıq 500q, Toyuq Filesi, Banan, Hazır Salat, Süd 1L) |
+| products.json | 80 | Includes 5 spotlight products (Qatıq 500q, Toyuq Filesi, Banan, Mayonez 250q, Süd 1L) |
 | inventory-batches.json | 286 | Active/depleted/expired batches across stores |
 | inventory-snapshots.json | 352 | Latest stock state per product × store |
 | sales.json | 2226 | Daily aggregates for last 30 days |
@@ -30,7 +30,7 @@ All five spotlight products from spec section 8 exist with the exact specs:
 - `p-demo-yogurt`  Qatıq 500q     @ Bravo Nərimanov (s-001) — combined recommendation
 - `p-demo-chicken` Toyuq Filesi   @ Bravo 28 May    (s-003) — urgent 30% discount
 - `p-demo-banana`  Banan          @ Bravo Yasamal   (s-005) — bundle + shelf
-- `p-demo-salad`   Hazır Salat    @ Bravo Gənclik   (s-002) — 25% discount
+- `p-demo-salad`   Mayonez 250q    @ Bravo Gənclik   (s-002) — 25% discount
 - `p-demo-milk`    Süd 1L         @ Bravo Elmlər    (s-004) — transfer to Sumqayıt
 
 ## Regenerate

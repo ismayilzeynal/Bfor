@@ -33,11 +33,11 @@
   },
   {
     "id": "c-005",
-    "name": "Hazır yeməklər",
+    "name": "Souslar və ədviyyatlar",
     "parent_category_id": null,
-    "risk_weight": 0.88,
-    "is_perishable_category": true,
-    "icon": "Salad"
+    "risk_weight": 0.35,
+    "is_perishable_category": false,
+    "icon": "Soup"
   },
   {
     "id": "c-006",

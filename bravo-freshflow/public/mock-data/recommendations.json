@@ -72,7 +72,7 @@
     "store_id": "s-002",
     "recommendation_type": "discount",
     "recommendation_text": "Dərhal 25% endirim tətbiq et. 1 gün qalıb, stok yüksəkdir.",
-    "reason_text": "Hazır salat sabaha qalmır. 25% endirim margin sərhədindən yuxarıdadır və tələbatı 2x artırır.",
+    "reason_text": "Mayonez sabaha qalmır. 25% endirim margin sərhədindən yuxarıdadır və tələbatı 2x artırır.",
     "expected_recovered_value": 99.23,
     "expected_cost": 33.84,
     "net_saved_value": 2.39,

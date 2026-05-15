@@ -21,7 +21,8 @@ export function HealthScore({ snapshots }: Props) {
     if (!snapshots.length) return 0;
     const sum = snapshots.reduce((acc, s) => acc + (s.confidence_score ?? 0), 0);
     const avg = sum / snapshots.length;
-    return Math.round(avg * 100);
+    const normalized = avg <= 1 ? avg * 100 : avg;
+    return Math.max(0, Math.min(100, Math.round(normalized)));
   }, [snapshots]);
 
   const tone =

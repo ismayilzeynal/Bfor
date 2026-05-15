@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import {
   type ColumnDef,
@@ -352,8 +352,9 @@ export function RiskyProductsTable({
     getRowId: (r) => r.id,
   });
 
-  // keep tanstack state in sync if pageSize changes
-  table.setPageSize(pageSize);
+  useEffect(() => {
+    table.setPageSize(pageSize);
+  }, [table, pageSize]);
 
   const rowModel = table.getRowModel();
   const totalRows = rows.length;

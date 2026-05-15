@@ -17,7 +17,7 @@ import type { Discount, KpiSnapshot, Transfer } from "@/types";
 interface NetSavedWaterfallChartProps {
   snapshots: KpiSnapshot[];
   transfers: Transfer[];
-  discounts: Discount[];
+  discounts?: Discount[];
 }
 
 interface Stack {
@@ -37,21 +37,21 @@ export function NetSavedWaterfallChart({
     const globalSnaps = snapshots.filter(
       (s) => s.store_id === null && s.category_id === null
     );
-    const potential = globalSnaps.reduce((sum, s) => sum + s.potential_loss, 0);
+    const recovered = globalSnaps.reduce((sum, s) => sum + s.recovered_value, 0);
     const netSaved = globalSnaps.reduce((sum, s) => sum + s.net_saved_value, 0);
+    const discountsApplied = globalSnaps.reduce((sum, s) => sum + s.discounts_applied, 0);
+    const tasksCompleted = globalSnaps.reduce((sum, s) => sum + s.tasks_completed, 0);
 
-    const discountCost = discounts.reduce((sum, d) => {
-      const margin = d.current_margin_after_discount_pct;
-      return sum + Math.max(0, (10 - margin) * 10);
-    }, 0);
-    const transferCost = transfers.reduce((sum, t) => sum + t.transfer_cost, 0);
+    const AVG_DISCOUNT_COST_AZN = 45;
+    const AVG_OPERATIONAL_COST_PER_TASK_AZN = 8;
 
-    const totalDeductions = potential - netSaved;
-    const operational = Math.max(0, totalDeductions - discountCost - transferCost);
+    const transferCost = transfers.reduce((sum, t) => sum + (t.transfer_cost ?? 0), 0);
+    const discountCost = discountsApplied * AVG_DISCOUNT_COST_AZN;
+    const operationalCost = tasksCompleted * AVG_OPERATIONAL_COST_PER_TASK_AZN;
 
     const stages: Stack[] = [];
-    let running = potential;
-    stages.push({ name: "Potential Loss", base: 0, delta: potential, total: potential, tone: "positive" });
+    let running = recovered;
+    stages.push({ name: "Recovered", base: 0, delta: recovered, total: recovered, tone: "positive" });
     stages.push({
       name: "− Discount",
       base: running - discountCost,
@@ -70,22 +70,21 @@ export function NetSavedWaterfallChart({
     running -= transferCost;
     stages.push({
       name: "− Operational",
-      base: running - operational,
-      delta: operational,
-      total: running - operational,
+      base: running - operationalCost,
+      delta: operationalCost,
+      total: running - operationalCost,
       tone: "deduction",
     });
-    running -= operational;
     stages.push({ name: "= Net Saved", base: 0, delta: netSaved, total: netSaved, tone: "endpoint" });
     return stages;
-  }, [snapshots, transfers, discounts]);
+  }, [snapshots, transfers]);
 
   const tone = (t: Stack["tone"]) =>
     t === "positive"
-      ? "hsl(215 16% 70%)"
+      ? "hsl(215 25% 50%)"
       : t === "endpoint"
-        ? "hsl(217 91% 60%)"
-        : "hsl(var(--risk-critical))";
+        ? "hsl(142 71% 40%)"
+        : "hsl(0 75% 55%)";
 
   const hasData = data.some((d) => d.total !== 0 || d.delta !== 0);
 
@@ -98,29 +97,36 @@ export function NetSavedWaterfallChart({
         {!hasData ? (
           <EmptyState />
         ) : (
-          <div className="h-[240px]">
+          <div className="h-[260px]">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }} barCategoryGap="20%">
+              <BarChart
+                data={data}
+                margin={{ top: 16, right: 12, left: 0, bottom: 8 }}
+                barCategoryGap="28%"
+              >
                 <XAxis
                   dataKey="name"
-                  tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                  tick={{ fontSize: 11, fill: "hsl(var(--foreground))", fontWeight: 500 }}
                   tickLine={false}
                   axisLine={false}
                   interval={0}
+                  height={36}
                 />
                 <YAxis
-                  tick={{ fontSize: 10, fill: "hsl(var(--muted-foreground))" }}
+                  tick={{ fontSize: 11, fill: "hsl(var(--foreground))" }}
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={(v: number) => formatAZN(v, { compact: true })}
                   width={64}
                 />
                 <Tooltip
+                  cursor={{ fill: "hsl(var(--muted) / 0.4)" }}
                   contentStyle={{
                     background: "hsl(var(--popover))",
                     border: "1px solid hsl(var(--border))",
                     borderRadius: 8,
                     fontSize: 12,
+                    color: "hsl(var(--foreground))",
                   }}
                   formatter={(_v, _n, ctx) => {
                     const item = ctx?.payload as Stack | undefined;

@@ -6,7 +6,7 @@
     "batch_id": "b-00001",
     "risk_score": 82,
     "risk_level": "high",
-    "predicted_unsold_quantity": 75,
+    "predicted_unsold_quantity": 300,
     "predicted_loss_value": 90.0,
     "main_reason": "Stok satış sürətindən 5x yüksəkdir və son istifadə tarixinə 3 gün qalıb. Eyni məhsul Bravo Gənclik filialında daha sürətli satılır.",
     "reason_factors": {
@@ -18,7 +18,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 3,
-    "current_stock": 120,
+    "current_stock": 480,
     "avg_daily_sales_7d": 22,
     "sales_trend": "declining",
     "created_at": "2026-05-15T08:30:00Z"
@@ -30,7 +30,7 @@
     "batch_id": "b-00002",
     "risk_score": 94,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 38,
+    "predicted_unsold_quantity": 152,
     "predicted_loss_value": 209.0,
     "main_reason": "Son istifadə tarixinə yalnız 1 gün qalıb. Stokun 84%-i bu gün satıla bilməyəcək — təcili tədbir tələb olunur.",
     "reason_factors": {
@@ -42,7 +42,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 1,
-    "current_stock": 45,
+    "current_stock": 180,
     "avg_daily_sales_7d": 12,
     "sales_trend": "stable",
     "created_at": "2026-05-15T08:30:00Z"
@@ -54,7 +54,7 @@
     "batch_id": "b-00003",
     "risk_score": 76,
     "risk_level": "high",
-    "predicted_unsold_quantity": 35,
+    "predicted_unsold_quantity": 140,
     "predicted_loss_value": 29.75,
     "main_reason": "Meyvə-tərəvəz qrupu üzrə yüksək risk. 2 gündə bütün stoku satmaq üçün gündəlik satış sürəti kifayət deyil.",
     "reason_factors": {
@@ -66,7 +66,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 2,
-    "current_stock": 90,
+    "current_stock": 360,
     "avg_daily_sales_7d": 28,
     "sales_trend": "stable",
     "created_at": "2026-05-15T08:30:00Z"
@@ -78,9 +78,9 @@
     "batch_id": "b-00004",
     "risk_score": 91,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 42,
+    "predicted_unsold_quantity": 168,
     "predicted_loss_value": 88.2,
-    "main_reason": "Hazır yemək qrupunda 1 gün qalıb. Stokun 70%-i bu gün satılmazsa atılacaq.",
+    "main_reason": "Sous qrupunda 1 gün qalıb. Stokun 70%-i bu gün satılmazsa atılacaq.",
     "reason_factors": {
       "expiry_score": 100,
       "stock_pressure_score": 95,
@@ -90,7 +90,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 1,
-    "current_stock": 60,
+    "current_stock": 240,
     "avg_daily_sales_7d": 18,
     "sales_trend": "stable",
     "created_at": "2026-05-15T08:30:00Z"
@@ -102,7 +102,7 @@
     "batch_id": "b-00005",
     "risk_score": 68,
     "risk_level": "high",
-    "predicted_unsold_quantity": 60,
+    "predicted_unsold_quantity": 240,
     "predicted_loss_value": 60.0,
     "main_reason": "4 gün ərzində 200 ədəd süd satılması mümkün deyil. Bravo Sumqayıt filialına transfer tövsiyə olunur.",
     "reason_factors": {
@@ -114,7 +114,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 4,
-    "current_stock": 200,
+    "current_stock": 800,
     "avg_daily_sales_7d": 35,
     "sales_trend": "stable",
     "created_at": "2026-05-15T08:30:00Z"
@@ -126,7 +126,7 @@
     "batch_id": "b-00200",
     "risk_score": 63.05,
     "risk_level": "high",
-    "predicted_unsold_quantity": 36,
+    "predicted_unsold_quantity": 144,
     "predicted_loss_value": 50.4,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -138,7 +138,7 @@
     },
     "data_confidence_score": 65,
     "days_to_expiry": 5,
-    "current_stock": 78,
+    "current_stock": 312,
     "avg_daily_sales_7d": 8.43,
     "sales_trend": "very_weak",
     "created_at": "2026-05-14T17:30:00Z"
@@ -150,7 +150,7 @@
     "batch_id": "b-00135",
     "risk_score": 84.2,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 54,
+    "predicted_unsold_quantity": 216,
     "predicted_loss_value": 43.2,
     "main_reason": "Son 1 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -162,7 +162,7 @@
     },
     "data_confidence_score": 70,
     "days_to_expiry": 1,
-    "current_stock": 55,
+    "current_stock": 220,
     "avg_daily_sales_7d": 1.1,
     "sales_trend": "very_weak",
     "created_at": "2026-05-15T04:30:00Z"
@@ -186,7 +186,7 @@
     },
     "data_confidence_score": 85,
     "days_to_expiry": 173,
-    "current_stock": 94,
+    "current_stock": 376,
     "avg_daily_sales_7d": 1.71,
     "sales_trend": "declining",
     "created_at": "2026-05-13T12:30:00Z"
@@ -198,7 +198,7 @@
     "batch_id": "b-00213",
     "risk_score": 34.6,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 4,
+    "predicted_unsold_quantity": 16,
     "predicted_loss_value": 4.8,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -210,7 +210,7 @@
     },
     "data_confidence_score": 83,
     "days_to_expiry": 6,
-    "current_stock": 18,
+    "current_stock": 72,
     "avg_daily_sales_7d": 2.29,
     "sales_trend": "stable",
     "created_at": "2026-05-15T09:30:00Z"
@@ -222,7 +222,7 @@
     "batch_id": "b-00143",
     "risk_score": 50.9,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 3,
+    "predicted_unsold_quantity": 12,
     "predicted_loss_value": 8.4,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -234,7 +234,7 @@
     },
     "data_confidence_score": 95,
     "days_to_expiry": 3,
-    "current_stock": 9,
+    "current_stock": 36,
     "avg_daily_sales_7d": 1.86,
     "sales_trend": "stable",
     "created_at": "2026-05-15T03:30:00Z"
@@ -246,7 +246,7 @@
     "batch_id": "b-00147",
     "risk_score": 75.2,
     "risk_level": "high",
-    "predicted_unsold_quantity": 17,
+    "predicted_unsold_quantity": 68,
     "predicted_loss_value": 102.0,
     "main_reason": "Son 1 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -258,7 +258,7 @@
     },
     "data_confidence_score": 97,
     "days_to_expiry": 1,
-    "current_stock": 20,
+    "current_stock": 80,
     "avg_daily_sales_7d": 3.0,
     "sales_trend": "rising",
     "created_at": "2026-05-15T03:30:00Z"
@@ -270,7 +270,7 @@
     "batch_id": "b-00033",
     "risk_score": 61.4,
     "risk_level": "high",
-    "predicted_unsold_quantity": 184,
+    "predicted_unsold_quantity": 736,
     "predicted_loss_value": 588.8,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -282,7 +282,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 4,
-    "current_stock": 197,
+    "current_stock": 788,
     "avg_daily_sales_7d": 3.29,
     "sales_trend": "stable",
     "created_at": "2026-05-14T17:30:00Z"
@@ -294,7 +294,7 @@
     "batch_id": "b-00199",
     "risk_score": 66.05,
     "risk_level": "high",
-    "predicted_unsold_quantity": 9,
+    "predicted_unsold_quantity": 36,
     "predicted_loss_value": 40.5,
     "main_reason": "Son 2 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -306,7 +306,7 @@
     },
     "data_confidence_score": 94,
     "days_to_expiry": 2,
-    "current_stock": 24,
+    "current_stock": 96,
     "avg_daily_sales_7d": 7.43,
     "sales_trend": "declining",
     "created_at": "2026-05-14T17:30:00Z"
@@ -318,7 +318,7 @@
     "batch_id": "b-00210",
     "risk_score": 48.7,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 119,
+    "predicted_unsold_quantity": 476,
     "predicted_loss_value": 535.5,
     "main_reason": "Son 9 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -330,7 +330,7 @@
     },
     "data_confidence_score": 92,
     "days_to_expiry": 9,
-    "current_stock": 142,
+    "current_stock": 568,
     "avg_daily_sales_7d": 2.6,
     "sales_trend": "stable",
     "created_at": "2026-05-14T09:30:00Z"
@@ -342,7 +342,7 @@
     "batch_id": "b-00158",
     "risk_score": 73.3,
     "risk_level": "high",
-    "predicted_unsold_quantity": 65,
+    "predicted_unsold_quantity": 260,
     "predicted_loss_value": 143.0,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -354,7 +354,7 @@
     },
     "data_confidence_score": 62,
     "days_to_expiry": 0,
-    "current_stock": 65,
+    "current_stock": 260,
     "avg_daily_sales_7d": 1.57,
     "sales_trend": "rising",
     "created_at": "2026-05-14T02:30:00Z"
@@ -366,7 +366,7 @@
     "batch_id": "b-00052",
     "risk_score": 73.4,
     "risk_level": "high",
-    "predicted_unsold_quantity": 49,
+    "predicted_unsold_quantity": 196,
     "predicted_loss_value": 137.2,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -378,7 +378,7 @@
     },
     "data_confidence_score": 81,
     "days_to_expiry": 0,
-    "current_stock": 49,
+    "current_stock": 196,
     "avg_daily_sales_7d": 4.71,
     "sales_trend": "stable",
     "created_at": "2026-05-14T06:30:00Z"
@@ -390,7 +390,7 @@
     "batch_id": "b-00188",
     "risk_score": 28.4,
     "risk_level": "low",
-    "predicted_unsold_quantity": 1,
+    "predicted_unsold_quantity": 4,
     "predicted_loss_value": 0.45,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -402,7 +402,7 @@
     },
     "data_confidence_score": 89,
     "days_to_expiry": 16,
-    "current_stock": 81,
+    "current_stock": 324,
     "avg_daily_sales_7d": 5.0,
     "sales_trend": "stable",
     "created_at": "2026-05-14T21:30:00Z"
@@ -414,7 +414,7 @@
     "batch_id": "b-00192",
     "risk_score": 72.45,
     "risk_level": "high",
-    "predicted_unsold_quantity": 30,
+    "predicted_unsold_quantity": 120,
     "predicted_loss_value": 9.0,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -426,7 +426,7 @@
     },
     "data_confidence_score": 80,
     "days_to_expiry": 2,
-    "current_stock": 55,
+    "current_stock": 220,
     "avg_daily_sales_7d": 12.29,
     "sales_trend": "declining",
     "created_at": "2026-05-13T12:30:00Z"
@@ -450,7 +450,7 @@
     },
     "data_confidence_score": 56,
     "days_to_expiry": 299,
-    "current_stock": 102,
+    "current_stock": 408,
     "avg_daily_sales_7d": 3.6,
     "sales_trend": "declining",
     "created_at": "2026-05-14T06:30:00Z"
@@ -462,7 +462,7 @@
     "batch_id": "b-00132",
     "risk_score": 66.25,
     "risk_level": "high",
-    "predicted_unsold_quantity": 57,
+    "predicted_unsold_quantity": 228,
     "predicted_loss_value": 199.5,
     "main_reason": "Stok satış sürətindən 9.2x yüksəkdir və son istifadə tarixinə 3 gün qalıb.",
     "reason_factors": {
@@ -474,7 +474,7 @@
     },
     "data_confidence_score": 97,
     "days_to_expiry": 3,
-    "current_stock": 84,
+    "current_stock": 336,
     "avg_daily_sales_7d": 9.14,
     "sales_trend": "stable",
     "created_at": "2026-05-14T00:30:00Z"
@@ -486,7 +486,7 @@
     "batch_id": "b-00274",
     "risk_score": 74.55,
     "risk_level": "high",
-    "predicted_unsold_quantity": 169,
+    "predicted_unsold_quantity": 676,
     "predicted_loss_value": 709.8,
     "main_reason": "Son 2 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -498,7 +498,7 @@
     },
     "data_confidence_score": 97,
     "days_to_expiry": 2,
-    "current_stock": 172,
+    "current_stock": 688,
     "avg_daily_sales_7d": 1.71,
     "sales_trend": "stable",
     "created_at": "2026-05-15T07:30:00Z"
@@ -510,7 +510,7 @@
     "batch_id": "b-00026",
     "risk_score": 70.65,
     "risk_level": "high",
-    "predicted_unsold_quantity": 18,
+    "predicted_unsold_quantity": 72,
     "predicted_loss_value": 8.1,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -522,7 +522,7 @@
     },
     "data_confidence_score": 97,
     "days_to_expiry": 2,
-    "current_stock": 29,
+    "current_stock": 116,
     "avg_daily_sales_7d": 5.57,
     "sales_trend": "stable",
     "created_at": "2026-05-14T23:30:00Z"
@@ -546,7 +546,7 @@
     },
     "data_confidence_score": 83,
     "days_to_expiry": 692,
-    "current_stock": 110,
+    "current_stock": 440,
     "avg_daily_sales_7d": 4.71,
     "sales_trend": "declining",
     "created_at": "2026-05-13T11:30:00Z"
@@ -558,7 +558,7 @@
     "batch_id": "b-00063",
     "risk_score": 77.8,
     "risk_level": "high",
-    "predicted_unsold_quantity": 93,
+    "predicted_unsold_quantity": 372,
     "predicted_loss_value": 353.4,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -570,7 +570,7 @@
     },
     "data_confidence_score": 75,
     "days_to_expiry": 1,
-    "current_stock": 97,
+    "current_stock": 388,
     "avg_daily_sales_7d": 4.0,
     "sales_trend": "stable",
     "created_at": "2026-05-14T00:30:00Z"
@@ -582,7 +582,7 @@
     "batch_id": "b-00245",
     "risk_score": 57.3,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 11,
+    "predicted_unsold_quantity": 44,
     "predicted_loss_value": 27.5,
     "main_reason": "Stok satış sürətindən 10.5x yüksəkdir və son istifadə tarixinə 4 gün qalıb.",
     "reason_factors": {
@@ -594,7 +594,7 @@
     },
     "data_confidence_score": 56,
     "days_to_expiry": 4,
-    "current_stock": 18,
+    "current_stock": 72,
     "avg_daily_sales_7d": 1.71,
     "sales_trend": "rising",
     "created_at": "2026-05-14T16:30:00Z"
@@ -606,7 +606,7 @@
     "batch_id": "b-00156",
     "risk_score": 68.55,
     "risk_level": "high",
-    "predicted_unsold_quantity": 78,
+    "predicted_unsold_quantity": 312,
     "predicted_loss_value": 46.8,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -618,7 +618,7 @@
     },
     "data_confidence_score": 65,
     "days_to_expiry": 3,
-    "current_stock": 83,
+    "current_stock": 332,
     "avg_daily_sales_7d": 1.8,
     "sales_trend": "stable",
     "created_at": "2026-05-14T16:30:00Z"
@@ -630,7 +630,7 @@
     "batch_id": "b-00091",
     "risk_score": 60.8,
     "risk_level": "high",
-    "predicted_unsold_quantity": 17,
+    "predicted_unsold_quantity": 68,
     "predicted_loss_value": 187.0,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -642,7 +642,7 @@
     },
     "data_confidence_score": 56,
     "days_to_expiry": 5,
-    "current_stock": 36,
+    "current_stock": 144,
     "avg_daily_sales_7d": 3.86,
     "sales_trend": "declining",
     "created_at": "2026-05-13T14:30:00Z"
@@ -666,7 +666,7 @@
     },
     "data_confidence_score": 69,
     "days_to_expiry": 346,
-    "current_stock": 100,
+    "current_stock": 400,
     "avg_daily_sales_7d": 4.2,
     "sales_trend": "very_weak",
     "created_at": "2026-05-13T16:30:00Z"
@@ -678,7 +678,7 @@
     "batch_id": "b-00107",
     "risk_score": 61.3,
     "risk_level": "high",
-    "predicted_unsold_quantity": 117,
+    "predicted_unsold_quantity": 468,
     "predicted_loss_value": 643.5,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -690,7 +690,7 @@
     },
     "data_confidence_score": 74,
     "days_to_expiry": 4,
-    "current_stock": 130,
+    "current_stock": 520,
     "avg_daily_sales_7d": 3.3,
     "sales_trend": "stable",
     "created_at": "2026-05-13T15:30:00Z"
@@ -702,7 +702,7 @@
     "batch_id": "b-00231",
     "risk_score": 84.3,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 29,
+    "predicted_unsold_quantity": 116,
     "predicted_loss_value": 217.5,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -714,7 +714,7 @@
     },
     "data_confidence_score": 85,
     "days_to_expiry": 0,
-    "current_stock": 29,
+    "current_stock": 116,
     "avg_daily_sales_7d": 5.57,
     "sales_trend": "declining",
     "created_at": "2026-05-15T09:30:00Z"
@@ -738,7 +738,7 @@
     },
     "data_confidence_score": 67,
     "days_to_expiry": 6,
-    "current_stock": 23,
+    "current_stock": 92,
     "avg_daily_sales_7d": 9.86,
     "sales_trend": "stable",
     "created_at": "2026-05-13T11:30:00Z"
@@ -750,7 +750,7 @@
     "batch_id": "b-00197",
     "risk_score": 74.8,
     "risk_level": "high",
-    "predicted_unsold_quantity": 67,
+    "predicted_unsold_quantity": 268,
     "predicted_loss_value": 603.0,
     "main_reason": "Stok satış sürətindən 119.0x yüksəkdir və son istifadə tarixinə 1 gün qalıb.",
     "reason_factors": {
@@ -762,7 +762,7 @@
     },
     "data_confidence_score": 71,
     "days_to_expiry": 1,
-    "current_stock": 68,
+    "current_stock": 272,
     "avg_daily_sales_7d": 0.57,
     "sales_trend": "stable",
     "created_at": "2026-05-14T03:30:00Z"
@@ -786,7 +786,7 @@
     },
     "data_confidence_score": 67,
     "days_to_expiry": 5,
-    "current_stock": 9,
+    "current_stock": 36,
     "avg_daily_sales_7d": 9.0,
     "sales_trend": "very_weak",
     "created_at": "2026-05-13T20:30:00Z"
@@ -810,7 +810,7 @@
     },
     "data_confidence_score": 81,
     "days_to_expiry": 5,
-    "current_stock": 11,
+    "current_stock": 44,
     "avg_daily_sales_7d": 4.43,
     "sales_trend": "declining",
     "created_at": "2026-05-15T09:30:00Z"
@@ -822,7 +822,7 @@
     "batch_id": "b-00045",
     "risk_score": 80.55,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 118,
+    "predicted_unsold_quantity": 472,
     "predicted_loss_value": 295.0,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -834,7 +834,7 @@
     },
     "data_confidence_score": 83,
     "days_to_expiry": 2,
-    "current_stock": 123,
+    "current_stock": 492,
     "avg_daily_sales_7d": 2.6,
     "sales_trend": "declining",
     "created_at": "2026-05-14T00:30:00Z"
@@ -858,7 +858,7 @@
     },
     "data_confidence_score": 69,
     "days_to_expiry": 556,
-    "current_stock": 139,
+    "current_stock": 556,
     "avg_daily_sales_7d": 2.14,
     "sales_trend": "stable",
     "created_at": "2026-05-13T14:30:00Z"
@@ -870,7 +870,7 @@
     "batch_id": "b-00265",
     "risk_score": 50.8,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 90,
+    "predicted_unsold_quantity": 360,
     "predicted_loss_value": 315.0,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -882,7 +882,7 @@
     },
     "data_confidence_score": 94,
     "days_to_expiry": 13,
-    "current_stock": 110,
+    "current_stock": 440,
     "avg_daily_sales_7d": 1.57,
     "sales_trend": "stable",
     "created_at": "2026-05-15T05:30:00Z"
@@ -894,7 +894,7 @@
     "batch_id": "b-00176",
     "risk_score": 76.15,
     "risk_level": "high",
-    "predicted_unsold_quantity": 196,
+    "predicted_unsold_quantity": 784,
     "predicted_loss_value": 1568.0,
     "main_reason": "Yüksək itki tarixçəsi olan məhsul, son istifadə tarixinə yaxınlaşır.",
     "reason_factors": {
@@ -906,7 +906,7 @@
     },
     "data_confidence_score": 81,
     "days_to_expiry": 2,
-    "current_stock": 201,
+    "current_stock": 804,
     "avg_daily_sales_7d": 2.43,
     "sales_trend": "stable",
     "created_at": "2026-05-14T16:30:00Z"
@@ -930,7 +930,7 @@
     },
     "data_confidence_score": 82,
     "days_to_expiry": 62,
-    "current_stock": 83,
+    "current_stock": 332,
     "avg_daily_sales_7d": 3.5,
     "sales_trend": "rising",
     "created_at": "2026-05-15T05:30:00Z"
@@ -942,7 +942,7 @@
     "batch_id": "b-00277",
     "risk_score": 61.3,
     "risk_level": "high",
-    "predicted_unsold_quantity": 13,
+    "predicted_unsold_quantity": 52,
     "predicted_loss_value": 71.5,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -954,7 +954,7 @@
     },
     "data_confidence_score": 74,
     "days_to_expiry": 4,
-    "current_stock": 20,
+    "current_stock": 80,
     "avg_daily_sales_7d": 1.86,
     "sales_trend": "stable",
     "created_at": "2026-05-14T20:30:00Z"
@@ -966,7 +966,7 @@
     "batch_id": "b-00204",
     "risk_score": 83.55,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 82,
+    "predicted_unsold_quantity": 328,
     "predicted_loss_value": 123.0,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -978,7 +978,7 @@
     },
     "data_confidence_score": 84,
     "days_to_expiry": 1,
-    "current_stock": 85,
+    "current_stock": 340,
     "avg_daily_sales_7d": 3.43,
     "sales_trend": "declining",
     "created_at": "2026-05-14T21:30:00Z"
@@ -990,7 +990,7 @@
     "batch_id": "b-00120",
     "risk_score": 61.4,
     "risk_level": "high",
-    "predicted_unsold_quantity": 20,
+    "predicted_unsold_quantity": 80,
     "predicted_loss_value": 24.0,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -1002,7 +1002,7 @@
     },
     "data_confidence_score": 77,
     "days_to_expiry": 5,
-    "current_stock": 27,
+    "current_stock": 108,
     "avg_daily_sales_7d": 1.3,
     "sales_trend": "stable",
     "created_at": "2026-05-15T03:30:00Z"
@@ -1014,7 +1014,7 @@
     "batch_id": "b-00028",
     "risk_score": 67.05,
     "risk_level": "high",
-    "predicted_unsold_quantity": 5,
+    "predicted_unsold_quantity": 20,
     "predicted_loss_value": 55.0,
     "main_reason": "Son 2 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -1026,7 +1026,7 @@
     },
     "data_confidence_score": 60,
     "days_to_expiry": 2,
-    "current_stock": 17,
+    "current_stock": 68,
     "avg_daily_sales_7d": 6.14,
     "sales_trend": "declining",
     "created_at": "2026-05-14T14:30:00Z"
@@ -1038,7 +1038,7 @@
     "batch_id": "b-00115",
     "risk_score": 59.0,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 85,
+    "predicted_unsold_quantity": 340,
     "predicted_loss_value": 212.5,
     "main_reason": "Stok satış sürətindən 198.0x yüksəkdir və son istifadə tarixinə 33 gün qalıb.",
     "reason_factors": {
@@ -1050,7 +1050,7 @@
     },
     "data_confidence_score": 65,
     "days_to_expiry": 33,
-    "current_stock": 99,
+    "current_stock": 396,
     "avg_daily_sales_7d": 0.43,
     "sales_trend": "declining",
     "created_at": "2026-05-15T05:30:00Z"
@@ -1074,7 +1074,7 @@
     },
     "data_confidence_score": 61,
     "days_to_expiry": 348,
-    "current_stock": 154,
+    "current_stock": 616,
     "avg_daily_sales_7d": 1.14,
     "sales_trend": "stable",
     "created_at": "2026-05-14T21:30:00Z"
@@ -1086,7 +1086,7 @@
     "batch_id": "b-00129",
     "risk_score": 75.8,
     "risk_level": "high",
-    "predicted_unsold_quantity": 18,
+    "predicted_unsold_quantity": 72,
     "predicted_loss_value": 75.6,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -1098,7 +1098,7 @@
     },
     "data_confidence_score": 94,
     "days_to_expiry": 0,
-    "current_stock": 18,
+    "current_stock": 72,
     "avg_daily_sales_7d": 6.43,
     "sales_trend": "rising",
     "created_at": "2026-05-15T03:30:00Z"
@@ -1110,7 +1110,7 @@
     "batch_id": "b-00025",
     "risk_score": 41.9,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 23,
+    "predicted_unsold_quantity": 92,
     "predicted_loss_value": 32.2,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -1122,7 +1122,7 @@
     },
     "data_confidence_score": 80,
     "days_to_expiry": 6,
-    "current_stock": 44,
+    "current_stock": 176,
     "avg_daily_sales_7d": 3.43,
     "sales_trend": "stable",
     "created_at": "2026-05-13T14:30:00Z"
@@ -1134,7 +1134,7 @@
     "batch_id": "b-00060",
     "risk_score": 73.55,
     "risk_level": "high",
-    "predicted_unsold_quantity": 31,
+    "predicted_unsold_quantity": 124,
     "predicted_loss_value": 170.5,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -1146,7 +1146,7 @@
     },
     "data_confidence_score": 67,
     "days_to_expiry": 2,
-    "current_stock": 32,
+    "current_stock": 128,
     "avg_daily_sales_7d": 0.43,
     "sales_trend": "stable",
     "created_at": "2026-05-13T22:30:00Z"
@@ -1158,7 +1158,7 @@
     "batch_id": "b-00113",
     "risk_score": 77.65,
     "risk_level": "high",
-    "predicted_unsold_quantity": 84,
+    "predicted_unsold_quantity": 336,
     "predicted_loss_value": 79.8,
     "main_reason": "Tədarükçü gecikmiş çatdırılma səbəbindən qısa raf ömrü ilə təhvil verib.",
     "reason_factors": {
@@ -1170,7 +1170,7 @@
     },
     "data_confidence_score": 98,
     "days_to_expiry": 2,
-    "current_stock": 88,
+    "current_stock": 352,
     "avg_daily_sales_7d": 2.0,
     "sales_trend": "declining",
     "created_at": "2026-05-15T05:30:00Z"
@@ -1182,7 +1182,7 @@
     "batch_id": "b-00266",
     "risk_score": 85.9,
     "risk_level": "critical",
-    "predicted_unsold_quantity": 109,
+    "predicted_unsold_quantity": 436,
     "predicted_loss_value": 119.9,
     "main_reason": "Son 0 gündə satış azalıb, anbar yığılıb. Risk yüksəkdir.",
     "reason_factors": {
@@ -1194,7 +1194,7 @@
     },
     "data_confidence_score": 73,
     "days_to_expiry": 0,
-    "current_stock": 109,
+    "current_stock": 436,
     "avg_daily_sales_7d": 1.4,
     "sales_trend": "very_weak",
     "created_at": "2026-05-15T05:30:00Z"
@@ -1218,7 +1218,7 @@
     },
     "data_confidence_score": 79,
     "days_to_expiry": 5,
-    "current_stock": 24,
+    "current_stock": 96,
     "avg_daily_sales_7d": 5.0,
     "sales_trend": "declining",
     "created_at": "2026-05-15T03:30:00Z"
@@ -1230,7 +1230,7 @@
     "batch_id": "b-00023",
     "risk_score": 71.65,
     "risk_level": "high",
-    "predicted_unsold_quantity": 26,
+    "predicted_unsold_quantity": 104,
     "predicted_loss_value": 24.7,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -1242,7 +1242,7 @@
     },
     "data_confidence_score": 74,
     "days_to_expiry": 2,
-    "current_stock": 45,
+    "current_stock": 180,
     "avg_daily_sales_7d": 9.43,
     "sales_trend": "declining",
     "created_at": "2026-05-13T11:30:00Z"
@@ -1254,7 +1254,7 @@
     "batch_id": "b-00116",
     "risk_score": 45.5,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 39,
+    "predicted_unsold_quantity": 156,
     "predicted_loss_value": 93.6,
     "main_reason": "Eyni məhsul digər filiallarda daha sürətli satılır — transfer mümkün ola bilər.",
     "reason_factors": {
@@ -1266,7 +1266,7 @@
     },
     "data_confidence_score": 94,
     "days_to_expiry": 7,
-    "current_stock": 51,
+    "current_stock": 204,
     "avg_daily_sales_7d": 1.71,
     "sales_trend": "rising",
     "created_at": "2026-05-14T23:30:00Z"
@@ -1278,7 +1278,7 @@
     "batch_id": "b-00224",
     "risk_score": 47.9,
     "risk_level": "medium",
-    "predicted_unsold_quantity": 93,
+    "predicted_unsold_quantity": 372,
     "predicted_loss_value": 195.3,
     "main_reason": "Mövsüm sonu səbəbindən tələbat azalıb, stok artıq vəziyyətdədir.",
     "reason_factors": {
@@ -1290,7 +1290,7 @@
     },
     "data_confidence_score": 72,
     "days_to_expiry": 14,
-    "current_stock": 141,
+    "current_stock": 564,
     "avg_daily_sales_7d": 3.43,
     "sales_trend": "stable",
     "created_at": "2026-05-14T22:30:00Z"
@@ -1302,7 +1302,7 @@
     "batch_id": "b-00088",
     "risk_score": 79.05,
     "risk_level": "high",
-    "predicted_unsold_quantity": 44,
+    "predicted_unsold_quantity": 176,
     "predicted_loss_value": 26.4,
     "main_reason": "Stok satış sürətindən 18.8x yüksəkdir və son istifadə tarixinə 1 gün qalıb.",
     "reason_factors": {
@@ -1314,7 +1314,7 @@
     },
     "data_confidence_score": 64,
     "days_to_expiry": 1,
-    "current_stock": 47,
+    "current_stock": 188,
     "avg_daily_sales_7d": 2.5,
     "sales_trend": "stable",
     "created_at": "2026-05-15T07:30:00Z"

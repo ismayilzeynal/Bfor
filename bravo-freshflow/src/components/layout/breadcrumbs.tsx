@@ -21,7 +21,6 @@ const SEGMENT_LABELS: Record<string, string> = {
   "my-tasks": "My Tasks",
   transfers: "Transfers",
   discounts: "Discounts",
-  analytics: "Analytics",
   "data-quality": "Data Quality",
   "whatif-lab": "What-If Lab",
   notifications: "Notifications",

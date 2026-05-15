@@ -15,6 +15,7 @@ import { NAV_GROUPS, ROLE_ALLOWED_ROUTES, ROLE_LABELS } from "@/lib/constants";
 import { useCurrentUser } from "@/hooks/use-role";
 import { useUiStore } from "@/store/ui-store";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
+import { usePlatformKeys } from "@/hooks/use-platform";
 import {
   loadProducts,
   loadRiskPredictions,
@@ -31,6 +32,7 @@ export function CommandPalette() {
   const open = useUiStore((s) => s.commandPaletteOpen);
   const setOpen = useUiStore((s) => s.setCommandPaletteOpen);
   const setRoleSwitcherOpen = useUiStore((s) => s.setRoleSwitcherOpen);
+  const { mod, shift } = usePlatformKeys();
 
   const [products, setProducts] = useState<Product[]>([]);
   const [stores, setStores] = useState<Store[]>([]);
@@ -160,7 +162,7 @@ export function CommandPalette() {
             <Sparkles className="mr-2 h-4 w-4" />
             <span>Switch role…</span>
             <span className="ml-auto rounded border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
-              ⌘⇧R
+              {mod}{shift}R
             </span>
             <span className="ml-2 text-xs text-muted-foreground">{ROLE_LABELS[user.role]}</span>
           </CommandItem>

@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { Sparkles, ArrowRight, X, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { useUiStore } from "@/store/ui-store";
+import { usePlatformKeys } from "@/hooks/use-platform";
 
 interface TourStep {
   id: string;
@@ -14,43 +15,45 @@ interface TourStep {
   placement: "right" | "bottom" | "left";
 }
 
-const STEPS: TourStep[] = [
-  {
-    id: "sidebar",
-    title: "Navigation sidebar",
-    body: "Every screen of the platform lives here, grouped by what each role needs. Switch roles to see how the sidebar adapts.",
-    selector: "[data-onboard='sidebar']",
-    placement: "right",
-  },
-  {
-    id: "kpi-grid",
-    title: "KPI grid",
-    body: "Top-of-page KPIs answer the executive question first: how much is at risk today and how much we've already recovered.",
-    selector: "[data-onboard='kpi-grid']",
-    placement: "bottom",
-  },
-  {
-    id: "notifications",
-    title: "Notifications bell",
-    body: "Critical risks, approvals waiting on you, and task pings all funnel into one inbox. Filter by priority or mark all read.",
-    selector: "[data-onboard='notifications']",
-    placement: "bottom",
-  },
-  {
-    id: "role-switcher",
-    title: "Role switcher",
-    body: "No login — pick any role to instantly see the platform from their seat. The data scopes automatically.",
-    selector: "[data-onboard='role-switcher']",
-    placement: "bottom",
-  },
-  {
-    id: "command-palette",
-    title: "Command palette (⌘K)",
-    body: "Jump to any page, product, or task without leaving the keyboard. Press ? anywhere to see all shortcuts.",
-    selector: "[data-onboard='search']",
-    placement: "bottom",
-  },
-];
+function buildSteps(mod: string): TourStep[] {
+  return [
+    {
+      id: "sidebar",
+      title: "Navigation sidebar",
+      body: "Every screen of the platform lives here, grouped by what each role needs. Switch roles to see how the sidebar adapts.",
+      selector: "[data-onboard='sidebar']",
+      placement: "right",
+    },
+    {
+      id: "kpi-grid",
+      title: "KPI grid",
+      body: "Top-of-page KPIs answer the executive question first: how much is at risk today and how much we've already recovered.",
+      selector: "[data-onboard='kpi-grid']",
+      placement: "bottom",
+    },
+    {
+      id: "notifications",
+      title: "Notifications bell",
+      body: "Critical risks, approvals waiting on you, and task pings all funnel into one inbox. Filter by priority or mark all read.",
+      selector: "[data-onboard='notifications']",
+      placement: "bottom",
+    },
+    {
+      id: "role-switcher",
+      title: "Role switcher",
+      body: "No login — pick any role to instantly see the platform from their seat. The data scopes automatically.",
+      selector: "[data-onboard='role-switcher']",
+      placement: "bottom",
+    },
+    {
+      id: "command-palette",
+      title: `Command palette (${mod}K)`,
+      body: "Jump to any page, product, or task without leaving the keyboard. Press ? anywhere to see all shortcuts.",
+      selector: "[data-onboard='search']",
+      placement: "bottom",
+    },
+  ];
+}
 
 interface AnchorRect {
   top: number;
@@ -125,6 +128,8 @@ export function OnboardingTour() {
   const [welcomeOpen, setWelcomeOpen] = useState(false);
   const [stepIdx, setStepIdx] = useState(0);
   const [done, setDone] = useState(false);
+  const { mod } = usePlatformKeys();
+  const STEPS = useMemo(() => buildSteps(mod), [mod]);
 
   useEffect(() => {
     if (!seen && !active) {

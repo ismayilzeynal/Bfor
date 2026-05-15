@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Activity, Clock4 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
@@ -18,7 +18,11 @@ function seededUnits(id: string): number {
 }
 
 export function ActiveLiveSection({ rows }: Props) {
-  const liveRows = rows.filter((r) => r.isLiveNow);
+  const liveRows = useMemo(() => rows.filter((r) => r.isLiveNow), [rows]);
+  const liveIdsKey = useMemo(
+    () => liveRows.map((r) => r.discount.id).sort().join(","),
+    [liveRows]
+  );
   const [units, setUnits] = useState<Record<string, number>>(() => {
     const map: Record<string, number> = {};
     for (const r of liveRows) map[r.discount.id] = seededUnits(r.discount.id);
@@ -27,28 +31,33 @@ export function ActiveLiveSection({ rows }: Props) {
 
   useEffect(() => {
     setUnits((prev) => {
-      const next = { ...prev };
+      let changed = false;
+      const next: Record<string, number> = { ...prev };
       for (const r of liveRows) {
-        if (next[r.discount.id] === undefined) next[r.discount.id] = seededUnits(r.discount.id);
+        if (next[r.discount.id] === undefined) {
+          next[r.discount.id] = seededUnits(r.discount.id);
+          changed = true;
+        }
       }
-      return next;
+      return changed ? next : prev;
     });
-  }, [liveRows]);
+  }, [liveIdsKey, liveRows]);
 
   useEffect(() => {
     if (liveRows.length === 0) return;
-    const id = setInterval(() => {
+    const id = window.setInterval(() => {
       setUnits((prev) => {
         const next = { ...prev };
         for (const r of liveRows) {
           const inc = Math.random() < 0.6 ? 1 : Math.random() < 0.85 ? 2 : 0;
+          if (inc === 0) continue;
           next[r.discount.id] = (next[r.discount.id] ?? seededUnits(r.discount.id)) + inc;
         }
         return next;
       });
     }, 2400);
-    return () => clearInterval(id);
-  }, [liveRows]);
+    return () => window.clearInterval(id);
+  }, [liveIdsKey, liveRows]);
 
   if (liveRows.length === 0) return null;
 

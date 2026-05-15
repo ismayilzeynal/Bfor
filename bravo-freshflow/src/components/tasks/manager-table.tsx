@@ -77,14 +77,13 @@ export function ManagerTable({
               <TableHead>Priority</TableHead>
               <TableHead>Deadline</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead>Source</TableHead>
               <TableHead className="w-[44px] text-right">·</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={11} className="py-14 text-center text-xs text-muted-foreground">
+                <TableCell colSpan={10} className="py-14 text-center text-xs text-muted-foreground">
                   Bu tabda heç bir tapşırıq yoxdur.
                 </TableCell>
               </TableRow>
@@ -170,23 +169,6 @@ export function ManagerTable({
                     </TableCell>
                     <TableCell>
                       <StatusBadge kind="task" status={r.task.status} />
-                    </TableCell>
-                    <TableCell>
-                      {r.recommendation ? (
-                        <Link
-                          href={`/products/${r.recommendation.product_id}`}
-                          className="text-xs hover:underline"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ActionBadge type={r.recommendation.recommendation_type} showIcon={false} />
-                        </Link>
-                      ) : r.source === "generated" ? (
-                        <Badge variant="outline" className="h-5 text-[10px]">
-                          AI generated
-                        </Badge>
-                      ) : (
-                        <span className="text-xs text-muted-foreground">—</span>
-                      )}
                     </TableCell>
                     <TableCell className="text-right">
                       <DropdownMenu>

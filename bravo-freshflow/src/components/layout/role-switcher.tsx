@@ -16,6 +16,7 @@ import { useAuthStore } from "@/store/auth-store";
 import { useUiStore } from "@/store/ui-store";
 import { useCurrentUser, useAllUsers } from "@/hooks/use-role";
 import { useKeyboardShortcut } from "@/hooks/use-keyboard-shortcut";
+import { usePlatformKeys } from "@/hooks/use-platform";
 import type { Role, User } from "@/types";
 import { useState } from "react";
 
@@ -33,6 +34,7 @@ export function RoleSwitcher() {
   const open = useUiStore((s) => s.roleSwitcherOpen);
   const setOpen = useUiStore((s) => s.setRoleSwitcherOpen);
   const [query, setQuery] = useState("");
+  const { mod, shift } = usePlatformKeys();
 
   useKeyboardShortcut({ key: "r", meta: true, shift: true }, () => setOpen(!open));
 
@@ -94,7 +96,7 @@ export function RoleSwitcher() {
           <div className="mb-1 flex items-center justify-between">
             <div className="text-sm font-medium">Switch role</div>
             <span className="rounded border px-1.5 py-0.5 font-mono text-[10px] text-muted-foreground">
-              ⌘⇧R
+              {mod}{shift}R
             </span>
           </div>
           <p className="mb-2 text-xs text-muted-foreground">

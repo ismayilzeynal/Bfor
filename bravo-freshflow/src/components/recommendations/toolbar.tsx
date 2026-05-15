@@ -28,7 +28,6 @@ const ACTION_TYPES: RecommendationType[] = [
   "transfer",
   "bundle",
   "stock_check",
-  "shelf_visibility",
   "reorder_reduce",
   "reorder_increase",
   "supplier_review",

@@ -8,14 +8,10 @@ import { PageHeader } from "@/components/common/page-header";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { KpiCard, type KpiChange } from "@/components/cards/kpi-card";
-import { SustainabilityCard } from "@/components/cards/sustainability-card";
 import { LatestRecommendationsCard } from "@/components/cards/latest-recommendations-card";
 import { CriticalTasksCard } from "@/components/cards/critical-tasks-card";
 import { NetworkHealthBanner } from "@/components/cards/network-health-banner";
-import { LossTrendChart } from "@/components/charts/loss-trend-chart";
-import { TopRiskyStoresChart } from "@/components/charts/top-risky-stores-chart";
-import { TopRiskyCategoriesChart } from "@/components/charts/top-risky-categories-chart";
-import { NetSavedWaterfallChart } from "@/components/charts/net-saved-waterfall-chart";
+import { LossRecoveryAreaChart } from "@/components/charts/loss-recovery-area-chart";
 import {
   loadCategories,
   loadDataQualityIssues,
@@ -147,13 +143,22 @@ function dailyTrend(snapshots: KpiSnapshot[], key: keyof KpiSnapshot): number[] 
     .map(([, v]) => v);
 }
 
-function pctChange(curr: number, prev: number): KpiChange {
+const CHANGE_CAP = 60;
+
+function pctChange(curr: number, prev: number, minPrev = 0): KpiChange {
   if (prev === 0 && curr === 0) return { value: 0, direction: "flat", isGood: true };
-  if (prev === 0) return { value: 100, direction: "up", isGood: true };
-  const delta = ((curr - prev) / Math.abs(prev)) * 100;
+  if (Math.abs(prev) < minPrev) {
+    return { value: 0, direction: "flat", isGood: true };
+  }
+  if (prev === 0) {
+    return { value: CHANGE_CAP, direction: "up", isGood: true };
+  }
+  let delta = ((curr - prev) / Math.abs(prev)) * 100;
+  if (delta > CHANGE_CAP) delta = CHANGE_CAP;
+  if (delta < -CHANGE_CAP) delta = -CHANGE_CAP;
   return {
-    value: Math.abs(delta) < 0.05 ? 0 : delta,
-    direction: delta > 0.05 ? "up" : delta < -0.05 ? "down" : "flat",
+    value: Math.abs(delta) < 0.1 ? 0 : delta,
+    direction: delta > 0.1 ? "up" : delta < -0.1 ? "down" : "flat",
     isGood: false,
   };
 }
@@ -235,17 +240,17 @@ export default function ExecutivePage() {
     const taskComp = totals.tasksCreated > 0 ? totals.tasksCompleted / totals.tasksCreated : 0;
     const taskCompPrev = prev.tasksCreated > 0 ? prev.tasksCompleted / prev.tasksCreated : 0;
 
-    const potentialChange = pctChange(totals.potential, prev.potential);
+    const potentialChange = pctChange(totals.potential, prev.potential, 1000);
     potentialChange.isGood = potentialChange.direction === "down";
-    const actualChange = pctChange(totals.actual, prev.actual);
+    const actualChange = pctChange(totals.actual, prev.actual, 500);
     actualChange.isGood = actualChange.direction === "down";
-    const netSavedChange = pctChange(totals.netSaved, prev.netSaved);
+    const netSavedChange = pctChange(totals.netSaved, prev.netSaved, 500);
     netSavedChange.isGood = netSavedChange.direction === "up";
-    const aiAccChange = pctChange(aiAcc * 100, aiAccPrev * 100);
+    const aiAccChange = pctChange(aiAcc * 100, aiAccPrev * 100, 1);
     aiAccChange.isGood = aiAccChange.direction === "up";
-    const taskCompChange = pctChange(taskComp * 100, taskCompPrev * 100);
+    const taskCompChange = pctChange(taskComp * 100, taskCompPrev * 100, 1);
     taskCompChange.isGood = taskCompChange.direction === "up";
-    const wasteChange = pctChange(totals.wasteKg, prev.wasteKg);
+    const wasteChange = pctChange(totals.wasteKg, prev.wasteKg, 50);
     wasteChange.isGood = wasteChange.direction === "down";
 
     return {
@@ -296,48 +301,36 @@ export default function ExecutivePage() {
             <KpiCard
               label="Potential Loss"
               value={formatAZN(view.totals.potential, { compact: true })}
-              change={view.potentialChange}
-              trend={view.potentialTrend}
               tone="danger"
               tooltip="Predicted gross loss if no action is taken."
             />
             <KpiCard
               label="Actual Loss"
               value={formatAZN(view.totals.actual, { compact: true })}
-              change={view.actualChange}
-              trend={view.actualTrend}
               tone="danger"
               tooltip="Realized loss recorded in period."
             />
             <KpiCard
               label="Net Saved Value"
               value={formatAZN(view.totals.netSaved, { compact: true })}
-              change={view.netSavedChange}
-              trend={view.netSavedTrend}
               tone="success"
               tooltip="Value preserved by AI-driven actions, net of costs."
             />
             <KpiCard
               label="AI Acceptance"
               value={formatPercent(view.aiAcc, 1)}
-              change={view.aiAccChange}
-              trend={view.acceptTrend}
               tone="primary"
               tooltip="Share of AI recommendations approved by operators."
             />
             <KpiCard
               label="Task Completion"
               value={formatPercent(view.taskComp, 1)}
-              change={view.taskCompChange}
-              trend={view.taskTrend}
               tone="primary"
               tooltip="Share of created tasks completed on time."
             />
             <KpiCard
               label="Waste Reduction"
               value={`${view.totals.wasteKg.toFixed(1)} kg`}
-              change={view.wasteChange}
-              trend={view.wasteTrend}
               tone="warning"
               tooltip="Total perishable waste recorded; lower is better."
             />
@@ -345,46 +338,12 @@ export default function ExecutivePage() {
         )}
       </div>
 
-      {/* Section 3 — Loss Trend + Sustainability */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          {loading || !view ? (
-            <Skeleton className="h-[400px]" />
-          ) : (
-            <LossTrendChart snapshots={view.periodSnaps} />
-          )}
-        </div>
-        <div>
-          {loading || !view ? (
-            <Skeleton className="h-[400px]" />
-          ) : (
-            <SustainabilityCard snapshots={view.periodSnaps} />
-          )}
-        </div>
-      </div>
-
-      {/* Section 4 — 3 charts */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
-        {loading || !data || !view ? (
-          <>
-            <Skeleton className="h-[320px]" />
-            <Skeleton className="h-[320px]" />
-            <Skeleton className="h-[320px]" />
-          </>
+      {/* Section 3 — Loss & Recovery area chart */}
+      <div>
+        {loading || !view ? (
+          <Skeleton className="h-[400px]" />
         ) : (
-          <>
-            <TopRiskyStoresChart predictions={data.predictions} stores={data.stores} />
-            <TopRiskyCategoriesChart
-              predictions={data.predictions}
-              products={data.products}
-              categories={data.categories}
-            />
-            <NetSavedWaterfallChart
-              snapshots={view.periodSnaps}
-              transfers={data.transfers}
-              discounts={data.discounts}
-            />
-          </>
+          <LossRecoveryAreaChart snapshots={view.periodSnaps} />
         )}
       </div>
 

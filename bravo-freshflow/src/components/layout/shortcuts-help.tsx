@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useUiStore } from "@/store/ui-store";
+import { usePlatformKeys } from "@/hooks/use-platform";
 
 interface ShortcutEntry {
   keys: string[];
@@ -21,27 +22,29 @@ interface ShortcutSection {
   entries: ShortcutEntry[];
 }
 
-const SECTIONS: ShortcutSection[] = [
-  {
-    title: "Navigation",
-    entries: [
-      { keys: ["G", "D"], label: "Go to Executive dashboard" },
-      { keys: ["G", "P"], label: "Go to Risky Products" },
-      { keys: ["G", "T"], label: "Go to Tasks" },
-      { keys: ["G", "R"], label: "Go to Recommendations" },
-    ],
-  },
-  {
-    title: "Global",
-    entries: [
-      { keys: ["⌘", "K"], label: "Command palette / search" },
-      { keys: ["⌘", "⇧", "R"], label: "Open role switcher" },
-      { keys: ["N"], label: "New task (manager only)" },
-      { keys: ["?"], label: "Show this cheat sheet" },
-      { keys: ["Esc"], label: "Close any modal or drawer" },
-    ],
-  },
-];
+function buildSections(mod: string, shift: string): ShortcutSection[] {
+  return [
+    {
+      title: "Navigation",
+      entries: [
+        { keys: ["G", "D"], label: "Go to Executive dashboard" },
+        { keys: ["G", "P"], label: "Go to Risky Products" },
+        { keys: ["G", "T"], label: "Go to Tasks" },
+        { keys: ["G", "R"], label: "Go to Recommendations" },
+      ],
+    },
+    {
+      title: "Global",
+      entries: [
+        { keys: [mod, "K"], label: "Command palette / search" },
+        { keys: [mod, shift, "R"], label: "Open role switcher" },
+        { keys: ["N"], label: "New task (manager only)" },
+        { keys: ["?"], label: "Show this cheat sheet" },
+        { keys: ["Esc"], label: "Close any modal or drawer" },
+      ],
+    },
+  ];
+}
 
 function Kbd({ children }: { children: React.ReactNode }) {
   return (
@@ -54,6 +57,8 @@ function Kbd({ children }: { children: React.ReactNode }) {
 export function ShortcutsHelp() {
   const open = useUiStore((s) => s.shortcutsOpen);
   const setOpen = useUiStore((s) => s.setShortcutsOpen);
+  const { mod, shift } = usePlatformKeys();
+  const sections = buildSections(mod, shift);
 
   return (
     <>
@@ -78,7 +83,7 @@ export function ShortcutsHelp() {
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-5">
-            {SECTIONS.map((section) => (
+            {sections.map((section) => (
               <div key={section.title} className="space-y-2">
                 <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   {section.title}

@@ -256,7 +256,6 @@ function ManualActionCard() {
                 <SelectItem value="discount">Apply discount</SelectItem>
                 <SelectItem value="transfer">Prepare transfer</SelectItem>
                 <SelectItem value="stock_check">Stock check</SelectItem>
-                <SelectItem value="shelf_visibility">Shelf action</SelectItem>
                 <SelectItem value="bundle">Create bundle</SelectItem>
               </SelectContent>
             </Select>

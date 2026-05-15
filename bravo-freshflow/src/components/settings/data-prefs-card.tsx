@@ -42,7 +42,7 @@ export function DataPrefsCard() {
               ))}
             </SelectContent>
           </Select>
-          <p className="text-[10px] text-muted-foreground">Applied to executive, analytics, and operations dashboards on first load.</p>
+          <p className="text-[10px] text-muted-foreground">Applied to executive and operations dashboards on first load.</p>
         </div>
         <div className="space-y-2 rounded-md border bg-card p-3">
           <div className="flex items-center justify-between">
