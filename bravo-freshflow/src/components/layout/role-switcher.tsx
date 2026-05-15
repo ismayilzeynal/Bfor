@@ -75,6 +75,7 @@ export function RoleSwitcher() {
       <PopoverTrigger asChild>
         <Button
           variant="outline"
+          data-onboard="role-switcher"
           className="h-9 gap-2 rounded-full border-primary/30 bg-primary/5 px-2 pr-3 hover:bg-primary/10"
         >
           <Avatar className="h-6 w-6">

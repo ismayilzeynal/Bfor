@@ -39,6 +39,8 @@ function defaultPrefs(): NotificationPreferences {
 interface UiState {
   sidebarCollapsed: boolean;
   onboardingSeen: boolean;
+  onboardingActive: boolean;
+  shortcutsOpen: boolean;
   commandPaletteOpen: boolean;
   roleSwitcherOpen: boolean;
   mobileSidebarOpen: boolean;
@@ -54,6 +56,8 @@ interface UiState {
   toggleSidebar: () => void;
   setSidebarCollapsed: (v: boolean) => void;
   setOnboardingSeen: (v: boolean) => void;
+  setOnboardingActive: (v: boolean) => void;
+  setShortcutsOpen: (v: boolean) => void;
   setCommandPaletteOpen: (v: boolean) => void;
   setRoleSwitcherOpen: (v: boolean) => void;
   setMobileSidebarOpen: (v: boolean) => void;
@@ -74,6 +78,8 @@ export const useUiStore = create<UiState>()(
     (set, get) => ({
       sidebarCollapsed: false,
       onboardingSeen: false,
+      onboardingActive: false,
+      shortcutsOpen: false,
       commandPaletteOpen: false,
       roleSwitcherOpen: false,
       mobileSidebarOpen: false,
@@ -89,6 +95,8 @@ export const useUiStore = create<UiState>()(
       toggleSidebar: () => set({ sidebarCollapsed: !get().sidebarCollapsed }),
       setSidebarCollapsed: (v) => set({ sidebarCollapsed: v }),
       setOnboardingSeen: (v) => set({ onboardingSeen: v }),
+      setOnboardingActive: (v) => set({ onboardingActive: v }),
+      setShortcutsOpen: (v) => set({ shortcutsOpen: v }),
       setCommandPaletteOpen: (v) => set({ commandPaletteOpen: v }),
       setRoleSwitcherOpen: (v) => set({ roleSwitcherOpen: v }),
       setMobileSidebarOpen: (v) => set({ mobileSidebarOpen: v }),

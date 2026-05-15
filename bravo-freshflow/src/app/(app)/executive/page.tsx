@@ -288,7 +288,7 @@ export default function ExecutivePage() {
       />
 
       {/* Section 2 — KPI grid */}
-      <div className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
+      <div data-onboard="kpi-grid" className="grid grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-6">
         {loading || !view ? (
           Array.from({ length: 6 }).map((_, i) => <Skeleton key={i} className="h-[136px]" />)
         ) : (

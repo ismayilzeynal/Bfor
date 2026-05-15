@@ -26,45 +26,7 @@ import { useNotificationsStore } from "@/store/notifications-store";
 import { useFiltersStore } from "@/store/filters-store";
 import { useWhatIfStore } from "@/store/whatif-store";
 import { useAuthStore } from "@/store/auth-store";
-
-interface DemoScenario {
-  id: string;
-  label: string;
-  description: string;
-  route: string;
-  roleId: string | null;
-}
-
-const SCENARIOS: DemoScenario[] = [
-  {
-    id: "crisis-yogurt",
-    label: "Crisis: Qatıq 500q",
-    description: "Open Qatıq 500q with all panels pristine — AI Recommendation highlighted, combined scenario pre-selected.",
-    route: "/products/p-demo-yogurt#whatif",
-    roleId: "u-001",
-  },
-  {
-    id: "morning-approvals",
-    label: "Morning approvals queue",
-    description: "Pending high-priority recommendations awaiting review for the start of the shift.",
-    route: "/recommendations?tab=pending",
-    roleId: "u-001",
-  },
-  {
-    id: "employee-shift",
-    label: "Employee shift starts",
-    description: "Switch to an employee and land on their mobile task list with 3 queued tasks.",
-    route: "/my-tasks",
-    roleId: "u-010",
-  },
-  {
-    id: "end-of-day",
-    label: "End-of-day report",
-    description: "CEO view with elevated saved-value KPIs and the day's wins highlighted.",
-    route: "/executive",
-    roleId: "u-001",
-  },
-];
+import { DEMO_SCENARIOS as SCENARIOS } from "@/lib/demo-scenarios";
 
 export function DemoControlsCard() {
   const router = useRouter();

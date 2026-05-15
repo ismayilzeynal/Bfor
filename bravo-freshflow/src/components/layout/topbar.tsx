@@ -23,6 +23,8 @@ import { ThemeToggle } from "./theme-toggle";
 import { DemoBadge } from "./brand";
 import { Sidebar } from "./sidebar";
 import { DateRangePill } from "./date-range-pill";
+import { DemoScenariosMenu } from "./demo-scenarios-menu";
+import { ShortcutsHelp } from "./shortcuts-help";
 
 export function Topbar() {
   const router = useRouter();
@@ -61,6 +63,7 @@ export function Topbar() {
           variant="outline"
           size="sm"
           onClick={() => setCommandOpen(true)}
+          data-onboard="search"
           className="hidden h-9 w-[220px] justify-between gap-2 text-muted-foreground md:inline-flex"
         >
           <span className="flex items-center gap-2">
@@ -82,7 +85,9 @@ export function Topbar() {
           <Search className="h-4 w-4" />
         </Button>
 
+        <DemoScenariosMenu />
         <DateRangePill />
+        <ShortcutsHelp />
         <NotificationsPopover />
         <ThemeToggle />
         <RoleSwitcher />

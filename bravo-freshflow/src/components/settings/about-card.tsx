@@ -1,8 +1,12 @@
 "use client";
 
-import { Sparkles, ExternalLink } from "lucide-react";
+import { Sparkles, ExternalLink, Compass } from "lucide-react";
+import { toast } from "sonner";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { useUiStore } from "@/store/ui-store";
+import { useRouter } from "next/navigation";
 
 const TECH = [
   "Next.js 14",
@@ -26,6 +30,17 @@ const TEAM = [
 ];
 
 export function AboutCard() {
+  const router = useRouter();
+  const setOnboardingSeen = useUiStore((s) => s.setOnboardingSeen);
+  const setOnboardingActive = useUiStore((s) => s.setOnboardingActive);
+
+  const replayTour = () => {
+    setOnboardingSeen(false);
+    setOnboardingActive(true);
+    toast.message("Starting tour — heading to /executive");
+    router.push("/executive");
+  };
+
   return (
     <Card id="about">
       <CardHeader>
@@ -68,15 +83,20 @@ export function AboutCard() {
             ))}
           </ul>
         </div>
-        <div className="flex items-center justify-between rounded-md border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
+        <div className="flex items-center justify-between gap-2 rounded-md border bg-muted/30 px-3 py-2 text-[11px] text-muted-foreground">
           <span>Built for the Bravo Retail Hackathon 2026.</span>
-          <a
-            href="#"
-            className="inline-flex items-center gap-1 text-primary hover:underline"
-            onClick={(e) => e.preventDefault()}
-          >
-            Release notes <ExternalLink className="h-3 w-3" />
-          </a>
+          <div className="flex items-center gap-2">
+            <Button size="sm" variant="ghost" className="h-7 gap-1 px-2 text-[11px]" onClick={replayTour}>
+              <Compass className="h-3 w-3" /> Replay tour
+            </Button>
+            <a
+              href="#"
+              className="inline-flex items-center gap-1 text-primary hover:underline"
+              onClick={(e) => e.preventDefault()}
+            >
+              Release notes <ExternalLink className="h-3 w-3" />
+            </a>
+          </div>
         </div>
       </CardContent>
     </Card>

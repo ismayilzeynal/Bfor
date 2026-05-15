@@ -9,7 +9,17 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Bravo FreshFlow AI",
-  description: "Decide before product becomes waste.",
+  description: "Detect, explain, compare, act, and learn — AI-powered retail loss prevention.",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+  },
+  openGraph: {
+    title: "Bravo FreshFlow AI",
+    description: "Detect, explain, compare, act, and learn — AI-powered retail loss prevention.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
