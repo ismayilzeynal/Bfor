@@ -1,11 +1,5 @@
-import { PageHeader } from "@/components/common/page-header";
-import { PhasePlaceholder } from "@/components/common/phase-placeholder";
+import { AnalyticsShell } from "@/components/analytics/analytics-shell";
 
 export default function AnalyticsPage() {
-  return (
-    <>
-      <PageHeader title="Analytics" description="Six-tab deep dive into loss, stores, categories, suppliers, AI, ESG." />
-      <PhasePlaceholder phase="PHASE_11" />
-    </>
-  );
+  return <AnalyticsShell />;
 }
