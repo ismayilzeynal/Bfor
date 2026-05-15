@@ -35,7 +35,6 @@ const RISK_CHIP_CLS: Record<RiskLevel, string> = {
 const ACTION_TYPES: RecommendationType[] = [
   "discount",
   "transfer",
-  "bundle",
   "stock_check",
   "reorder_reduce",
   "supplier_review",

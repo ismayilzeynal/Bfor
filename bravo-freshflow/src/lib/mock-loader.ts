@@ -112,7 +112,7 @@ export async function loadRiskPredictions(): Promise<RiskPrediction[]> {
   return all.filter((r) => valid.has(r.product_id));
 }
 
-const EXCLUDED_RECOMMENDATION_TYPES = new Set<string>(["shelf_visibility"]);
+const EXCLUDED_RECOMMENDATION_TYPES = new Set<string>(["shelf_visibility", "bundle"]);
 
 export async function loadRecommendations(): Promise<Recommendation[]> {
   const [all, valid] = await Promise.all([
