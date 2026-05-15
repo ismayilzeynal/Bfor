@@ -26,7 +26,7 @@ import { InventoryTrendCard } from "@/components/products/details/inventory-tren
 import { ExpiryTimelineCard } from "@/components/products/details/expiry-timeline-card";
 import { DataConfidenceCard } from "@/components/products/details/data-confidence-card";
 import { AiRecommendationPanel } from "@/components/products/details/ai-recommendation-panel";
-import { ScenariosSection } from "@/components/products/details/scenarios-section";
+import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
 import { AuditTrailSection } from "@/components/products/details/audit-trail-section";
 import { RelatedProductsSection } from "@/components/products/details/related-products-section";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
@@ -209,7 +209,31 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         </div>
       </div>
 
-      <ScenariosSection scenarios={bundle.scenarios} />
+      {bundle.prediction ? (
+        <WhatIfSimulator
+          product={bundle.product}
+          store={bundle.store}
+          baseline={{
+            currentStock: bundle.prediction.current_stock,
+            avgDailySales7d: bundle.prediction.avg_daily_sales_7d,
+            daysToExpiry: bundle.prediction.days_to_expiry,
+            costPrice: bundle.product.cost_price,
+            salePrice: bundle.product.sale_price,
+            minimumMarginPct: bundle.product.minimum_margin_pct,
+            dataConfidence: bundle.prediction.data_confidence_score,
+          }}
+          candidateTargetStores={bundle.candidateTargetStores}
+          candidateCompanions={bundle.candidateCompanions}
+          onApply={(_scenario, _result) => {
+            if (bundle.recommendation) setApproveOpen(true);
+          }}
+          approveDisabled={!bundle.recommendation}
+          approveDisabledReason={
+            bundle.recommendation ? undefined : "No active recommendation to approve."
+          }
+          variant="embedded"
+        />
+      ) : null}
 
       <AuditTrailSection
         baseAudit={bundle.audit}

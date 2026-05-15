@@ -31,6 +31,19 @@ import type {
   WasteRecord,
 } from "@/types";
 
+export interface CandidateTargetStore {
+  id: string;
+  code: string;
+  name: string;
+  current_stock: number;
+  avg_daily_sales: number;
+}
+
+export interface CandidateCompanion {
+  id: string;
+  name: string;
+}
+
 export interface ProductDetailsBundle {
   product: Product;
   store: Store;
@@ -47,6 +60,8 @@ export interface ProductDetailsBundle {
   users: User[];
   relatedProducts: Product[];
   relatedPredictionsByProduct: Map<string, RiskPrediction>;
+  candidateTargetStores: CandidateTargetStore[];
+  candidateCompanions: CandidateCompanion[];
 }
 
 const MOCK_TODAY = parseISO(`${MOCK_DATE}T00:00:00.000Z`);
@@ -156,6 +171,41 @@ export async function loadProductDetailsBundle(
     if (relatedProducts.length >= 6) break;
   }
 
+  const candidateTargetStores: CandidateTargetStore[] = [];
+  const sevenDaysAgo = new Date(MOCK_TODAY);
+  sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+  for (const otherStore of stores) {
+    if (otherStore.id === store.id || !otherStore.is_active) continue;
+    const otherSales = sales.filter(
+      (s) => s.product_id === productId && s.store_id === otherStore.id,
+    );
+    const recent = otherSales.filter((s) => {
+      try {
+        return parseISO(s.date).getTime() >= sevenDaysAgo.getTime();
+      } catch {
+        return false;
+      }
+    });
+    const totalQty = recent.reduce((acc, s) => acc + s.quantity_sold, 0);
+    const avgDaily = recent.length > 0 ? totalQty / 7 : 0;
+    const latestSnap = snapshots
+      .filter((s) => s.product_id === productId && s.store_id === otherStore.id)
+      .sort((a, b) => b.snapshot_datetime.localeCompare(a.snapshot_datetime))[0];
+    candidateTargetStores.push({
+      id: otherStore.id,
+      code: otherStore.code,
+      name: otherStore.name,
+      current_stock: latestSnap?.current_stock ?? 0,
+      avg_daily_sales: round1(avgDaily || (prediction?.avg_daily_sales_7d ?? 0) * 1.5),
+    });
+  }
+  candidateTargetStores.sort((a, b) => b.avg_daily_sales - a.avg_daily_sales);
+
+  const candidateCompanions: CandidateCompanion[] = products
+    .filter((p) => p.id !== productId && p.category_id === product.category_id && p.is_active)
+    .slice(0, 8)
+    .map((p) => ({ id: p.id, name: p.name }));
+
   return {
     product,
     store,
@@ -172,7 +222,13 @@ export async function loadProductDetailsBundle(
     users,
     relatedProducts,
     relatedPredictionsByProduct,
+    candidateTargetStores: candidateTargetStores.slice(0, 6),
+    candidateCompanions,
   };
+}
+
+function round1(n: number): number {
+  return Math.round(n * 10) / 10;
 }
 
 function mostRecent<T>(list: T[], getDate: (item: T) => string): T | undefined {
