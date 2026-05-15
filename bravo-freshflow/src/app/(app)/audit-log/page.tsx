@@ -1,11 +1,5 @@
-import { PageHeader } from "@/components/common/page-header";
-import { PhasePlaceholder } from "@/components/common/phase-placeholder";
+import { AuditLogShell } from "@/components/audit-log/audit-log-shell";
 
 export default function AuditLogPage() {
-  return (
-    <>
-      <PageHeader title="Audit Log" description="Full audit trail with diff viewer." />
-      <PhasePlaceholder phase="PHASE_13" />
-    </>
-  );
+  return <AuditLogShell />;
 }

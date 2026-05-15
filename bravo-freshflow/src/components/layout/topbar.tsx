@@ -30,6 +30,7 @@ export function Topbar() {
   const setCommandOpen = useUiStore((s) => s.setCommandPaletteOpen);
   const mobileOpen = useUiStore((s) => s.mobileSidebarOpen);
   const setMobileOpen = useUiStore((s) => s.setMobileSidebarOpen);
+  const demoMode = useUiStore((s) => s.demoMode);
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-3 border-b bg-background/80 px-4 backdrop-blur-md">
@@ -48,11 +49,11 @@ export function Topbar() {
       </Sheet>
 
       <div className="hidden items-center gap-2 md:flex">
-        <DemoBadge />
+        {demoMode ? <DemoBadge /> : null}
         <Breadcrumbs />
       </div>
       <div className="flex flex-1 items-center gap-2 md:hidden">
-        <DemoBadge />
+        {demoMode ? <DemoBadge /> : null}
       </div>
 
       <div className="ml-auto flex items-center gap-1.5">
