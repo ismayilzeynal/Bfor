@@ -2,7 +2,16 @@
 
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
-import type { Task, TaskStatus, Transfer, Discount, AuditLog, Priority } from "@/types";
+import type {
+  Task,
+  TaskStatus,
+  Transfer,
+  Discount,
+  AuditLog,
+  Priority,
+  TransferStatus,
+  DiscountStatus,
+} from "@/types";
 
 export type ApprovalDecision = "approved" | "rejected";
 
@@ -47,12 +56,40 @@ export interface TaskComment {
   created_at: string;
 }
 
+export type TransferApprovalRole = "source_manager" | "target_manager" | "logistics";
+
+export interface TransferApproval {
+  role: TransferApprovalRole;
+  user_id: string;
+  approved_at: string;
+}
+
+export interface TransferOverride {
+  status?: TransferStatus;
+  completed_at?: string | null;
+  rejection_reason?: string | null;
+  approvals?: TransferApproval[];
+}
+
+export interface DiscountOverride {
+  status?: DiscountStatus;
+  discount_pct?: number;
+  start_datetime?: string;
+  end_datetime?: string;
+  current_margin_after_discount_pct?: number;
+  minimum_margin_checked?: boolean;
+  override_below_margin?: boolean;
+  rejection_reason?: string | null;
+}
+
 interface ActionsState {
   decisions: PendingApproval[];
   appliedActions: AppliedAction[];
   auditEntries: AuditLog[];
   taskOverrides: Record<string, TaskOverride>;
   taskComments: Record<string, TaskComment[]>;
+  transferOverrides: Record<string, TransferOverride>;
+  discountOverrides: Record<string, DiscountOverride>;
 
   approve: (input: Omit<PendingApproval, "decision" | "decided_at"> & { decided_at?: string }) => PendingApproval;
   reject: (input: Omit<PendingApproval, "decision" | "decided_at"> & { decided_at?: string }) => PendingApproval;
@@ -66,6 +103,19 @@ interface ActionsState {
   ) => void;
   setTaskOverride: (taskId: string, patch: TaskOverride) => void;
   addTaskComment: (input: Omit<TaskComment, "id" | "created_at"> & { id?: string; created_at?: string }) => TaskComment;
+  setTransferOverride: (transferId: string, patch: TransferOverride) => void;
+  approveTransferStep: (transferId: string, role: TransferApprovalRole, userId: string) => void;
+  setTransferStatus: (
+    transferId: string,
+    status: TransferStatus,
+    extras?: { completedAt?: string | null; rejectionReason?: string | null }
+  ) => void;
+  setDiscountOverride: (discountId: string, patch: DiscountOverride) => void;
+  setDiscountStatus: (
+    discountId: string,
+    status: DiscountStatus,
+    extras?: { rejectionReason?: string | null }
+  ) => void;
   reset: () => void;
 }
 
@@ -77,6 +127,8 @@ export const useActionsStore = create<ActionsState>()(
       auditEntries: [],
       taskOverrides: {},
       taskComments: {},
+      transferOverrides: {},
+      discountOverrides: {},
 
       approve: (input) => {
         const entry: PendingApproval = {
@@ -146,6 +198,58 @@ export const useActionsStore = create<ActionsState>()(
         });
         return entry;
       },
+      setTransferOverride: (transferId, patch) => {
+        const prev = get().transferOverrides[transferId] ?? {};
+        set({
+          transferOverrides: {
+            ...get().transferOverrides,
+            [transferId]: { ...prev, ...patch },
+          },
+        });
+      },
+      approveTransferStep: (transferId, role, userId) => {
+        const prev = get().transferOverrides[transferId] ?? {};
+        const existing = prev.approvals ?? [];
+        if (existing.some((a) => a.role === role)) return;
+        const approvals: TransferApproval[] = [
+          ...existing,
+          { role, user_id: userId, approved_at: new Date().toISOString() },
+        ];
+        set({
+          transferOverrides: {
+            ...get().transferOverrides,
+            [transferId]: { ...prev, approvals },
+          },
+        });
+      },
+      setTransferStatus: (transferId, status, extras) => {
+        const prev = get().transferOverrides[transferId] ?? {};
+        const patch: TransferOverride = { ...prev, status };
+        if (status === "completed") patch.completed_at = extras?.completedAt ?? new Date().toISOString();
+        if (status === "cancelled" || status === "failed") {
+          patch.rejection_reason = extras?.rejectionReason ?? null;
+        }
+        set({
+          transferOverrides: { ...get().transferOverrides, [transferId]: patch },
+        });
+      },
+      setDiscountOverride: (discountId, patch) => {
+        const prev = get().discountOverrides[discountId] ?? {};
+        set({
+          discountOverrides: {
+            ...get().discountOverrides,
+            [discountId]: { ...prev, ...patch },
+          },
+        });
+      },
+      setDiscountStatus: (discountId, status, extras) => {
+        const prev = get().discountOverrides[discountId] ?? {};
+        const patch: DiscountOverride = { ...prev, status };
+        if (status === "rejected") patch.rejection_reason = extras?.rejectionReason ?? null;
+        set({
+          discountOverrides: { ...get().discountOverrides, [discountId]: patch },
+        });
+      },
       reset: () =>
         set({
           decisions: [],
@@ -153,6 +257,8 @@ export const useActionsStore = create<ActionsState>()(
           auditEntries: [],
           taskOverrides: {},
           taskComments: {},
+          transferOverrides: {},
+          discountOverrides: {},
         }),
     }),
     {
