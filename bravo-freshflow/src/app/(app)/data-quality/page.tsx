@@ -1,11 +1,5 @@
-import { PageHeader } from "@/components/common/page-header";
-import { PhasePlaceholder } from "@/components/common/phase-placeholder";
+import { DataQualityShell } from "@/components/data-quality/data-quality-shell";
 
 export default function DataQualityPage() {
-  return (
-    <>
-      <PageHeader title="Data Quality" description="Integrity issues and integration health for CIO / Admin." />
-      <PhasePlaceholder phase="PHASE_12" />
-    </>
-  );
+  return <DataQualityShell />;
 }

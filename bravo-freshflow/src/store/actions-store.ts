@@ -11,6 +11,7 @@ import type {
   Priority,
   TransferStatus,
   DiscountStatus,
+  DataQualityStatus,
 } from "@/types";
 
 export type ApprovalDecision = "approved" | "rejected";
@@ -82,6 +83,13 @@ export interface DiscountOverride {
   rejection_reason?: string | null;
 }
 
+export interface IssueOverride {
+  status?: DataQualityStatus;
+  resolved_at?: string | null;
+  resolution_note?: string | null;
+  resolved_by_user_id?: string | null;
+}
+
 interface ActionsState {
   decisions: PendingApproval[];
   appliedActions: AppliedAction[];
@@ -90,6 +98,7 @@ interface ActionsState {
   taskComments: Record<string, TaskComment[]>;
   transferOverrides: Record<string, TransferOverride>;
   discountOverrides: Record<string, DiscountOverride>;
+  issueOverrides: Record<string, IssueOverride>;
 
   approve: (input: Omit<PendingApproval, "decision" | "decided_at"> & { decided_at?: string }) => PendingApproval;
   reject: (input: Omit<PendingApproval, "decision" | "decided_at"> & { decided_at?: string }) => PendingApproval;
@@ -116,6 +125,12 @@ interface ActionsState {
     status: DiscountStatus,
     extras?: { rejectionReason?: string | null }
   ) => void;
+  setIssueOverride: (issueId: string, patch: IssueOverride) => void;
+  setIssueStatus: (
+    issueId: string,
+    status: DataQualityStatus,
+    extras?: { note?: string | null; userId?: string }
+  ) => void;
   reset: () => void;
 }
 
@@ -129,6 +144,7 @@ export const useActionsStore = create<ActionsState>()(
       taskComments: {},
       transferOverrides: {},
       discountOverrides: {},
+      issueOverrides: {},
 
       approve: (input) => {
         const entry: PendingApproval = {
@@ -250,6 +266,29 @@ export const useActionsStore = create<ActionsState>()(
           discountOverrides: { ...get().discountOverrides, [discountId]: patch },
         });
       },
+      setIssueOverride: (issueId, patch) => {
+        const prev = get().issueOverrides[issueId] ?? {};
+        set({
+          issueOverrides: { ...get().issueOverrides, [issueId]: { ...prev, ...patch } },
+        });
+      },
+      setIssueStatus: (issueId, status, extras) => {
+        const prev = get().issueOverrides[issueId] ?? {};
+        const patch: IssueOverride = { ...prev, status };
+        if (status === "resolved") {
+          patch.resolved_at = new Date().toISOString();
+          if (extras?.note !== undefined) patch.resolution_note = extras.note;
+          if (extras?.userId) patch.resolved_by_user_id = extras.userId;
+        } else if (status === "ignored") {
+          patch.resolved_at = new Date().toISOString();
+          if (extras?.userId) patch.resolved_by_user_id = extras.userId;
+        } else {
+          patch.resolved_at = null;
+          patch.resolution_note = null;
+          patch.resolved_by_user_id = null;
+        }
+        set({ issueOverrides: { ...get().issueOverrides, [issueId]: patch } });
+      },
       reset: () =>
         set({
           decisions: [],
@@ -259,6 +298,7 @@ export const useActionsStore = create<ActionsState>()(
           taskComments: {},
           transferOverrides: {},
           discountOverrides: {},
+          issueOverrides: {},
         }),
     }),
     {
