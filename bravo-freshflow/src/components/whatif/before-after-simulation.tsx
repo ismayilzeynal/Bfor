@@ -18,7 +18,7 @@ import { formatAZN } from "@/lib/formatters";
 import { SCENARIO_TYPE_LABELS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { ScenarioType } from "@/types";
-import type { ScenarioResult, ScenarioBaseline } from "@/lib/scenario-calculator";
+import { computeImpactView, type ScenarioResult, type ScenarioBaseline } from "@/lib/scenario-calculator";
 
 interface Props {
   scenario: ScenarioType;
@@ -29,35 +29,34 @@ interface Props {
 
 export function BeforeAfterSimulation({ scenario, result, baseline, recommendedType }: Props) {
   const view = useMemo(() => {
+    const impact = computeImpactView(baseline, result);
     const stock = baseline.currentStock;
     const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
     const baselineUnsold = Math.max(0, stock - baselineSold);
-    const noActionLoss = baselineUnsold * baseline.costPrice;
-    const noActionRiskPct = stock > 0 ? (baselineUnsold / stock) * 100 : 0;
-
     const sold = result.expectedSold;
     const unsoldAfter = Math.max(0, stock - sold);
     const productsSaved = Math.max(0, sold - baselineSold);
-    const remainingRiskPct = stock > 0 ? (unsoldAfter / stock) * 100 : 0;
-    const recoveredValue = result.recoveredValue;
+    const residualLoss = unsoldAfter * baseline.costPrice;
 
-    const lossAvoided = Math.max(0, noActionLoss - unsoldAfter * baseline.costPrice);
-    const netSavedAbs = Math.max(
-      0,
-      Math.abs(result.recoveredValue - result.transferCost - unsoldAfter * baseline.costPrice -
-        (baselineSold * baseline.salePrice - noActionLoss))
-    );
-    const riskReduction = Math.max(0, noActionRiskPct - remainingRiskPct);
+    // Same G/K formula as Detail Panel — single source of truth.
+    const actionCost = result.transferCost;
+    const baselineRevenue = baselineSold * baseline.salePrice;
+    const G = actionCost + residualLoss - result.recoveredValue;
+    const K = impact.potentialLoss - baselineRevenue;
+    const actionNetGain = Math.abs(G - K);
+
+    const lossAvoided = Math.max(0, impact.potentialLoss - residualLoss);
+    const riskReduction = Math.max(0, impact.riskBeforePct - impact.riskAfterPct);
 
     return {
-      noActionLoss,
+      noActionLoss: impact.potentialLoss,
       baselineUnsold,
-      noActionRiskPct,
-      recoveredValue,
+      noActionRiskPct: impact.riskBeforePct,
+      recoveredValue: impact.recoveredValue,
       productsSaved,
-      remainingRiskPct,
+      remainingRiskPct: impact.riskAfterPct,
       lossAvoided,
-      netSavedAbs,
+      actionNetGain,
       riskReduction,
     };
   }, [baseline, result]);
@@ -185,7 +184,7 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
           />
           <Summary
             label="Net saved value"
-            value={formatAZN(view.netSavedAbs, { compact: true })}
+            value={formatAZN(view.actionNetGain, { compact: true })}
             tone="emerald"
             highlight
           />
