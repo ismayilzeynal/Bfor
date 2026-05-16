@@ -11,9 +11,10 @@ import type { RiskPrediction } from "@/types";
 
 interface Props {
   prediction: RiskPrediction;
+  headless?: boolean;
 }
 
-export function ExpiryTimelineCard({ prediction }: Props) {
+export function ExpiryTimelineCard({ prediction, headless }: Props) {
   const today = parseISO(`${MOCK_DATE}T00:00:00.000Z`);
   const expiryDate = new Date(today);
   expiryDate.setDate(expiryDate.getDate() + prediction.days_to_expiry);
@@ -50,15 +51,8 @@ export function ExpiryTimelineCard({ prediction }: Props) {
   const expectedSoldPct = stock > 0 ? (expectedSold / stock) * 100 : 0;
   const atRiskPct = stock > 0 ? (atRisk / stock) * 100 : 0;
 
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
-          <CalendarClock className="size-4 text-muted-foreground" aria-hidden />
-          Expiry Timeline
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-5">
+  const body = (
+    <div className="space-y-5">
         <div className="space-y-2">
           <div className="relative h-3 w-full overflow-visible rounded-full">
             <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-200 via-amber-200 to-rose-300 dark:from-emerald-900/40 dark:via-amber-900/40 dark:to-rose-900/40" />
@@ -118,7 +112,20 @@ export function ExpiryTimelineCard({ prediction }: Props) {
             </span>
           </div>
         </div>
-      </CardContent>
+    </div>
+  );
+
+  if (headless) return body;
+
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
+          <CalendarClock className="size-4 text-muted-foreground" aria-hidden />
+          Expiry Timeline
+        </CardTitle>
+      </CardHeader>
+      <CardContent>{body}</CardContent>
     </Card>
   );
 }

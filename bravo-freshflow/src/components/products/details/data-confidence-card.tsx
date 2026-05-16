@@ -14,9 +14,10 @@ interface Props {
   snapshots: InventorySnapshot[];
   batches: InventoryBatch[];
   sales: SalesAggregate[];
+  headless?: boolean;
 }
 
-export function DataConfidenceCard({ prediction, snapshots, batches, sales }: Props) {
+export function DataConfidenceCard({ prediction, snapshots, batches, sales, headless }: Props) {
   const checks = useMemo(() => {
     const latestSnap = snapshots[snapshots.length - 1];
     const expiryPresent = batches.every((b) => Boolean(b.expiry_date));
@@ -51,15 +52,8 @@ export function DataConfidenceCard({ prediction, snapshots, batches, sales }: Pr
 
   const score = Math.round(prediction.data_confidence_score);
 
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
-          <Gauge className="size-4 text-muted-foreground" aria-hidden />
-          Data Confidence
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+  const body = (
+    <div className="space-y-4">
         <div className="flex items-end gap-3">
           <span
             className={cn(
@@ -107,7 +101,20 @@ export function DataConfidenceCard({ prediction, snapshots, batches, sales }: Pr
           <ClipboardPlus className="size-3.5" aria-hidden />
           Create stock check task
         </Button>
-      </CardContent>
+    </div>
+  );
+
+  if (headless) return body;
+
+  return (
+    <Card>
+      <CardHeader className="pb-2">
+        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
+          <Gauge className="size-4 text-muted-foreground" aria-hidden />
+          Data Confidence
+        </CardTitle>
+      </CardHeader>
+      <CardContent>{body}</CardContent>
     </Card>
   );
 }
