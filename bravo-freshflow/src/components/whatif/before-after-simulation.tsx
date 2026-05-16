@@ -158,7 +158,7 @@ export function BeforeAfterSimulation({ scenario, result: _result, baseline, rec
             tone="emerald"
           />
           <Summary
-            label="Action ziyan azaltması (K − G)"
+            label="Action ziyan azaltması (K − G − xərc)"
             value={formatAZN(view.lossReduction, { compact: true })}
             tone="emerald"
             highlight

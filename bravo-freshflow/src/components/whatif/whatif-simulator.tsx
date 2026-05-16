@@ -857,15 +857,33 @@ function DetailPanel({
   const K = impact.K;
   const G = impact.G;
   const lossReduction = impact.lossReduction;
+  const transferQty = impact.transferQty;
+  const localSoldDiscount = impact.localSoldDiscount;
+  const discountedPrice = impact.discountedPrice;
+  const discountPctLabel = (impact.effectiveDiscountPct * 100).toFixed(0);
 
   const actionCostFormula =
     actionCost > 0
-      ? `Transfer: 8 + 0.05 × ${sold.toFixed(0)}`
+      ? `Transfer: 8 + 0.05 × ${transferQty}`
       : scenario === "discount"
         ? "Yoxdur (endirim gəlirə təsir edir)"
-        : scenario === "no_action"
-          ? "Yoxdur"
-          : "Yoxdur";
+        : "Yoxdur";
+
+  // Action satış məbləği formula text — per scenario
+  const revenueFormula =
+    scenario === "discount"
+      ? `${sold} × ${formatAZN(baseline.salePrice)} × (1 − ${discountPctLabel}%)`
+      : scenario === "transfer"
+        ? `${sold} × ${formatAZN(baseline.salePrice)}`
+        : scenario === "combined"
+          ? `${transferQty} × ${formatAZN(baseline.salePrice)} + ${localSoldDiscount} × ${formatAZN(discountedPrice)}`
+          : `${sold} × ${formatAZN(baseline.salePrice)}`;
+
+  // Action sonrası ziyan (G) formula text — per scenario
+  const gFormula =
+    scenario === "transfer" || scenario === "combined"
+      ? `(${baselineUnsold} − ${transferQty}) × ${formatAZN(baseline.costPrice)}`
+      : `${unsoldAfterAction} × ${formatAZN(baseline.costPrice)}`;
 
   const rows: Array<{
     label: string;
@@ -888,7 +906,7 @@ function DetailPanel({
     },
     {
       label: "Action olmazsa itki (K)",
-      formula: `${baselineUnsold.toFixed(0)} satılmaz × ${formatAZN(baseline.costPrice)}`,
+      formula: `${baselineUnsold} satılmaz × ${formatAZN(baseline.costPrice)}`,
       value: fmt(noActionLoss),
       tone: "loss",
     },
@@ -900,16 +918,13 @@ function DetailPanel({
     },
     {
       label: "Action satış məbləği",
-      formula:
-        scenario === "discount" || scenario === "combined"
-          ? `${sold.toFixed(0)} × ${formatAZN(baseline.salePrice)} × (1 − 20%)`
-          : `${sold.toFixed(0)} × ${formatAZN(baseline.salePrice)}`,
+      formula: revenueFormula,
       value: fmt(actionRevenue),
       tone: "revenue",
     },
     {
       label: "Action sonrası ziyan (G)",
-      formula: `${unsoldAfterAction.toFixed(0)} × ${formatAZN(baseline.costPrice)}`,
+      formula: gFormula,
       value: fmt(residualLoss),
       tone: "loss",
     },

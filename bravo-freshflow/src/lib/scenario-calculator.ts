@@ -35,13 +35,23 @@ function baselineRevenue(b: ScenarioBaseline): number {
  *  K = Action olmazsa itki  = baselineUnsold × costPrice
  *  G = Action sonrası ziyan = actionUnsold × costPrice
  *  Action ziyan azaltması   = K − (G + actionCost)
- *  Action satış məbləği     = actionSold × salePrice × (1 − discountPct)
  *
- * Each scenario derives `actionSold` correctly:
- *  - discount: lifted velocity × days, all units locally
- *  - transfer: remaining local that still sells + units sold at target (full price)
- *  - combined: target sales + remaining local with discount
- *  - no_action: baseline local sales only
+ * Per-scenario formulas (integer counts → formula text matches values exactly):
+ *  - discount:
+ *      actionSold     = floor(min(stock, liftedVelocity × days))
+ *      actionUnsold   = stock − actionSold
+ *      actionRevenue  = actionSold × salePrice × (1 − discountPct)
+ *  - transfer:
+ *      actionUnsold   = max(0, baselineUnsold − transferQty)
+ *      actionSold     = stock − actionUnsold          (= baselineSold + transferQty, capped)
+ *      actionRevenue  = actionSold × salePrice
+ *  - combined:
+ *      actionUnsold   = max(0, baselineUnsold − transferQty)
+ *      actionSold     = transferQty + localSoldDiscount
+ *      actionRevenue  = transferQty × salePrice + localSoldDiscount × discountedPrice
+ *  - no_action:
+ *      actionSold     = baselineSold
+ *      actionRevenue  = baselineSold × salePrice
  */
 export interface ScenarioImpact {
   scenario: ScenarioType;
@@ -52,6 +62,10 @@ export interface ScenarioImpact {
   actionSold: number;
   actionUnsold: number;
   productsSaved: number; // actionSold − baselineSold (units we rescued)
+  // Per-scenario breakdown (for revenue formula display)
+  transferQty: number;        // 0 for discount / no_action
+  localSoldDiscount: number;  // 0 for transfer / no_action; for combined = local units sold with discount
+  discountedPrice: number;    // salePrice × (1 − effectiveDiscountPct)
   // Money
   K: number; // Action olmazsa itki = baselineUnsold × costPrice
   G: number; // Action sonrası ziyan = actionUnsold × costPrice
@@ -60,13 +74,9 @@ export interface ScenarioImpact {
    * — money we keep by acting, net of any hard action cost like transfer fees.
    */
   lossReduction: number;
-  /**
-   * Action satış məbləği = actionSold × salePrice × (1 − discountPct)
-   * For transfer-only (no discount applied) the discount factor is 0.
-   */
   actionRevenue: number;
   actionCost: number; // hard cost of action (transfer fees etc.)
-  effectiveDiscountPct: number; // discount applied to actionSold (0 for pure transfer / no_action)
+  effectiveDiscountPct: number; // discount applied (0 for pure transfer / no_action)
   // Risk %
   riskBeforePct: number;
   riskAfterPct: number;
@@ -105,48 +115,60 @@ export function computeScenarioImpact(
 ): ScenarioImpact {
   const p = { ...defaultParams(baseline), ...paramsIn };
   const stock = baseline.currentStock;
-  const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
+  // Integer counts so the displayed formula matches the computed value exactly.
+  const baselineSold = Math.min(stock, Math.floor(baseline.avgDailySales * baseline.daysToExpiry));
   const baselineUnsold = Math.max(0, stock - baselineSold);
 
-  let actionSold = baselineSold;
+  let actionSold: number;
+  let actionUnsold: number;
+  let actionRevenue = 0;
   let actionCost = 0;
-  let effectiveDiscountPct = 0; // applied to actionSold for revenue
+  let effectiveDiscountPct = 0;
+  let transferQtyOut = 0;
+  let localSoldDiscount = 0;
 
   if (scenario === "discount") {
     const lift = liftFor(p.discountPct);
     const liftedVelocity = baseline.avgDailySales * lift;
-    actionSold = Math.min(stock, liftedVelocity * baseline.daysToExpiry);
+    actionSold = Math.min(stock, Math.floor(liftedVelocity * baseline.daysToExpiry));
+    actionUnsold = Math.max(0, stock - actionSold);
+    actionRevenue = actionSold * baseline.salePrice * (1 - p.discountPct);
     actionCost = 0;
     effectiveDiscountPct = p.discountPct;
   } else if (scenario === "transfer") {
     const transferQty = Math.min(p.transferQty, stock);
-    const localRemain = Math.max(0, stock - transferQty);
-    const localSoldAfter = Math.min(localRemain, baseline.avgDailySales * baseline.daysToExpiry);
-    const targetSold = Math.min(transferQty, p.targetVelocity * baseline.daysToExpiry);
-    actionSold = localSoldAfter + targetSold;
-    actionCost = 8 + 0.05 * transferQty; // freight
-    effectiveDiscountPct = 0; // no discount in pure transfer
+    // User formula: G uses (baselineUnsold − transferQty) × cost
+    actionUnsold = Math.max(0, baselineUnsold - transferQty);
+    actionSold = stock - actionUnsold; // = baselineSold + transferQty when transferQty ≤ baselineUnsold
+    actionRevenue = actionSold * baseline.salePrice; // no discount in pure transfer
+    actionCost = 8 + 0.05 * transferQty;
+    effectiveDiscountPct = 0;
+    transferQtyOut = transferQty;
   } else if (scenario === "combined") {
     const transferQty = Math.min(p.transferQty, stock);
     const localRemain = Math.max(0, stock - transferQty);
     const lift = liftFor(p.discountPct);
     const liftedVelocity = baseline.avgDailySales * lift;
-    const localSoldDiscount = Math.min(localRemain, liftedVelocity * baseline.daysToExpiry);
-    const targetSold = Math.min(transferQty, p.targetVelocity * baseline.daysToExpiry);
-    actionSold = localSoldDiscount + targetSold;
+    localSoldDiscount = Math.min(localRemain, Math.floor(liftedVelocity * baseline.daysToExpiry));
+    // User formula: G uses (baselineUnsold − transferQty) × cost (transfer is the unsold-saver)
+    actionUnsold = Math.max(0, baselineUnsold - transferQty);
+    // Total sold displayed = transferred + locally sold under discount
+    actionSold = transferQty + localSoldDiscount;
+    // User revenue formula: transferQty × salePrice + localSoldDiscount × discountedPrice
+    const discountedPrice = baseline.salePrice * (1 - p.discountPct);
+    actionRevenue = transferQty * baseline.salePrice + localSoldDiscount * discountedPrice;
     actionCost = 8 + 0.05 * transferQty;
-    // Apply discount factor to the total sold for a single unified formula
     effectiveDiscountPct = p.discountPct;
+    transferQtyOut = transferQty;
   } else {
     actionSold = baselineSold;
+    actionUnsold = baselineUnsold;
+    actionRevenue = baselineSold * baseline.salePrice;
     actionCost = 0;
     effectiveDiscountPct = 0;
   }
 
-  // Unified Action satış məbləği = actionSold × salePrice × (1 − effectiveDiscountPct)
-  const actionRevenue = actionSold * baseline.salePrice * (1 - effectiveDiscountPct);
-
-  const actionUnsold = Math.max(0, stock - actionSold);
+  const discountedPrice = baseline.salePrice * (1 - effectiveDiscountPct);
   const K = baselineUnsold * baseline.costPrice;
   const G = actionUnsold * baseline.costPrice;
   // Action ziyan azaltması = K − (G + actionCost)
@@ -164,6 +186,9 @@ export function computeScenarioImpact(
     actionSold,
     actionUnsold,
     productsSaved,
+    transferQty: transferQtyOut,
+    localSoldDiscount,
+    discountedPrice,
     K,
     G,
     lossReduction,
