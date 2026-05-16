@@ -822,103 +822,94 @@ function DetailPanel({
   // Action net qazancı = ABS(G − K) — magnitude of improvement
   const actionNetGain = Math.abs(G - K);
 
+  const actionCostFormula =
+    actionCost > 0
+      ? `Transfer: 8 + 0.05 × ${sold.toFixed(0)}`
+      : scenario === "discount"
+        ? "Yoxdur (endirim gəlirə təsir edir)"
+        : scenario === "no_action"
+          ? "Yoxdur"
+          : "Yoxdur";
+
+  const rows: Array<{
+    label: string;
+    formula: string;
+    value: string;
+    tone: BreakdownTone;
+    big?: boolean;
+  }> = [
+    {
+      label: "Stokun cost dəyəri",
+      formula: `${stock} × ${formatAZN(baseline.costPrice)}`,
+      value: fmt(totalCostBasis),
+      tone: "muted",
+    },
+    {
+      label: "Stokun satış dəyəri",
+      formula: `${stock} × ${formatAZN(baseline.salePrice)}`,
+      value: fmt(totalSalePotential),
+      tone: "muted",
+    },
+    {
+      label: "Action olmazsa itki (K)",
+      formula: `${baselineUnsold.toFixed(0)} satılmaz × ${formatAZN(baseline.costPrice)}`,
+      value: fmt(noActionLoss),
+      tone: "loss",
+    },
+    {
+      label: "Action xərci",
+      formula: actionCostFormula,
+      value: fmt(actionCost),
+      tone: actionCost > 0 ? "cost" : "muted",
+    },
+    {
+      label: "Action satış məbləği",
+      formula: `${sold.toFixed(0)} satılır${scenario === "discount" || scenario === "combined" ? " (endirimli)" : ""}`,
+      value: fmt(actionRevenue),
+      tone: "revenue",
+    },
+    {
+      label: "Action sonrası ziyan",
+      formula: `${unsoldAfterAction.toFixed(0)} × ${formatAZN(baseline.costPrice)}`,
+      value: fmt(residualLoss),
+      tone: "loss",
+    },
+    {
+      label: "Action net qazancı",
+      formula: `|G − K|  =  |${fmt(G)} − ${fmt(K)}|`,
+      value: fmt(actionNetGain),
+      tone: "profit",
+      big: true,
+    },
+  ];
+
   return (
     <Card>
-      <CardContent className="space-y-3 p-4">
+      <CardContent className="space-y-2 p-3">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="text-sm font-semibold">
-            Detail — {SCENARIO_TYPE_LABELS[scenario]}
+          <h3 className="text-xs font-semibold uppercase tracking-wide">
+            Detail · {SCENARIO_TYPE_LABELS[scenario]}
           </h3>
-          <span className="text-[11px] text-muted-foreground">
-            Action qazancı:{" "}
+          <span className="text-[10px] text-muted-foreground">
+            Net qazanc:{" "}
             <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
               {formatAZN(actionNetGain, { compact: true })}
             </span>
           </span>
         </div>
 
-        <div className="space-y-2">
-          {/* Row 1: Total cost basis */}
-          <BreakdownRow
-            label="Stokun xalis (cost) dəyəri"
-            formula={`${stock} ədəd × ${formatAZN(baseline.costPrice)}`}
-            value={fmt(totalCostBasis)}
-            tone="muted"
-          />
-          {/* Row 2: Total sale potential */}
-          <BreakdownRow
-            label="Stokun toplam satış dəyəri"
-            formula={`${stock} ədəd × ${formatAZN(baseline.salePrice)}`}
-            value={fmt(totalSalePotential)}
-            tone="muted"
-          />
-          {/* Row 3: No-action loss */}
-          <BreakdownRow
-            label="Heç bir action olmazsa itki"
-            formula={`(${stock} − ${baselineSold.toFixed(0)} satılacaq) × ${formatAZN(baseline.costPrice)} = ${baselineUnsold.toFixed(0)} ədəd ziyan`}
-            value={fmt(noActionLoss)}
-            tone="loss"
-          />
-          {/* Row 4: Action cost (transfer only) */}
-          <BreakdownRow
-            label="Action xərci"
-            formula={
-              actionCost > 0
-                ? `Transfer xərci (8 ₼ baza + 0.05 ₼/ədəd × ${sold.toFixed(0)})`
-                : scenario === "discount"
-                  ? "Endirim üçün xərc yoxdur — endirim gəlir azalmasıdır, aşağıda satış məbləğində nəzərə alınır"
-                  : scenario === "no_action"
-                    ? "Heç bir action götürülmür → xərc yoxdur"
-                    : "Bu ssenari üçün ayrıca xərc yoxdur"
-            }
-            value={fmt(actionCost)}
-            tone={actionCost > 0 ? "cost" : "muted"}
-          />
-          {/* Row 5: Sold sale revenue */}
-          <BreakdownRow
-            label={`Action ilə əldə olunan satış məbləği`}
-            formula={`${sold.toFixed(0)} ədəd satılır${scenario === "discount" || scenario === "combined" ? " (endirim sonrası qiymət ilə)" : ""}`}
-            value={fmt(actionRevenue)}
-            tone="revenue"
-          />
-          {/* Row 6: Residual loss after action */}
-          <BreakdownRow
-            label="Action sonrası qalan ziyan"
-            formula={`(${stock} − ${sold.toFixed(0)}) × ${formatAZN(baseline.costPrice)} = ${unsoldAfterAction.toFixed(0)} ədəd satılmır`}
-            value={fmt(residualLoss)}
-            tone="loss"
-          />
-          {/* Row 7: Net gain magnitude */}
-          <BreakdownRow
-            label="Action net qazancı"
-            formula={`|G − K|  =  |${fmt(G)} − ${fmt(K)}|  (G = action sonrası ziyan, K = action olmazsa ziyan)`}
-            value={fmt(actionNetGain)}
-            tone="profit"
-            big
-          />
+        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+          {rows.slice(0, 6).map((r) => (
+            <BreakdownRow key={r.label} {...r} />
+          ))}
         </div>
-
-        <div className="rounded-md border border-dashed bg-muted/30 p-2.5 text-[11px] leading-relaxed text-muted-foreground">
-          <span className="font-medium text-foreground">İzah:</span> Heç bir action olmazsa{" "}
-          <span className="font-semibold tabular-nums">{baselineSold.toFixed(0)}</span> ədəd
-          satılır,{" "}
-          <span className="font-semibold tabular-nums">{baselineUnsold.toFixed(0)}</span>{" "}
-          ədəd cost dəyərində ziyana gedir — ümumi ziyan{" "}
-          <span className="font-semibold tabular-nums">K = {fmt(K)}</span>. Seçilmiş{" "}
-          "{SCENARIO_TYPE_LABELS[scenario]}" ssenarisi ilə{" "}
-          <span className="font-semibold tabular-nums">{sold.toFixed(0)}</span> ədəd satılır,
-          action sonrası ziyan{" "}
-          <span className="font-semibold tabular-nums">G = {fmt(G)}</span>{" "}
-          ({G < 0 ? "mənfi → action qazanca çevrildi" : "yenə də ziyandır"}). Action net qazancı{" "}
-          <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
-            |G − K| = {fmt(actionNetGain)}
-          </span>
-          {" "}— bu, hər iki ssenari arasındakı maliyyə fərqidir.
-        </div>
+        <BreakdownRow {...rows[6]} />
       </CardContent>
     </Card>
   );
 }
+
+type BreakdownTone = "muted" | "loss" | "cost" | "revenue" | "profit";
 
 function BreakdownRow({
   label,
@@ -930,7 +921,7 @@ function BreakdownRow({
   label: string;
   formula: string;
   value: string;
-  tone: "muted" | "loss" | "cost" | "revenue" | "profit";
+  tone: BreakdownTone;
   big?: boolean;
 }) {
   const valueTone =
@@ -954,15 +945,15 @@ function BreakdownRow({
             ? "border-sky-200 bg-sky-50/40 dark:border-sky-900/40 dark:bg-sky-950/20"
             : "border-border bg-background";
   return (
-    <div className={cn("flex items-center gap-3 rounded-md border p-2.5", borderTone)}>
+    <div className={cn("flex items-center gap-2 rounded border px-2 py-1.5", borderTone, big && "px-2.5 py-2")}>
       <div className="min-w-0 flex-1">
-        <div className={cn("font-medium", big ? "text-sm" : "text-xs")}>{label}</div>
-        <div className="mt-0.5 text-[10.5px] text-muted-foreground">{formula}</div>
+        <div className={cn("font-medium leading-tight", big ? "text-xs" : "text-[11px]")}>{label}</div>
+        <div className="mt-0.5 text-[10px] leading-tight text-muted-foreground">{formula}</div>
       </div>
       <div
         className={cn(
           "shrink-0 text-right font-semibold tabular-nums",
-          big ? "text-lg" : "text-sm",
+          big ? "text-base" : "text-xs",
           valueTone,
         )}
       >
