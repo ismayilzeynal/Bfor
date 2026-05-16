@@ -63,8 +63,9 @@ export interface ScenarioImpact {
   actionUnsold: number;
   productsSaved: number; // actionSold − baselineSold (units we rescued)
   // Per-scenario breakdown (for revenue formula display)
-  transferQty: number;        // 0 for discount / no_action
+  transferQty: number;        // 0 for discount / no_action; effective (capped) for transfer / combined
   localSoldDiscount: number;  // 0 for transfer / no_action; for combined = local units sold with discount
+  localUnsoldAfterDiscount: number; // 0 outside combined; = stock − localSoldDiscount
   discountedPrice: number;    // salePrice × (1 − effectiveDiscountPct)
   // Money
   K: number; // Action olmazsa itki = baselineUnsold × costPrice
@@ -126,6 +127,7 @@ export function computeScenarioImpact(
   let effectiveDiscountPct = 0;
   let transferQtyOut = 0;
   let localSoldDiscount = 0;
+  let localUnsoldForCombined = 0;
 
   if (scenario === "discount") {
     const lift = liftFor(p.discountPct);
@@ -145,21 +147,29 @@ export function computeScenarioImpact(
     effectiveDiscountPct = 0;
     transferQtyOut = transferQty;
   } else if (scenario === "combined") {
-    const transferQty = Math.min(p.transferQty, stock);
-    const localRemain = Math.max(0, stock - transferQty);
     const lift = liftFor(p.discountPct);
     const liftedVelocity = baseline.avgDailySales * lift;
-    localSoldDiscount = Math.min(localRemain, Math.floor(liftedVelocity * baseline.daysToExpiry));
-    // User formula: G uses (baselineUnsold − transferQty) × cost (transfer is the unsold-saver)
-    actionUnsold = Math.max(0, baselineUnsold - transferQty);
-    // Total sold displayed = transferred + locally sold under discount
-    actionSold = transferQty + localSoldDiscount;
-    // User revenue formula: transferQty × salePrice + localSoldDiscount × discountedPrice
+
+    // Step 1 — discount applied across FULL stock (lifts sell-through locally)
+    localSoldDiscount = Math.min(stock, Math.floor(liftedVelocity * baseline.daysToExpiry));
+    const localUnsoldAfterDiscount = Math.max(0, stock - localSoldDiscount);
+
+    // Step 2 — transfer the leftover unsold. Can't transfer more than what's still on the shelf.
+    const requestedTransfer = Math.min(p.transferQty, stock);
+    const effectiveTransfer = Math.min(requestedTransfer, localUnsoldAfterDiscount);
+
+    // User formula: G = (endirimdən sonra satılmaz − transfer) × cost
+    actionUnsold = localUnsoldAfterDiscount - effectiveTransfer;
+    actionSold = localSoldDiscount + effectiveTransfer;
+
     const discountedPrice = baseline.salePrice * (1 - p.discountPct);
-    actionRevenue = transferQty * baseline.salePrice + localSoldDiscount * discountedPrice;
-    actionCost = 8 + 0.05 * transferQty;
+    // Revenue: local at discount + transferred at full price
+    actionRevenue = localSoldDiscount * discountedPrice + effectiveTransfer * baseline.salePrice;
+
+    actionCost = 8 + 0.05 * effectiveTransfer;
     effectiveDiscountPct = p.discountPct;
-    transferQtyOut = transferQty;
+    transferQtyOut = effectiveTransfer;
+    localUnsoldForCombined = localUnsoldAfterDiscount;
   } else {
     actionSold = baselineSold;
     actionUnsold = baselineUnsold;
@@ -188,6 +198,7 @@ export function computeScenarioImpact(
     productsSaved,
     transferQty: transferQtyOut,
     localSoldDiscount,
+    localUnsoldAfterDiscount: localUnsoldForCombined,
     discountedPrice,
     K,
     G,

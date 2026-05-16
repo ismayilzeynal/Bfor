@@ -859,6 +859,7 @@ function DetailPanel({
   const lossReduction = impact.lossReduction;
   const transferQty = impact.transferQty;
   const localSoldDiscount = impact.localSoldDiscount;
+  const localUnsoldAfterDiscount = impact.localUnsoldAfterDiscount;
   const discountedPrice = impact.discountedPrice;
   const discountPctLabel = (impact.effectiveDiscountPct * 100).toFixed(0);
 
@@ -881,9 +882,11 @@ function DetailPanel({
 
   // Action sonrası ziyan (G) formula text — per scenario
   const gFormula =
-    scenario === "transfer" || scenario === "combined"
-      ? `(${baselineUnsold} − ${transferQty}) × ${formatAZN(baseline.costPrice)}`
-      : `${unsoldAfterAction} × ${formatAZN(baseline.costPrice)}`;
+    scenario === "combined"
+      ? `(${localUnsoldAfterDiscount} − ${transferQty}) × ${formatAZN(baseline.costPrice)}`
+      : scenario === "transfer"
+        ? `(${baselineUnsold} − ${transferQty}) × ${formatAZN(baseline.costPrice)}`
+        : `${unsoldAfterAction} × ${formatAZN(baseline.costPrice)}`;
 
   const rows: Array<{
     label: string;
