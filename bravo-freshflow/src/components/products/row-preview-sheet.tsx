@@ -148,9 +148,6 @@ export function RowPreviewSheet({
                 />
               </div>
 
-              <div className="rounded-md border bg-muted/30 p-3 text-xs leading-relaxed text-muted-foreground">
-                {row.prediction.main_reason}
-              </div>
             </section>
 
             <Separator />
