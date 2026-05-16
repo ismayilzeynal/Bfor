@@ -8,16 +8,16 @@ import { Toaster } from "@/components/ui/sonner";
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
-  title: "Bravo FreshFlow AI",
-  description: "Detect, explain, compare, act, and learn — AI-powered retail loss prevention.",
+  title: "Bfor",
+  description: "AI-powered retail loss prevention — detect, decide, act.",
   icons: {
     icon: [
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/bfor-logo.svg", type: "image/svg+xml" },
     ],
   },
   openGraph: {
-    title: "Bravo FreshFlow AI",
-    description: "Detect, explain, compare, act, and learn — AI-powered retail loss prevention.",
+    title: "Bfor",
+    description: "AI-powered retail loss prevention — detect, decide, act.",
     type: "website",
   },
 };

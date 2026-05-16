@@ -190,7 +190,7 @@ export function OnboardingTour() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Sparkles className="h-4 w-4 text-emerald-600" />
-              Welcome to Bravo FreshFlow AI
+              Welcome to Bfor
             </DialogTitle>
             <DialogDescription>
               Detect, explain, compare, act, and learn — all from one screen. Take a 30-second tour?

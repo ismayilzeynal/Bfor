@@ -46,7 +46,7 @@ export function AboutCard() {
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-emerald-600" />
-          About Bravo FreshFlow AI
+          About Bfor
         </CardTitle>
         <CardDescription>Hackathon build · designed to prevent loss before it happens.</CardDescription>
       </CardHeader>

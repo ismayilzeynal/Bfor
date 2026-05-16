@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Leaf } from "lucide-react";
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 interface BrandProps {
@@ -13,14 +13,19 @@ interface BrandProps {
 export function Brand({ variant = "full", href = "/", className }: BrandProps) {
   const inner = (
     <span className={cn("flex items-center gap-2", className)}>
-      <span className="flex h-8 w-8 items-center justify-center rounded-md bg-emerald-600 text-white shadow-sm transition-transform group-hover:scale-105">
-        <Leaf className="h-4 w-4" />
-      </span>
+      <Image
+        src="/bfor-logo.svg"
+        alt="Bfor logo"
+        width={variant === "full" ? 96 : 36}
+        height={variant === "full" ? 36 : 36}
+        priority
+        className={cn(
+          "transition-transform group-hover:scale-105",
+          variant === "full" ? "h-9 w-auto" : "h-9 w-9"
+        )}
+      />
       {variant === "full" ? (
-        <span className="flex flex-col leading-tight">
-          <span className="text-sm font-semibold tracking-tight">Bravo</span>
-          <span className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">FreshFlow AI</span>
-        </span>
+        <span className="sr-only">Bfor</span>
       ) : null}
     </span>
   );
@@ -33,7 +38,7 @@ export function Brand({ variant = "full", href = "/", className }: BrandProps) {
     <Link
       href={href}
       className="group relative rounded-md outline-none focus-visible:ring-2 focus-visible:ring-ring"
-      aria-label="Bravo FreshFlow AI home"
+      aria-label="Bfor home"
     >
       {inner}
     </Link>

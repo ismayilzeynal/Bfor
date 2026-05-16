@@ -187,33 +187,39 @@ export function RiskyProductsTable({
         accessorFn: (r) => r.prediction.risk_score,
         cell: ({ row }) => {
           const s = row.original.prediction.risk_score;
+          const barColor =
+            s >= 80
+              ? "bg-red-500"
+              : s >= 60
+                ? "bg-orange-500"
+                : s >= 40
+                  ? "bg-amber-500"
+                  : "bg-emerald-500";
+          const chipColor =
+            s >= 80
+              ? "bg-red-100 text-red-700"
+              : s >= 60
+                ? "bg-orange-100 text-orange-700"
+                : s >= 40
+                  ? "bg-amber-100 text-amber-700"
+                  : "bg-emerald-100 text-emerald-700";
           return (
             <div className="flex items-center justify-end gap-2">
-              <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-muted lg:block">
+              <div className="relative hidden h-1.5 w-12 shrink-0 overflow-hidden rounded-full bg-muted lg:block">
                 <div
-                  className={cn(
-                    "h-full rounded-full",
-                    s >= 80
-                      ? "bg-red-500"
-                      : s >= 60
-                        ? "bg-orange-500"
-                        : s >= 40
-                          ? "bg-amber-500"
-                          : "bg-emerald-500"
-                  )}
+                  className={cn("absolute inset-y-0 left-0 rounded-full", barColor)}
                   style={{ width: `${Math.min(100, Math.max(0, s))}%` }}
                 />
               </div>
-              <span className={cn(
-                "text-xs font-medium tabular-nums px-1.5 py-0.5 rounded lg:bg-transparent lg:px-0",
-                s >= 80
-                  ? "bg-red-100 text-red-700 lg:text-foreground"
-                  : s >= 60
-                    ? "bg-orange-100 text-orange-700 lg:text-foreground"
-                    : s >= 40
-                      ? "bg-amber-100 text-amber-700 lg:text-foreground"
-                      : "bg-emerald-100 text-emerald-700 lg:text-foreground"
-              )}>{s}</span>
+              <span
+                className={cn(
+                  "inline-flex w-12 shrink-0 items-center justify-end rounded px-1.5 py-0.5 text-xs font-medium tabular-nums lg:bg-transparent lg:px-0 lg:py-0",
+                  chipColor,
+                  "lg:text-foreground"
+                )}
+              >
+                {Math.round(s)}
+              </span>
             </div>
           );
         },

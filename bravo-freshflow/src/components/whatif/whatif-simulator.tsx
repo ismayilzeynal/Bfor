@@ -477,61 +477,6 @@ export function WhatIfSimulator({
         ) : null}
       </ScenarioCard>
 
-      <Card>
-        <CardContent className="space-y-3 p-3">
-          <div className="flex items-center justify-between">
-            <h3 className="text-sm font-semibold">Comparison — Net Saved</h3>
-            <span className="text-[10px] text-muted-foreground">
-              Best bar tinted emerald • disabled bars are non-viable
-            </span>
-          </div>
-          <div className="h-44">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={chartData} margin={{ top: 18, right: 16, left: 0, bottom: 0 }}>
-                <XAxis
-                  dataKey="label"
-                  tick={{ fontSize: 10 }}
-                  interval={0}
-                  tickLine={false}
-                  axisLine={false}
-                />
-                <YAxis tick={{ fontSize: 10 }} axisLine={false} tickLine={false} width={48} />
-                <RTooltip
-                  contentStyle={{ fontSize: 11 }}
-                  formatter={(value) => [
-                    formatAZN(Number(value) || 0, { compact: true, sign: true }),
-                    "Net saved",
-                  ]}
-                  labelFormatter={(label) => String(label)}
-                />
-                <Bar dataKey="netSaved" radius={[4, 4, 0, 0]}>
-                  {chartData.map((d, i) => (
-                    <Cell
-                      key={i}
-                      fill={
-                        d.notViable
-                          ? "rgba(148,163,184,0.45)"
-                          : d.isBest
-                          ? "#10b981"
-                          : "rgba(99,102,241,0.55)"
-                      }
-                    />
-                  ))}
-                  <LabelList
-                    dataKey="netSaved"
-                    position="top"
-                    formatter={(v: unknown) =>
-                      typeof v === "number" ? formatAZN(v, { compact: true, sign: true }) : ""
-                    }
-                    style={{ fontSize: 10, fill: "currentColor" }}
-                  />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
-        </CardContent>
-      </Card>
-
       <DetailPanel scenario={selected} result={selectedResult} baseline={calcBaseline} />
 
       <div className="sticky bottom-0 z-10 -mx-1 flex flex-wrap items-center gap-2 rounded-md border bg-background/95 px-3 py-2 shadow-md backdrop-blur">
@@ -851,133 +796,199 @@ function DetailPanel({
   result: ScenarioResult;
   baseline: ScenarioBaseline;
 }) {
-  const baselineRev = baseline.avgDailySales * baseline.daysToExpiry * baseline.salePrice;
-  const totalCost = result.discountCost + result.transferCost + result.operationalCost;
-  const final = result.recoveredValue - totalCost;
-  const finalDelta = final - baselineRev;
-  const fmt = (n: number) => formatAZN(n, { compact: true });
+  const fmt = (n: number) => formatAZN(n, { compact: false });
+  const stock = baseline.currentStock;
+  const totalCostBasis = stock * baseline.costPrice;
+  const totalSalePotential = stock * baseline.salePrice;
 
-  const waterfall = [
-    { name: "Baseline", value: baselineRev, isStart: true },
-    { name: "+ Recovered", value: result.recoveredValue - baselineRev },
-    { name: "− Costs", value: -totalCost },
-    { name: "Final", value: final, isEnd: true },
-  ];
+  // No-action baseline
+  const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
+  const baselineUnsold = Math.max(0, stock - baselineSold);
+  const noActionLoss = baselineUnsold * baseline.costPrice;
 
-  const narrative = buildNarrative(scenario, result, baseline);
-  const margin =
-    scenario === "discount" || scenario === "combined" || scenario === "bundle"
-      ? marginAt(scenario, result, baseline)
-      : null;
+  // Action numbers
+  const sold = result.expectedSold;
+  const unsoldAfterAction = Math.max(0, stock - sold);
+  const residualLoss = unsoldAfterAction * baseline.costPrice;
+  const actionCost = result.transferCost; // only transfer counts as real cost per spec
+  const actionRevenue = result.recoveredValue;
+  // Net profit with action = revenue - action cost - residual loss
+  const actionNetProfit = actionRevenue - actionCost - residualLoss;
+  // Baseline profit (no action) = baseline revenue - 0 - full no-action loss
+  const baselineProfit = baselineSold * baseline.salePrice - noActionLoss;
+  const advantage = actionNetProfit - baselineProfit;
 
   return (
     <Card>
-      <CardContent className="space-y-3 p-3">
+      <CardContent className="space-y-3 p-4">
         <div className="flex items-center justify-between gap-2">
           <h3 className="text-sm font-semibold">
             Detail — {SCENARIO_TYPE_LABELS[scenario]}
           </h3>
           <span className="text-[11px] text-muted-foreground">
-            Final delta vs baseline:{" "}
+            Action üstünlüyü:{" "}
             <span
               className={cn(
                 "font-semibold tabular-nums",
-                finalDelta >= 0 ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300",
+                advantage >= 0
+                  ? "text-emerald-700 dark:text-emerald-300"
+                  : "text-rose-700 dark:text-rose-300",
               )}
             >
-              {formatAZN(finalDelta, { compact: true, sign: true })}
+              {formatAZN(advantage, { compact: true, sign: true })}
             </span>
           </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
-          <Card className="border-dashed">
-            <CardContent className="space-y-1 p-2 text-xs">
-              <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Revenue impact</div>
-              <KV label="Baseline" value={fmt(baselineRev)} />
-              <KV label="Recovered" value={fmt(result.recoveredValue)} />
-              <KV label="Final" value={fmt(final)} />
-            </CardContent>
-          </Card>
-          <Card className="border-dashed">
-            <CardContent className="space-y-1 p-2 text-xs">
-              <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Cost breakdown</div>
-              <KV
-                label="Discount"
-                value={fmt(result.discountCost)}
-                valueClassName="text-amber-700 dark:text-amber-400"
-              />
-              <KV label="Transfer" value={fmt(result.transferCost)} />
-              <KV label="Operational" value={fmt(result.operationalCost)} />
-              <KV label="Total" value={fmt(totalCost)} />
-            </CardContent>
-          </Card>
-          <Card className="border-dashed">
-            <CardContent className="space-y-1 p-2 text-xs">
-              <div className="text-[10px] uppercase tracking-wide text-muted-foreground">Margin & confidence</div>
-              {margin !== null ? (
-                <KV label="Margin" value={`${(margin * 100).toFixed(1)}%`} />
-              ) : (
-                <KV label="Margin" value="—" />
+        <div className="space-y-2">
+          {/* Row 1: Total cost basis */}
+          <BreakdownRow
+            label="Stokun xalis (cost) dəyəri"
+            formula={`${stock} ədəd × ${formatAZN(baseline.costPrice)}`}
+            value={fmt(totalCostBasis)}
+            tone="muted"
+          />
+          {/* Row 2: Total sale potential */}
+          <BreakdownRow
+            label="Stokun toplam satış dəyəri"
+            formula={`${stock} ədəd × ${formatAZN(baseline.salePrice)}`}
+            value={fmt(totalSalePotential)}
+            tone="muted"
+          />
+          {/* Row 3: No-action loss */}
+          <BreakdownRow
+            label="Heç bir action olmazsa itki"
+            formula={`(${stock} − ${baselineSold.toFixed(0)} satılacaq) × ${formatAZN(baseline.costPrice)} = ${baselineUnsold.toFixed(0)} ədəd ziyan`}
+            value={fmt(noActionLoss)}
+            tone="loss"
+          />
+          {/* Row 4: Action cost (transfer only) */}
+          <BreakdownRow
+            label="Action xərci"
+            formula={
+              actionCost > 0
+                ? `Transfer xərci (8 ₼ baza + 0.05 ₼/ədəd × ${sold.toFixed(0)})`
+                : scenario === "discount"
+                  ? "Endirim üçün xərc yoxdur — endirim gəlir azalmasıdır, aşağıda satış məbləğində nəzərə alınır"
+                  : scenario === "no_action"
+                    ? "Heç bir action götürülmür → xərc yoxdur"
+                    : "Bu ssenari üçün ayrıca xərc yoxdur"
+            }
+            value={fmt(actionCost)}
+            tone={actionCost > 0 ? "cost" : "muted"}
+          />
+          {/* Row 5: Sold sale revenue */}
+          <BreakdownRow
+            label={`Action ilə əldə olunan satış məbləği`}
+            formula={`${sold.toFixed(0)} ədəd satılır${scenario === "discount" || scenario === "combined" ? " (endirim sonrası qiymət ilə)" : ""}`}
+            value={fmt(actionRevenue)}
+            tone="revenue"
+          />
+          {/* Row 6: Residual loss after action */}
+          <BreakdownRow
+            label="Action sonrası qalan ziyan"
+            formula={`(${stock} − ${sold.toFixed(0)}) × ${formatAZN(baseline.costPrice)} = ${unsoldAfterAction.toFixed(0)} ədəd satılmır`}
+            value={fmt(residualLoss)}
+            tone="loss"
+          />
+          {/* Row 7: Net profit */}
+          <BreakdownRow
+            label="Action net qazancı"
+            formula={`${fmt(actionRevenue)} − ${fmt(actionCost)} − ${fmt(residualLoss)}`}
+            value={fmt(actionNetProfit)}
+            tone={actionNetProfit >= 0 ? "profit" : "loss"}
+            big
+          />
+        </div>
+
+        <div className="rounded-md border border-dashed bg-muted/30 p-2.5 text-[11px] leading-relaxed text-muted-foreground">
+          <span className="font-medium text-foreground">İzah:</span> Heç bir action olmazsa
+          ortalama satış sürəti ilə{" "}
+            <span className="font-semibold tabular-nums">{baselineSold.toFixed(0)}</span> ədəd
+            satılır,{" "}
+            <span className="font-semibold tabular-nums">{baselineUnsold.toFixed(0)}</span>{" "}
+            ədəd isə cost dəyərində ziyana gedir{" "}
+            (<span className="font-semibold tabular-nums">{fmt(noActionLoss)}</span>).{" "}
+            Seçilmiş "{SCENARIO_TYPE_LABELS[scenario]}" ssenarisi ilə{" "}
+            <span className="font-semibold tabular-nums">{sold.toFixed(0)}</span> ədəd satılır
+            və net qazanc{" "}
+            <span
+              className={cn(
+                "font-semibold tabular-nums",
+                actionNetProfit >= 0
+                  ? "text-emerald-700 dark:text-emerald-300"
+                  : "text-rose-700 dark:text-rose-300",
               )}
-              <KV label="Min req." value={`${(baseline.minimumMarginPct * 100).toFixed(0)}%`} />
-              <KV label="Confidence" value={`${result.confidenceScore}%`} />
-              <KV label="Sold qty" value={result.expectedSold.toFixed(0)} />
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="h-36">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              data={waterfall.map((w) => ({ ...w, abs: Math.abs(w.value) }))}
-              margin={{ top: 14, right: 14, left: 0, bottom: 0 }}
             >
-              <XAxis dataKey="name" tick={{ fontSize: 10 }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fontSize: 10 }} axisLine={false} tickLine={false} width={48} />
-              <RTooltip
-                contentStyle={{ fontSize: 11 }}
-                formatter={(_value, _name, item) => {
-                  const raw = (item?.payload as { value?: number } | undefined)?.value ?? 0;
-                  return [formatAZN(raw, { compact: true, sign: true }), "Delta"];
-                }}
-                labelFormatter={(label) => String(label)}
-              />
-              <Bar dataKey="abs" radius={[4, 4, 0, 0]}>
-                {waterfall.map((w, i) => (
-                  <Cell
-                    key={i}
-                    fill={
-                      w.isStart
-                        ? "rgba(148,163,184,0.55)"
-                        : w.isEnd
-                        ? w.value >= baselineRev
-                          ? "#10b981"
-                          : "#f43f5e"
-                        : w.value >= 0
-                        ? "rgba(16,185,129,0.7)"
-                        : "rgba(244,63,94,0.7)"
-                    }
-                  />
-                ))}
-                <LabelList
-                  dataKey="value"
-                  position="top"
-                  formatter={(v: unknown) =>
-                    typeof v === "number" ? formatAZN(v, { compact: true, sign: true }) : ""
-                  }
-                  style={{ fontSize: 10, fill: "currentColor" }}
-                />
-              </Bar>
-            </BarChart>
-          </ResponsiveContainer>
+              {fmt(actionNetProfit)}
+            </span>{" "}
+            olur. Bu, "no action" ilə müqayisədə{" "}
+            <span
+              className={cn(
+                "font-semibold tabular-nums",
+                advantage >= 0
+                  ? "text-emerald-700 dark:text-emerald-300"
+                  : "text-rose-700 dark:text-rose-300",
+              )}
+            >
+              {formatAZN(advantage, { sign: true })}
+            </span>{" "}
+            fərqdir.
         </div>
-
-        <p className="rounded-md border bg-muted/30 p-2 text-xs leading-relaxed text-muted-foreground">
-          {narrative}
-        </p>
       </CardContent>
     </Card>
+  );
+}
+
+function BreakdownRow({
+  label,
+  formula,
+  value,
+  tone,
+  big,
+}: {
+  label: string;
+  formula: string;
+  value: string;
+  tone: "muted" | "loss" | "cost" | "revenue" | "profit";
+  big?: boolean;
+}) {
+  const valueTone =
+    tone === "loss"
+      ? "text-rose-700 dark:text-rose-300"
+      : tone === "cost"
+        ? "text-amber-700 dark:text-amber-400"
+        : tone === "revenue"
+          ? "text-sky-700 dark:text-sky-300"
+          : tone === "profit"
+            ? "text-emerald-700 dark:text-emerald-300"
+            : "text-foreground";
+  const borderTone =
+    tone === "profit"
+      ? "border-emerald-500/40 bg-emerald-50/60 dark:bg-emerald-950/30"
+      : tone === "loss"
+        ? "border-rose-200 bg-rose-50/40 dark:border-rose-900/40 dark:bg-rose-950/20"
+        : tone === "cost"
+          ? "border-amber-200 bg-amber-50/40 dark:border-amber-900/40 dark:bg-amber-950/20"
+          : tone === "revenue"
+            ? "border-sky-200 bg-sky-50/40 dark:border-sky-900/40 dark:bg-sky-950/20"
+            : "border-border bg-background";
+  return (
+    <div className={cn("flex items-center gap-3 rounded-md border p-2.5", borderTone)}>
+      <div className="min-w-0 flex-1">
+        <div className={cn("font-medium", big ? "text-sm" : "text-xs")}>{label}</div>
+        <div className="mt-0.5 text-[10.5px] text-muted-foreground">{formula}</div>
+      </div>
+      <div
+        className={cn(
+          "shrink-0 text-right font-semibold tabular-nums",
+          big ? "text-lg" : "text-sm",
+          valueTone,
+        )}
+      >
+        {value}
+      </div>
+    </div>
   );
 }
 

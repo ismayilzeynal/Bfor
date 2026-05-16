@@ -219,8 +219,8 @@ export default function WhatIfLabPage() {
         }
       />
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="space-y-4 lg:col-span-9">
+      <div className="grid grid-cols-1 gap-4">
+        <div className="space-y-4">
           <Card>
             <CardContent className="space-y-3 p-3">
               <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
@@ -435,108 +435,6 @@ export default function WhatIfLabPage() {
           )}
         </div>
 
-        <aside className="space-y-3 lg:col-span-3">
-          <Card>
-            <CardContent className="space-y-2 p-3">
-              <div className="flex items-center justify-between gap-2">
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                  Saved snapshots
-                </h3>
-                {snapshots.length > 0 ? (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    className="h-6 gap-1 text-[10px]"
-                    onClick={() => clearSnapshots()}
-                  >
-                    <Trash2 className="size-3" aria-hidden />
-                    Clear
-                  </Button>
-                ) : null}
-              </div>
-              {snapshots.length === 0 ? (
-                <p className="rounded-md border border-dashed p-3 text-center text-[11px] text-muted-foreground">
-                  <Sparkles className="mx-auto mb-1 size-3.5" aria-hidden />
-                  No snapshots yet. Use Save snapshot in the simulator to pin a configuration here.
-                </p>
-              ) : (
-                <ScrollArea className="h-[380px] pr-1">
-                  <ul className="space-y-1.5">
-                    {snapshots.map((s) => (
-                      <li
-                        key={s.id}
-                        className={cn(
-                          "rounded-md border bg-background p-2 text-xs",
-                          s.product_id === selectedProductId &&
-                            s.store_id === selectedStoreId &&
-                            "border-primary/40 bg-primary/5",
-                        )}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <span className="truncate font-medium">{s.product_name}</span>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="size-5 text-muted-foreground"
-                            onClick={() => removeSnapshot(s.id)}
-                            aria-label="Remove snapshot"
-                          >
-                            <Trash2 className="size-3" aria-hidden />
-                          </Button>
-                        </div>
-                        <div className="mt-0.5 flex flex-wrap items-center gap-1.5 text-[10px] text-muted-foreground">
-                          <span>{s.store_code}</span>
-                          <span>•</span>
-                          <span>{SCENARIO_TYPE_LABELS[s.selected]}</span>
-                          <span>•</span>
-                          <span>{formatRelative(s.saved_at)}</span>
-                        </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          className="mt-1.5 h-6 w-full justify-start gap-1.5 px-2 text-[11px]"
-                          onClick={() => {
-                            if (!s.product_id || !s.store_id) return;
-                            setSelectedProductId(s.product_id);
-                            setSelectedStoreId(s.store_id);
-                            setOverrideBaseline(true);
-                            setManual({
-                              currentStock: s.baseline.currentStock,
-                              avgDailySales7d: s.baseline.avgDailySales,
-                              daysToExpiry: s.baseline.daysToExpiry,
-                              costPrice: s.baseline.costPrice,
-                              salePrice: s.baseline.salePrice,
-                              minimumMarginPct: s.baseline.minimumMarginPct,
-                              dataConfidence: s.baseline.dataConfidence,
-                            });
-                            toast.info("Snapshot loaded — baseline restored.");
-                          }}
-                          disabled={!s.product_id || !s.store_id}
-                        >
-                          <RefreshCw className="size-3" aria-hidden />
-                          Load
-                        </Button>
-                      </li>
-                    ))}
-                  </ul>
-                </ScrollArea>
-              )}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="space-y-1.5 p-3 text-[11px] text-muted-foreground">
-              <div className="flex items-center gap-1.5 font-medium text-foreground">
-                <Info className="size-3.5" aria-hidden />
-                How the lab works
-              </div>
-              <p>
-                Pick any product to load its latest snapshot. Toggle Override to test
-                hypothetical inventory states. Nothing here writes to operations.
-              </p>
-            </CardContent>
-          </Card>
-        </aside>
       </div>
     </div>
   );
