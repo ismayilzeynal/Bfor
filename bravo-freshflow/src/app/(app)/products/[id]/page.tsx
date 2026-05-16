@@ -26,6 +26,8 @@ import { DataConfidenceCard } from "@/components/products/details/data-confidenc
 import { AiRecommendationPanel } from "@/components/products/details/ai-recommendation-panel";
 import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
+import { RescueModeModal } from "@/components/modals/rescue-mode-modal";
+import { ActionImpactAnimation } from "@/components/modals/action-impact-animation";
 
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -40,6 +42,8 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
   const [approveOpen, setApproveOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [auditOpen, setAuditOpen] = useState(false);
+  const [rescueOpen, setRescueOpen] = useState(false);
+  const [impactOpen, setImpactOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -94,6 +98,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         action: { label: "View tasks", onClick: () => router.push("/tasks") },
       });
       setApproveOpen(false);
+      setImpactOpen(true);
     },
     [approve, appendAudit, currentUser.id, router]
   );
@@ -148,6 +153,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         product={bundle.product}
         prediction={bundle.prediction}
         onOpenAuditLog={() => setAuditOpen(true)}
+        onStartRescue={bundle.prediction ? () => setRescueOpen(true) : undefined}
       />
 
       {bundle.prediction ? (
@@ -255,6 +261,27 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         users={bundle.users}
         recommendation={bundle.recommendation}
       />
+
+      <RescueModeModal
+        open={rescueOpen}
+        onClose={() => setRescueOpen(false)}
+        product={bundle.product}
+        store={bundle.store}
+        prediction={bundle.prediction ?? null}
+        recommendation={bundle.recommendation ?? null}
+      />
+
+      {bundle.prediction ? (
+        <ActionImpactAnimation
+          open={impactOpen}
+          onClose={() => setImpactOpen(false)}
+          productName={bundle.product.name}
+          potentialLossBefore={bundle.prediction.predicted_loss_value}
+          recoveredValueAfter={bundle.recommendation?.expected_recovered_value ?? 0}
+          riskBefore={bundle.prediction.risk_score}
+          riskAfter={Math.max(5, Math.round(bundle.prediction.risk_score * 0.18))}
+        />
+      ) : null}
 
       {bundle.recommendation ? (
         <MobileActionBar

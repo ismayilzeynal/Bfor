@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ChevronRight, ScrollText, Share2 } from "lucide-react";
+import { ChevronRight, LifeBuoy, ScrollText, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { RiskBadge } from "@/components/badges/risk-badge";
@@ -12,9 +12,10 @@ interface Props {
   product: Product;
   prediction: RiskPrediction | undefined;
   onOpenAuditLog: () => void;
+  onStartRescue?: () => void;
 }
 
-export function StickyHeader({ product, prediction, onOpenAuditLog }: Props) {
+export function StickyHeader({ product, prediction, onOpenAuditLog, onStartRescue }: Props) {
   function handleShare() {
     try {
       if (typeof window !== "undefined") {
@@ -73,6 +74,16 @@ export function StickyHeader({ product, prediction, onOpenAuditLog }: Props) {
               </span>
               <RiskBadge level={prediction.risk_level} />
             </div>
+          ) : null}
+          {onStartRescue ? (
+            <Button
+              size="sm"
+              className="h-9 gap-1.5 bg-rose-600 hover:bg-rose-700"
+              onClick={onStartRescue}
+            >
+              <LifeBuoy className="size-3.5" aria-hidden />
+              Start Rescue
+            </Button>
           ) : null}
           <Button
             variant="outline"

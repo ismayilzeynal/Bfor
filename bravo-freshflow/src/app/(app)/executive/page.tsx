@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { KpiCard, type KpiChange } from "@/components/cards/kpi-card";
 import { LatestRecommendationsCard } from "@/components/cards/latest-recommendations-card";
+import { MissionBoard } from "@/components/cards/mission-board";
 import { CriticalTasksCard } from "@/components/cards/critical-tasks-card";
 import { NetworkHealthBanner } from "@/components/cards/network-health-banner";
 import { LossRecoveryAreaChart } from "@/components/charts/loss-recovery-area-chart";
@@ -335,6 +336,19 @@ export default function ExecutivePage() {
               tooltip="Total perishable waste recorded; lower is better."
             />
           </>
+        )}
+      </div>
+
+      {/* Section 2.5 — Daily Mission Board */}
+      <div>
+        {loading || !data ? (
+          <Skeleton className="h-[180px]" />
+        ) : (
+          <MissionBoard
+            predictions={data.predictions}
+            recommendations={data.recommendations}
+            tasks={data.tasks}
+          />
         )}
       </div>
 
