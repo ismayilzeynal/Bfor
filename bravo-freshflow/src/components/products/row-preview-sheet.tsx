@@ -1,7 +1,15 @@
 "use client";
 
+import { useMemo, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight, CheckCircle2, ShieldOff } from "lucide-react";
+import {
+  ArrowUpRight,
+  CheckCircle2,
+  Combine,
+  Percent,
+  ShieldOff,
+  Truck,
+} from "lucide-react";
 import {
   Sheet,
   SheetContent,
@@ -12,11 +20,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { RiskBadge } from "@/components/badges/risk-badge";
-import { ActionBadge } from "@/components/badges/action-badge";
-import { ConfidenceBadge } from "@/components/badges/confidence-badge";
-import { StatusBadge } from "@/components/badges/status-badge";
 import { formatAZN, formatDaysToExpiry } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
+import {
+  calcCombined,
+  calcDiscount,
+  calcTransfer,
+  type ScenarioBaseline,
+  type ScenarioResult,
+} from "@/lib/scenario-calculator";
+import type { ScenarioType } from "@/types";
 import type { RiskyRow } from "./types";
 
 interface RowPreviewSheetProps {
@@ -26,6 +39,8 @@ interface RowPreviewSheetProps {
   onReject: (row: RiskyRow) => void;
 }
 
+type PickableScenario = "discount" | "transfer" | "combined";
+
 export function RowPreviewSheet({
   row,
   onOpenChange,
@@ -33,6 +48,64 @@ export function RowPreviewSheet({
   onReject,
 }: RowPreviewSheetProps) {
   const router = useRouter();
+
+  const scenarios = useMemo(() => {
+    if (!row?.prediction) return null;
+    const baseline: ScenarioBaseline = {
+      currentStock: row.prediction.current_stock,
+      avgDailySales: row.prediction.avg_daily_sales_7d,
+      daysToExpiry: row.prediction.days_to_expiry,
+      costPrice: row.product.cost_price,
+      salePrice: row.product.sale_price,
+      minimumMarginPct: row.product.minimum_margin_pct,
+      dataConfidence: row.prediction.data_confidence_score,
+    };
+    const targetVelocity = row.prediction.avg_daily_sales_7d * 1.5;
+    const optimalQty = Math.max(
+      1,
+      Math.min(
+        row.prediction.current_stock,
+        Math.round(targetVelocity * row.prediction.days_to_expiry)
+      )
+    );
+    return {
+      discount: calcDiscount(baseline, { discountPct: 0.2 }),
+      transfer: calcTransfer(baseline, {
+        transferQty: optimalQty,
+        targetStoreAvgDailySales: targetVelocity,
+      }),
+      combined: calcCombined(baseline, {
+        discountPct: 0.2,
+        transferQty: optimalQty,
+        targetStoreAvgDailySales: targetVelocity,
+      }),
+    };
+  }, [row]);
+
+  const recommended: PickableScenario = useMemo(() => {
+    if (!scenarios) return "combined";
+    const entries: Array<[PickableScenario, ScenarioResult]> = [
+      ["discount", scenarios.discount],
+      ["transfer", scenarios.transfer],
+      ["combined", scenarios.combined],
+    ];
+    let best: PickableScenario = "combined";
+    let bestVal = -Infinity;
+    for (const [type, r] of entries) {
+      if (r.notViable) continue;
+      if (r.netSaved > bestVal) {
+        bestVal = r.netSaved;
+        best = type;
+      }
+    }
+    return best;
+  }, [scenarios]);
+
+  const [selected, setSelected] = useState<PickableScenario>(recommended);
+
+  useEffect(() => {
+    setSelected(recommended);
+  }, [recommended, row?.id]);
 
   return (
     <Sheet open={row !== null} onOpenChange={onOpenChange}>
@@ -82,42 +155,57 @@ export function RowPreviewSheet({
 
             <Separator />
 
-            {row.recommendation ? (
-              <section className="space-y-3">
-                <div className="flex items-center justify-between gap-2">
-                  <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    AI Recommendation
-                  </p>
-                  <div className="flex items-center gap-1.5">
-                    <ActionBadge type={row.recommendation.recommendation_type} />
-                    <ConfidenceBadge score={row.recommendation.confidence_score} />
-                  </div>
-                </div>
-                <p className="text-sm leading-relaxed">{row.recommendation.recommendation_text}</p>
-                <div className="grid grid-cols-3 gap-2">
-                  <Stat
-                    label="Recovered"
-                    value={formatAZN(row.recommendation.expected_recovered_value, { compact: true })}
+            {scenarios ? (
+              <section className="space-y-2">
+                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Choose a scenario
+                </p>
+                <div className="space-y-1.5">
+                  <ScenarioRow
+                    type="discount"
+                    label="Discount"
+                    icon={Percent}
+                    result={scenarios.discount}
+                    selected={selected === "discount"}
+                    recommended={recommended === "discount"}
+                    onSelect={() => setSelected("discount")}
                   />
-                  <Stat
-                    label="Cost"
-                    value={formatAZN(row.recommendation.expected_cost, { compact: true })}
+                  <ScenarioRow
+                    type="transfer"
+                    label="Transfer"
+                    icon={Truck}
+                    result={scenarios.transfer}
+                    selected={selected === "transfer"}
+                    recommended={recommended === "transfer"}
+                    onSelect={() => setSelected("transfer")}
+                    notViableReason={
+                      row.prediction.days_to_expiry <= 1
+                        ? "Expiry too close"
+                        : scenarios.transfer.notViable
+                          ? scenarios.transfer.notViableReason
+                          : undefined
+                    }
                   />
-                  <Stat
-                    label="Net saved"
-                    value={formatAZN(row.recommendation.net_saved_value, {
-                      compact: true,
-                      sign: true,
-                    })}
-                    tone={row.recommendation.net_saved_value >= 0 ? "text-emerald-700" : "text-rose-700"}
+                  <ScenarioRow
+                    type="combined"
+                    label="Discount + Transfer"
+                    icon={Combine}
+                    result={scenarios.combined}
+                    selected={selected === "combined"}
+                    recommended={recommended === "combined"}
+                    onSelect={() => setSelected("combined")}
+                    notViableReason={
+                      row.prediction.days_to_expiry <= 1
+                        ? "Expiry too close"
+                        : scenarios.combined.notViable
+                          ? scenarios.combined.notViableReason
+                          : undefined
+                    }
                   />
-                </div>
-                <div className="flex items-center justify-between">
-                  <StatusBadge kind="recommendation" status={row.recommendation.status} />
                 </div>
               </section>
             ) : (
-              <p className="text-xs text-muted-foreground">No AI recommendation generated yet.</p>
+              <p className="text-xs text-muted-foreground">No prediction data to score scenarios.</p>
             )}
 
             <div className="mt-auto flex flex-col gap-2">
@@ -128,7 +216,6 @@ export function RowPreviewSheet({
               <div className="flex items-center gap-2">
                 <Button
                   className="flex-1"
-                  variant="outline"
                   onClick={() => onApprove(row)}
                   disabled={!row.recommendation}
                 >
@@ -150,6 +237,79 @@ export function RowPreviewSheet({
         ) : null}
       </SheetContent>
     </Sheet>
+  );
+}
+
+function ScenarioRow({
+  type: _type,
+  label,
+  icon: Icon,
+  result,
+  selected,
+  recommended,
+  onSelect,
+  notViableReason,
+}: {
+  type: ScenarioType;
+  label: string;
+  icon: typeof Truck;
+  result: ScenarioResult;
+  selected: boolean;
+  recommended: boolean;
+  onSelect: () => void;
+  notViableReason?: string;
+}) {
+  const positive = result.netSaved >= 0;
+  const disabled = !!notViableReason;
+  return (
+    <button
+      type="button"
+      onClick={onSelect}
+      disabled={disabled}
+      className={cn(
+        "flex w-full items-center gap-2 rounded-md border px-2.5 py-2 text-left text-xs transition-colors",
+        selected && !disabled && "border-primary bg-primary/10",
+        !selected && !disabled && "border-border bg-background hover:bg-muted/40",
+        disabled && "cursor-not-allowed opacity-50"
+      )}
+    >
+      <span
+        className={cn(
+          "flex size-4 shrink-0 items-center justify-center rounded-full border",
+          selected ? "border-primary bg-primary" : "border-muted-foreground/40"
+        )}
+        aria-hidden
+      >
+        {selected ? <span className="size-1.5 rounded-full bg-primary-foreground" /> : null}
+      </span>
+      <Icon className="size-3.5 shrink-0 text-muted-foreground" aria-hidden />
+      <div className="min-w-0 flex-1">
+        <div className="flex items-center gap-1.5">
+          <span className="font-medium">{label}</span>
+          {recommended && !disabled ? (
+            <span className="rounded-full bg-emerald-100 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wide text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300">
+              Recommended
+            </span>
+          ) : null}
+          {disabled ? (
+            <span className="rounded-full bg-slate-200 px-1.5 py-0.5 text-[9px] font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+              {notViableReason}
+            </span>
+          ) : null}
+        </div>
+      </div>
+      <div className="shrink-0 text-right">
+        <div className="text-[9px] uppercase tracking-wide text-muted-foreground">Net saved</div>
+        <div
+          className={cn(
+            "text-sm font-semibold tabular-nums",
+            positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"
+          )}
+        >
+          {formatAZN(result.netSaved, { compact: true, sign: true })}
+        </div>
+      </div>
+    </button>
   );
 }
 
