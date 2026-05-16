@@ -36,20 +36,17 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
     const sold = result.expectedSold;
     const unsoldAfter = Math.max(0, stock - sold);
     const productsSaved = Math.max(0, sold - baselineSold);
-    const residualLoss = unsoldAfter * baseline.costPrice;
 
-    // Same G/K formula as Detail Panel — single source of truth.
-    const actionCost = result.transferCost;
-    const baselineRevenue = baselineSold * baseline.salePrice;
-    const G = actionCost + residualLoss - result.recoveredValue;
-    const K = impact.potentialLoss - baselineRevenue;
-    const actionNetGain = Math.abs(G - K);
+    // K = Action olmazsa itki, G = Action sonrası ziyan, netGain = K − G
+    const K = impact.potentialLoss;
+    const G = unsoldAfter * baseline.costPrice;
+    const actionNetGain = K - G;
 
-    const lossAvoided = Math.max(0, impact.potentialLoss - residualLoss);
+    const lossAvoided = actionNetGain;
     const riskReduction = Math.max(0, impact.riskBeforePct - impact.riskAfterPct);
 
     return {
-      noActionLoss: impact.potentialLoss,
+      noActionLoss: K,
       baselineUnsold,
       noActionRiskPct: impact.riskBeforePct,
       recoveredValue: impact.recoveredValue,

@@ -819,23 +819,21 @@ function DetailPanel({
   // No-action baseline
   const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
   const baselineUnsold = Math.max(0, stock - baselineSold);
-  const noActionLoss = baselineUnsold * baseline.costPrice;
+  // K = Action olmazsa itki = noActionLoss
+  const K = baselineUnsold * baseline.costPrice;
+  const noActionLoss = K;
 
   // Action numbers
   const sold = result.expectedSold;
   const unsoldAfterAction = Math.max(0, stock - sold);
-  const residualLoss = unsoldAfterAction * baseline.costPrice;
-  const actionCost = result.transferCost; // only transfer counts as real cost per spec
+  // G = Action sonrası ziyan = residualLoss
+  const G = unsoldAfterAction * baseline.costPrice;
+  const residualLoss = G;
+  const actionCost = result.transferCost;
   const actionRevenue = result.recoveredValue;
 
-  // G = ziyan (loss) after action: action_cost + residual_loss − action_revenue
-  //     - positive = still net loss; negative = action turned a profit
-  const G = actionCost + residualLoss - actionRevenue;
-  // K = ziyan if no action: no-action loss − baseline revenue
-  const baselineRevenue = baselineSold * baseline.salePrice;
-  const K = noActionLoss - baselineRevenue;
-  // Action net qazancı = ABS(G − K) — magnitude of improvement
-  const actionNetGain = Math.abs(G - K);
+  // Action net qazancı = K − G (loss avoided by acting)
+  const actionNetGain = K - G;
 
   const actionCostFormula =
     actionCost > 0
@@ -884,14 +882,14 @@ function DetailPanel({
       tone: "revenue",
     },
     {
-      label: "Action sonrası ziyan",
+      label: "Action sonrası ziyan (G)",
       formula: `${unsoldAfterAction.toFixed(0)} × ${formatAZN(baseline.costPrice)}`,
       value: fmt(residualLoss),
       tone: "loss",
     },
     {
       label: "Action net qazancı",
-      formula: `|G − K|  =  |${fmt(G)} − ${fmt(K)}|`,
+      formula: `K − G  =  ${fmt(K)} − ${fmt(G)}`,
       value: fmt(actionNetGain),
       tone: "profit",
       big: true,
