@@ -39,10 +39,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { RiskBadge } from "@/components/badges/risk-badge";
 import { ActionBadge } from "@/components/badges/action-badge";
 import { StatusBadge } from "@/components/badges/status-badge";
-import { ConfidenceBadge } from "@/components/badges/confidence-badge";
 import { formatAZN, formatDaysToExpiry } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
 import type { RiskyRow } from "@/components/products/types";
@@ -140,6 +138,7 @@ export function RiskyProductsTable({
             </div>
           );
         },
+        meta: { className: "hidden md:table-cell" },
       },
       {
         id: "stock",
@@ -150,17 +149,18 @@ export function RiskyProductsTable({
             {row.original.prediction.current_stock}
           </div>
         ),
+        meta: { className: "w-[60px]" },
       },
       {
         id: "days",
-        header: "Days to Expiry",
+        header: "Days left",
         accessorFn: (r) => r.prediction.days_to_expiry,
         cell: ({ row }) => {
           const d = row.original.prediction.days_to_expiry;
           return (
             <span
               className={cn(
-                "inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium tabular-nums",
+                "inline-flex items-center rounded-full px-1.5 py-0.5 text-[11px] font-medium tabular-nums",
                 daysToTone(d)
               )}
             >
@@ -168,16 +168,18 @@ export function RiskyProductsTable({
             </span>
           );
         },
+        meta: { className: "w-[80px]" },
       },
       {
         id: "sales",
-        header: () => <div className="text-right">Avg 7d Sales</div>,
+        header: () => <div className="text-right">Velocity</div>,
         accessorFn: (r) => r.prediction.avg_daily_sales_7d,
         cell: ({ row }) => (
           <div className="text-right tabular-nums text-xs">
             {row.original.prediction.avg_daily_sales_7d.toFixed(1)}
           </div>
         ),
+        meta: { className: "hidden xl:table-cell w-[80px]" },
       },
       {
         id: "risk",
@@ -187,7 +189,7 @@ export function RiskyProductsTable({
           const s = row.original.prediction.risk_score;
           return (
             <div className="flex items-center justify-end gap-2">
-              <div className="h-1.5 w-14 overflow-hidden rounded-full bg-muted">
+              <div className="hidden h-1.5 w-12 overflow-hidden rounded-full bg-muted lg:block">
                 <div
                   className={cn(
                     "h-full rounded-full",
@@ -202,16 +204,20 @@ export function RiskyProductsTable({
                   style={{ width: `${Math.min(100, Math.max(0, s))}%` }}
                 />
               </div>
-              <span className="text-xs font-medium tabular-nums">{s}</span>
+              <span className={cn(
+                "text-xs font-medium tabular-nums px-1.5 py-0.5 rounded lg:bg-transparent lg:px-0",
+                s >= 80
+                  ? "bg-red-100 text-red-700 lg:text-foreground"
+                  : s >= 60
+                    ? "bg-orange-100 text-orange-700 lg:text-foreground"
+                    : s >= 40
+                      ? "bg-amber-100 text-amber-700 lg:text-foreground"
+                      : "bg-emerald-100 text-emerald-700 lg:text-foreground"
+              )}>{s}</span>
             </div>
           );
         },
-      },
-      {
-        id: "level",
-        header: "Level",
-        accessorFn: (r) => r.prediction.risk_level,
-        cell: ({ row }) => <RiskBadge level={row.original.prediction.risk_level} />,
+        meta: { className: "w-[110px]" },
       },
       {
         id: "potential",
@@ -222,6 +228,7 @@ export function RiskyProductsTable({
             −{formatAZN(row.original.prediction.predicted_loss_value, { compact: true })}
           </div>
         ),
+        meta: { className: "w-[110px]" },
       },
       {
         id: "action",
@@ -233,20 +240,7 @@ export function RiskyProductsTable({
           ) : (
             <span className="text-xs text-muted-foreground">—</span>
           ),
-      },
-      {
-        id: "confidence",
-        header: () => <div className="text-right">Confidence</div>,
-        accessorFn: (r) => r.recommendation?.confidence_score ?? r.prediction.data_confidence_score,
-        cell: ({ row }) => {
-          const r = row.original;
-          const score = r.recommendation?.confidence_score ?? r.prediction.data_confidence_score;
-          return (
-            <div className="flex justify-end">
-              <ConfidenceBadge score={score} />
-            </div>
-          );
-        },
+        meta: { className: "hidden lg:table-cell" },
       },
       {
         id: "status",
@@ -261,11 +255,13 @@ export function RiskyProductsTable({
           ) : (
             <span className="text-xs text-muted-foreground">—</span>
           ),
+        meta: { className: "hidden md:table-cell" },
       },
       {
         id: "actions",
         header: "",
         enableSorting: false,
+        meta: { className: "w-[44px]" },
         cell: ({ row }) => {
           const r = row.original;
           return (
@@ -353,13 +349,16 @@ export function RiskyProductsTable({
                 {group.headers.map((h) => {
                   const canSort = h.column.getCanSort();
                   const sorted = h.column.getIsSorted();
+                  const metaClass = (h.column.columnDef.meta as { className?: string } | undefined)
+                    ?.className;
                   return (
                     <TableHead
                       key={h.id}
                       className={cn(
-                        "h-9 whitespace-nowrap",
+                        "h-9 whitespace-nowrap px-2",
                         h.column.id === "select" && "w-9 pl-3",
-                        canSort && "cursor-pointer select-none"
+                        canSort && "cursor-pointer select-none",
+                        metaClass
                       )}
                       onClick={canSort ? h.column.getToggleSortingHandler() : undefined}
                     >
@@ -392,17 +391,22 @@ export function RiskyProductsTable({
                 onClick={() => onPreview(row.original)}
                 className="cursor-pointer text-sm"
               >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell
-                    key={cell.id}
-                    className={cn(
-                      "py-2",
-                      cell.column.id === "select" && "w-9 pl-3"
-                    )}
-                  >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+                {row.getVisibleCells().map((cell) => {
+                  const metaClass = (cell.column.columnDef.meta as { className?: string } | undefined)
+                    ?.className;
+                  return (
+                    <TableCell
+                      key={cell.id}
+                      className={cn(
+                        "py-2 px-2",
+                        cell.column.id === "select" && "w-9 pl-3",
+                        metaClass
+                      )}
+                    >
+                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             ))}
           </TableBody>
