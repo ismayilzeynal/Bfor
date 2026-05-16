@@ -91,9 +91,19 @@ export function RescueModeModal({
   const recoveryScore = recommendation
     ? Math.min(100, Math.round(recommendation.confidence_score))
     : 0;
-  const recoveredEstimate = recommendation?.expected_recovered_value ?? 0;
-  const netSaved = recommendation?.net_saved_value ?? 0;
   const deadline = "Bu gün, 18:00";
+
+  // Unified What-If impact — same K, G, lossReduction shown everywhere
+  const baseline: ScenarioBaseline = {
+    currentStock: prediction.current_stock,
+    avgDailySales: prediction.avg_daily_sales_7d,
+    daysToExpiry: prediction.days_to_expiry,
+    costPrice: product.cost_price,
+    salePrice: product.sale_price,
+    minimumMarginPct: product.minimum_margin_pct,
+    dataConfidence: prediction.data_confidence_score,
+  };
+  const impact = computeScenarioImpact(baseline, "combined");
 
   function startCalculation() {
     setPhase("calculating");
@@ -192,7 +202,7 @@ export function RescueModeModal({
                 />
                 <SituationCard
                   label="Potential loss"
-                  value={formatAZN(prediction.predicted_loss_value, { compact: true })}
+                  value={formatAZN(impact.K, { compact: true })}
                   tone="danger"
                 />
                 <SituationCard
@@ -276,8 +286,8 @@ export function RescueModeModal({
                       </ul>
                       <div className="grid grid-cols-2 gap-2 pt-1">
                         <PlanMetric
-                          label="Expected net saved"
-                          value={formatAZN(netSaved, { compact: true })}
+                          label="Action ziyan azaltması"
+                          value={formatAZN(impact.lossReduction, { compact: true })}
                           tone="emerald"
                         />
                         <PlanMetric
@@ -351,33 +361,19 @@ export function RescueModeModal({
         </DialogContent>
       </Dialog>
 
-      {(() => {
-        const baseline: ScenarioBaseline = {
-          currentStock: prediction.current_stock,
-          avgDailySales: prediction.avg_daily_sales_7d,
-          daysToExpiry: prediction.days_to_expiry,
-          costPrice: product.cost_price,
-          salePrice: product.sale_price,
-          minimumMarginPct: product.minimum_margin_pct,
-          dataConfidence: prediction.data_confidence_score,
-        };
-        const impact = computeScenarioImpact(baseline, "combined");
-        return (
-          <ActionImpactAnimation
-            open={impactOpen}
-            onClose={() => {
-              setImpactOpen(false);
-              onClose();
-            }}
-            productName={product.name}
-            potentialLossBefore={impact.K}
-            potentialLossAfter={impact.G}
-            recoveredValueAfter={impact.lossReduction}
-            riskBefore={impact.riskBeforePct}
-            riskAfter={impact.riskAfterPct}
-          />
-        );
-      })()}
+      <ActionImpactAnimation
+        open={impactOpen}
+        onClose={() => {
+          setImpactOpen(false);
+          onClose();
+        }}
+        productName={product.name}
+        potentialLossBefore={impact.K}
+        potentialLossAfter={impact.G}
+        recoveredValueAfter={impact.lossReduction}
+        riskBefore={impact.riskBeforePct}
+        riskAfter={impact.riskAfterPct}
+      />
     </>
   );
 }
