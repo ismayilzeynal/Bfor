@@ -17,11 +17,11 @@ import { ConfidenceBadge } from "@/components/badges/confidence-badge";
 import { formatAZN } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
 import {
-  calcCombined,
-  calcDiscount,
-  calcTransfer,
+  computeScenarioImpact,
   type ScenarioBaseline,
+  type ScenarioImpact,
 } from "@/lib/scenario-calculator";
+import type { ScenarioType } from "@/types";
 import type { RiskyRow } from "@/components/products/types";
 
 interface ApproveDialogProps {
@@ -30,7 +30,7 @@ interface ApproveDialogProps {
   onConfirm: (row: RiskyRow, note: string | null) => void;
 }
 
-function computeLiveResult(row: RiskyRow) {
+function impactFor(row: RiskyRow): ScenarioImpact | null {
   const rec = row.recommendation;
   const pred = row.prediction;
   if (!rec || !pred) return null;
@@ -45,35 +45,17 @@ function computeLiveResult(row: RiskyRow) {
     dataConfidence: pred.data_confidence_score,
   };
 
-  // Mirror What-If defaults: 20% discount, target velocity = local × 1.5
-  const targetVelocity = pred.avg_daily_sales_7d * 1.5;
-  const optimalQty = Math.max(
-    1,
-    Math.min(pred.current_stock, Math.round(targetVelocity * pred.days_to_expiry))
-  );
+  const allowedTypes = new Set<ScenarioType>(["discount", "transfer", "combined"]);
+  const type: ScenarioType = allowedTypes.has(rec.recommendation_type as ScenarioType)
+    ? (rec.recommendation_type as ScenarioType)
+    : "combined";
 
-  switch (rec.recommendation_type) {
-    case "combined":
-      return calcCombined(baseline, {
-        discountPct: 0.2,
-        transferQty: optimalQty,
-        targetStoreAvgDailySales: targetVelocity,
-      });
-    case "transfer":
-      return calcTransfer(baseline, {
-        transferQty: optimalQty,
-        targetStoreAvgDailySales: targetVelocity,
-      });
-    case "discount":
-      return calcDiscount(baseline, { discountPct: 0.2 });
-    default:
-      return null;
-  }
+  return computeScenarioImpact(baseline, type);
 }
 
 export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) {
   const [note, setNote] = useState("");
-  const liveResult = useMemo(() => (row ? computeLiveResult(row) : null), [row]);
+  const impact = useMemo(() => (row ? impactFor(row) : null), [row]);
 
   if (!row || !row.recommendation) {
     return (
@@ -119,25 +101,35 @@ export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) 
           <p className="text-xs leading-relaxed text-muted-foreground">
             {rec.recommendation_text}
           </p>
-          {(() => {
-            const recovered = liveResult?.recoveredValue ?? rec.expected_recovered_value;
-            const cost =
-              liveResult != null
-                ? liveResult.transferCost + liveResult.discountCost + liveResult.operationalCost
-                : rec.expected_cost;
-            const netSaved = liveResult?.netSaved ?? rec.net_saved_value;
-            return (
-              <div className="grid grid-cols-3 gap-2 text-xs">
-                <Metric label="Recovered" value={formatAZN(recovered, { compact: true })} />
-                <Metric label="Cost" value={formatAZN(cost, { compact: true })} />
-                <Metric
-                  label="Net saved"
-                  value={formatAZN(netSaved, { compact: true, sign: true })}
-                  tone={netSaved >= 0 ? "text-emerald-700" : "text-rose-700"}
-                />
-              </div>
-            );
-          })()}
+          {impact ? (
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <Metric
+                label="Action olmazsa itki (K)"
+                value={formatAZN(impact.K, { compact: true })}
+                tone="text-rose-700"
+              />
+              <Metric
+                label="Action sonrası ziyan (G)"
+                value={formatAZN(impact.G, { compact: true })}
+                tone="text-rose-700"
+              />
+              <Metric
+                label="Net qazanc (K − G)"
+                value={formatAZN(impact.actionNetGain, { compact: true })}
+                tone="text-emerald-700"
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <Metric label="Recovered" value={formatAZN(rec.expected_recovered_value, { compact: true })} />
+              <Metric label="Cost" value={formatAZN(rec.expected_cost, { compact: true })} />
+              <Metric
+                label="Net saved"
+                value={formatAZN(rec.net_saved_value, { compact: true, sign: true })}
+                tone={rec.net_saved_value >= 0 ? "text-emerald-700" : "text-rose-700"}
+              />
+            </div>
+          )}
           <div>
             <p className="mb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
               Tasks to create

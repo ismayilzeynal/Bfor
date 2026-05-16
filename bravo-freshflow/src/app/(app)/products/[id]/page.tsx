@@ -28,10 +28,7 @@ import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
 import { RescueModeModal } from "@/components/modals/rescue-mode-modal";
 import { ActionImpactAnimation } from "@/components/modals/action-impact-animation";
-import {
-  computeImpactView,
-  defaultCombinedResult,
-} from "@/lib/scenario-calculator";
+import { computeScenarioImpact } from "@/lib/scenario-calculator";
 
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -286,15 +283,14 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
             minimumMarginPct: bundle.product.minimum_margin_pct,
             dataConfidence: bundle.prediction.data_confidence_score,
           };
-          const result = defaultCombinedResult(baseline);
-          const impact = computeImpactView(baseline, result);
+          const impact = computeScenarioImpact(baseline, "combined");
           return (
             <ActionImpactAnimation
               open={impactOpen}
               onClose={() => setImpactOpen(false)}
               productName={bundle.product.name}
-              potentialLossBefore={impact.potentialLoss}
-              recoveredValueAfter={impact.recoveredValue}
+              potentialLossBefore={impact.K}
+              recoveredValueAfter={impact.actionNetGain}
               riskBefore={impact.riskBeforePct}
               riskAfter={impact.riskAfterPct}
             />

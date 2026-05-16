@@ -56,6 +56,7 @@ import {
   calcDiscount,
   calcNoAction,
   calcTransfer,
+  computeScenarioImpact,
   type ScenarioBaseline,
   type ScenarioResult,
 } from "@/lib/scenario-calculator";
@@ -816,24 +817,18 @@ function DetailPanel({
   const totalCostBasis = stock * baseline.costPrice;
   const totalSalePotential = stock * baseline.salePrice;
 
-  // No-action baseline
-  const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
-  const baselineUnsold = Math.max(0, stock - baselineSold);
-  // K = Action olmazsa itki = noActionLoss
-  const K = baselineUnsold * baseline.costPrice;
-  const noActionLoss = K;
-
-  // Action numbers
-  const sold = result.expectedSold;
-  const unsoldAfterAction = Math.max(0, stock - sold);
-  // G = Action sonrası ziyan = residualLoss
-  const G = unsoldAfterAction * baseline.costPrice;
-  const residualLoss = G;
-  const actionCost = result.transferCost;
-  const actionRevenue = result.recoveredValue;
-
-  // Action net qazancı = K − G (loss avoided by acting)
-  const actionNetGain = K - G;
+  // Unified scenario impact — same numbers as Before/After + Approve + Animation
+  const impact = computeScenarioImpact(baseline, scenario);
+  const baselineUnsold = impact.baselineUnsold;
+  const noActionLoss = impact.K;
+  const sold = impact.actionSold;
+  const unsoldAfterAction = impact.actionUnsold;
+  const residualLoss = impact.G;
+  const actionCost = impact.actionCost;
+  const actionRevenue = impact.actionRevenue;
+  const K = impact.K;
+  const G = impact.G;
+  const actionNetGain = impact.actionNetGain;
 
   const actionCostFormula =
     actionCost > 0

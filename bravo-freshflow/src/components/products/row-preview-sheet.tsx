@@ -23,11 +23,9 @@ import { RiskBadge } from "@/components/badges/risk-badge";
 import { formatAZN, formatDaysToExpiry } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
 import {
-  calcCombined,
-  calcDiscount,
-  calcTransfer,
+  computeScenarioImpact,
   type ScenarioBaseline,
-  type ScenarioResult,
+  type ScenarioImpact,
 } from "@/lib/scenario-calculator";
 import type { ScenarioType } from "@/types";
 import type { RiskyRow } from "./types";
@@ -60,46 +58,36 @@ export function RowPreviewSheet({
       minimumMarginPct: row.product.minimum_margin_pct,
       dataConfidence: row.prediction.data_confidence_score,
     };
-    const targetVelocity = row.prediction.avg_daily_sales_7d * 1.5;
-    const optimalQty = Math.max(
-      1,
-      Math.min(
-        row.prediction.current_stock,
-        Math.round(targetVelocity * row.prediction.days_to_expiry)
-      )
-    );
     return {
-      discount: calcDiscount(baseline, { discountPct: 0.2 }),
-      transfer: calcTransfer(baseline, {
-        transferQty: optimalQty,
-        targetStoreAvgDailySales: targetVelocity,
-      }),
-      combined: calcCombined(baseline, {
-        discountPct: 0.2,
-        transferQty: optimalQty,
-        targetStoreAvgDailySales: targetVelocity,
-      }),
+      discount: computeScenarioImpact(baseline, "discount"),
+      transfer: computeScenarioImpact(baseline, "transfer"),
+      combined: computeScenarioImpact(baseline, "combined"),
     };
   }, [row]);
 
+  const transferDisabled = row ? row.prediction.days_to_expiry <= 1 : false;
+
   const recommended: PickableScenario = useMemo(() => {
     if (!scenarios) return "combined";
-    const entries: Array<[PickableScenario, ScenarioResult]> = [
+    const entries: Array<[PickableScenario, ScenarioImpact]> = [
       ["discount", scenarios.discount],
-      ["transfer", scenarios.transfer],
-      ["combined", scenarios.combined],
+      ...(transferDisabled
+        ? []
+        : ([
+            ["transfer", scenarios.transfer],
+            ["combined", scenarios.combined],
+          ] as Array<[PickableScenario, ScenarioImpact]>)),
     ];
-    let best: PickableScenario = "combined";
+    let best: PickableScenario = "discount";
     let bestVal = -Infinity;
-    for (const [type, r] of entries) {
-      if (r.notViable) continue;
-      if (r.netSaved > bestVal) {
-        bestVal = r.netSaved;
+    for (const [type, i] of entries) {
+      if (i.actionNetGain > bestVal) {
+        bestVal = i.actionNetGain;
         best = type;
       }
     }
     return best;
-  }, [scenarios]);
+  }, [scenarios, transferDisabled]);
 
   const [selected, setSelected] = useState<PickableScenario>(recommended);
 
@@ -162,7 +150,7 @@ export function RowPreviewSheet({
                     type="discount"
                     label="Discount"
                     icon={Percent}
-                    result={scenarios.discount}
+                    impact={scenarios.discount}
                     selected={selected === "discount"}
                     recommended={recommended === "discount"}
                     onSelect={() => setSelected("discount")}
@@ -171,33 +159,21 @@ export function RowPreviewSheet({
                     type="transfer"
                     label="Transfer"
                     icon={Truck}
-                    result={scenarios.transfer}
+                    impact={scenarios.transfer}
                     selected={selected === "transfer"}
                     recommended={recommended === "transfer"}
                     onSelect={() => setSelected("transfer")}
-                    notViableReason={
-                      row.prediction.days_to_expiry <= 1
-                        ? "Expiry too close"
-                        : scenarios.transfer.notViable
-                          ? scenarios.transfer.notViableReason
-                          : undefined
-                    }
+                    notViableReason={transferDisabled ? "Expiry too close" : undefined}
                   />
                   <ScenarioRow
                     type="combined"
                     label="Discount + Transfer"
                     icon={Combine}
-                    result={scenarios.combined}
+                    impact={scenarios.combined}
                     selected={selected === "combined"}
                     recommended={recommended === "combined"}
                     onSelect={() => setSelected("combined")}
-                    notViableReason={
-                      row.prediction.days_to_expiry <= 1
-                        ? "Expiry too close"
-                        : scenarios.combined.notViable
-                          ? scenarios.combined.notViableReason
-                          : undefined
-                    }
+                    notViableReason={transferDisabled ? "Expiry too close" : undefined}
                   />
                 </div>
               </section>
@@ -241,7 +217,7 @@ function ScenarioRow({
   type: _type,
   label,
   icon: Icon,
-  result,
+  impact,
   selected,
   recommended,
   onSelect,
@@ -250,13 +226,13 @@ function ScenarioRow({
   type: ScenarioType;
   label: string;
   icon: typeof Truck;
-  result: ScenarioResult;
+  impact: ScenarioImpact;
   selected: boolean;
   recommended: boolean;
   onSelect: () => void;
   notViableReason?: string;
 }) {
-  const positive = result.netSaved >= 0;
+  const positive = impact.actionNetGain >= 0;
   const disabled = !!notViableReason;
   return (
     <button
@@ -296,14 +272,14 @@ function ScenarioRow({
         </div>
       </div>
       <div className="shrink-0 text-right">
-        <div className="text-[9px] uppercase tracking-wide text-muted-foreground">Net saved</div>
+        <div className="text-[9px] uppercase tracking-wide text-muted-foreground">Net qazanc (K−G)</div>
         <div
           className={cn(
             "text-sm font-semibold tabular-nums",
             positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"
           )}
         >
-          {formatAZN(result.netSaved, { compact: true, sign: true })}
+          {formatAZN(impact.actionNetGain, { compact: true })}
         </div>
       </div>
     </button>

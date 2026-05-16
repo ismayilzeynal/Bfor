@@ -28,8 +28,7 @@ import { Progress } from "@/components/ui/progress";
 import { ActionImpactAnimation } from "./action-impact-animation";
 import { formatAZN, formatDaysToExpiry } from "@/lib/formatters";
 import {
-  computeImpactView,
-  defaultCombinedResult,
+  computeScenarioImpact,
   type ScenarioBaseline,
 } from "@/lib/scenario-calculator";
 import { useActionsStore } from "@/store/actions-store";
@@ -362,8 +361,7 @@ export function RescueModeModal({
           minimumMarginPct: product.minimum_margin_pct,
           dataConfidence: prediction.data_confidence_score,
         };
-        const result = defaultCombinedResult(baseline);
-        const impact = computeImpactView(baseline, result);
+        const impact = computeScenarioImpact(baseline, "combined");
         return (
           <ActionImpactAnimation
             open={impactOpen}
@@ -372,8 +370,8 @@ export function RescueModeModal({
               onClose();
             }}
             productName={product.name}
-            potentialLossBefore={impact.potentialLoss}
-            recoveredValueAfter={impact.recoveredValue}
+            potentialLossBefore={impact.K}
+            recoveredValueAfter={impact.actionNetGain}
             riskBefore={impact.riskBeforePct}
             riskAfter={impact.riskAfterPct}
           />

@@ -18,7 +18,11 @@ import { formatAZN } from "@/lib/formatters";
 import { SCENARIO_TYPE_LABELS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { ScenarioType } from "@/types";
-import { computeImpactView, type ScenarioResult, type ScenarioBaseline } from "@/lib/scenario-calculator";
+import {
+  computeScenarioImpact,
+  type ScenarioResult,
+  type ScenarioBaseline,
+} from "@/lib/scenario-calculator";
 
 interface Props {
   scenario: ScenarioType;
@@ -27,36 +31,10 @@ interface Props {
   recommendedType: ScenarioType;
 }
 
-export function BeforeAfterSimulation({ scenario, result, baseline, recommendedType }: Props) {
+export function BeforeAfterSimulation({ scenario, result: _result, baseline, recommendedType }: Props) {
   const view = useMemo(() => {
-    const impact = computeImpactView(baseline, result);
-    const stock = baseline.currentStock;
-    const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
-    const baselineUnsold = Math.max(0, stock - baselineSold);
-    const sold = result.expectedSold;
-    const unsoldAfter = Math.max(0, stock - sold);
-    const productsSaved = Math.max(0, sold - baselineSold);
-
-    // K = Action olmazsa itki, G = Action sonrası ziyan, netGain = K − G
-    const K = impact.potentialLoss;
-    const G = unsoldAfter * baseline.costPrice;
-    const actionNetGain = K - G;
-
-    const lossAvoided = actionNetGain;
-    const riskReduction = Math.max(0, impact.riskBeforePct - impact.riskAfterPct);
-
-    return {
-      noActionLoss: K,
-      baselineUnsold,
-      noActionRiskPct: impact.riskBeforePct,
-      recoveredValue: impact.recoveredValue,
-      productsSaved,
-      remainingRiskPct: impact.riskAfterPct,
-      lossAvoided,
-      actionNetGain,
-      riskReduction,
-    };
-  }, [baseline, result]);
+    return computeScenarioImpact(baseline, scenario);
+  }, [baseline, scenario]);
 
   const isRecommended = scenario === recommendedType;
 
@@ -102,8 +80,8 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
             </div>
             <BAStat
               icon={TrendingDown}
-              label="Potential loss"
-              value={formatAZN(view.noActionLoss, { compact: false })}
+              label="Potential loss (K)"
+              value={formatAZN(view.K, { compact: false })}
               tone="rose"
               big
             />
@@ -116,9 +94,9 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
             <BAStat
               icon={ShieldAlert}
               label="Waste risk"
-              value={`${view.noActionRiskPct.toFixed(0)}%`}
+              value={`${view.riskBeforePct.toFixed(0)}%`}
               tone="rose"
-              progress={view.noActionRiskPct}
+              progress={view.riskBeforePct}
               progressTone="rose"
             />
           </motion.div>
@@ -144,9 +122,9 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
               </h4>
             </div>
             <BAStat
-              icon={TrendingUp}
-              label="Expected recovery"
-              value={formatAZN(view.recoveredValue, { compact: false })}
+              icon={TrendingDown}
+              label="Remaining loss (G)"
+              value={formatAZN(view.G, { compact: false })}
               tone="emerald"
               big
             />
@@ -159,9 +137,9 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
             <BAStat
               icon={ShieldAlert}
               label="Remaining risk"
-              value={`${view.remainingRiskPct.toFixed(0)}%`}
+              value={`${view.riskAfterPct.toFixed(0)}%`}
               tone="emerald"
-              progress={view.remainingRiskPct}
+              progress={view.riskAfterPct}
               progressTone="emerald"
             />
           </motion.div>
@@ -170,17 +148,17 @@ export function BeforeAfterSimulation({ scenario, result, baseline, recommendedT
         {/* Summary strip */}
         <div className="mt-3 grid grid-cols-1 gap-2 rounded-md border bg-background/80 p-3 sm:grid-cols-3">
           <Summary
-            label="Loss avoided"
-            value={formatAZN(view.lossAvoided, { compact: true })}
+            label="Products recovered"
+            value={`${view.productsSaved.toFixed(0)} units`}
             tone="emerald"
           />
           <Summary
             label="Risk reduced"
-            value={`−${view.riskReduction.toFixed(0)}%`}
+            value={`−${view.riskReductionPct.toFixed(0)}%`}
             tone="emerald"
           />
           <Summary
-            label="Net saved value"
+            label="Action net qazancı (K − G)"
             value={formatAZN(view.actionNetGain, { compact: true })}
             tone="emerald"
             highlight
