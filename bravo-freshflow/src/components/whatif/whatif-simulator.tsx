@@ -44,6 +44,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { ConfidenceBadge } from "@/components/badges/confidence-badge";
+import { BeforeAfterSimulation } from "./before-after-simulation";
 import { SCENARIO_TYPE_LABELS } from "@/lib/constants";
 import { formatAZN } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
@@ -479,6 +480,13 @@ export function WhatIfSimulator({
           <DetailPanel scenario="combined" result={results.combined} baseline={calcBaseline} />
         </div>
       </div>
+
+      <BeforeAfterSimulation
+        scenario={selected}
+        result={selectedResult}
+        baseline={calcBaseline}
+        recommendedType={recommendedType}
+      />
 
       <div className="sticky bottom-0 z-10 -mx-1 flex flex-wrap items-center gap-2 rounded-md border bg-background/95 px-3 py-2 shadow-md backdrop-blur">
         <div className="flex min-w-0 flex-1 items-center gap-2 text-xs">
