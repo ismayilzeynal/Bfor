@@ -27,8 +27,6 @@ import { ExpiryTimelineCard } from "@/components/products/details/expiry-timelin
 import { DataConfidenceCard } from "@/components/products/details/data-confidence-card";
 import { AiRecommendationPanel } from "@/components/products/details/ai-recommendation-panel";
 import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
-import { AuditTrailSection } from "@/components/products/details/audit-trail-section";
-import { RelatedProductsSection } from "@/components/products/details/related-products-section";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
 
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
@@ -246,17 +244,6 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
           variant="embedded"
         />
       ) : null}
-
-      <AuditTrailSection
-        baseAudit={bundle.audit}
-        users={bundle.users}
-        recommendation={bundle.recommendation}
-      />
-
-      <RelatedProductsSection
-        products={bundle.relatedProducts}
-        predictionsByProduct={bundle.relatedPredictionsByProduct}
-      />
 
       <ApproveDialog
         row={approveOpen ? row : null}

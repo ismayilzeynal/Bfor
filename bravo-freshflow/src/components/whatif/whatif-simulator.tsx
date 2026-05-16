@@ -812,11 +812,15 @@ function DetailPanel({
   const residualLoss = unsoldAfterAction * baseline.costPrice;
   const actionCost = result.transferCost; // only transfer counts as real cost per spec
   const actionRevenue = result.recoveredValue;
-  // Net profit with action = revenue - action cost - residual loss
-  const actionNetProfit = actionRevenue - actionCost - residualLoss;
-  // Baseline profit (no action) = baseline revenue - 0 - full no-action loss
-  const baselineProfit = baselineSold * baseline.salePrice - noActionLoss;
-  const advantage = actionNetProfit - baselineProfit;
+
+  // G = ziyan (loss) after action: action_cost + residual_loss − action_revenue
+  //     - positive = still net loss; negative = action turned a profit
+  const G = actionCost + residualLoss - actionRevenue;
+  // K = ziyan if no action: no-action loss − baseline revenue
+  const baselineRevenue = baselineSold * baseline.salePrice;
+  const K = noActionLoss - baselineRevenue;
+  // Action net qazancı = ABS(G − K) — magnitude of improvement
+  const actionNetGain = Math.abs(G - K);
 
   return (
     <Card>
@@ -826,16 +830,9 @@ function DetailPanel({
             Detail — {SCENARIO_TYPE_LABELS[scenario]}
           </h3>
           <span className="text-[11px] text-muted-foreground">
-            Action üstünlüyü:{" "}
-            <span
-              className={cn(
-                "font-semibold tabular-nums",
-                advantage >= 0
-                  ? "text-emerald-700 dark:text-emerald-300"
-                  : "text-rose-700 dark:text-rose-300",
-              )}
-            >
-              {formatAZN(advantage, { compact: true, sign: true })}
+            Action qazancı:{" "}
+            <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
+              {formatAZN(actionNetGain, { compact: true })}
             </span>
           </span>
         </div>
@@ -891,49 +888,32 @@ function DetailPanel({
             value={fmt(residualLoss)}
             tone="loss"
           />
-          {/* Row 7: Net profit */}
+          {/* Row 7: Net gain magnitude */}
           <BreakdownRow
             label="Action net qazancı"
-            formula={`${fmt(actionRevenue)} − ${fmt(actionCost)} − ${fmt(residualLoss)}`}
-            value={fmt(actionNetProfit)}
-            tone={actionNetProfit >= 0 ? "profit" : "loss"}
+            formula={`|G − K|  =  |${fmt(G)} − ${fmt(K)}|  (G = action sonrası ziyan, K = action olmazsa ziyan)`}
+            value={fmt(actionNetGain)}
+            tone="profit"
             big
           />
         </div>
 
         <div className="rounded-md border border-dashed bg-muted/30 p-2.5 text-[11px] leading-relaxed text-muted-foreground">
-          <span className="font-medium text-foreground">İzah:</span> Heç bir action olmazsa
-          ortalama satış sürəti ilə{" "}
-            <span className="font-semibold tabular-nums">{baselineSold.toFixed(0)}</span> ədəd
-            satılır,{" "}
-            <span className="font-semibold tabular-nums">{baselineUnsold.toFixed(0)}</span>{" "}
-            ədəd isə cost dəyərində ziyana gedir{" "}
-            (<span className="font-semibold tabular-nums">{fmt(noActionLoss)}</span>).{" "}
-            Seçilmiş "{SCENARIO_TYPE_LABELS[scenario]}" ssenarisi ilə{" "}
-            <span className="font-semibold tabular-nums">{sold.toFixed(0)}</span> ədəd satılır
-            və net qazanc{" "}
-            <span
-              className={cn(
-                "font-semibold tabular-nums",
-                actionNetProfit >= 0
-                  ? "text-emerald-700 dark:text-emerald-300"
-                  : "text-rose-700 dark:text-rose-300",
-              )}
-            >
-              {fmt(actionNetProfit)}
-            </span>{" "}
-            olur. Bu, "no action" ilə müqayisədə{" "}
-            <span
-              className={cn(
-                "font-semibold tabular-nums",
-                advantage >= 0
-                  ? "text-emerald-700 dark:text-emerald-300"
-                  : "text-rose-700 dark:text-rose-300",
-              )}
-            >
-              {formatAZN(advantage, { sign: true })}
-            </span>{" "}
-            fərqdir.
+          <span className="font-medium text-foreground">İzah:</span> Heç bir action olmazsa{" "}
+          <span className="font-semibold tabular-nums">{baselineSold.toFixed(0)}</span> ədəd
+          satılır,{" "}
+          <span className="font-semibold tabular-nums">{baselineUnsold.toFixed(0)}</span>{" "}
+          ədəd cost dəyərində ziyana gedir — ümumi ziyan{" "}
+          <span className="font-semibold tabular-nums">K = {fmt(K)}</span>. Seçilmiş{" "}
+          "{SCENARIO_TYPE_LABELS[scenario]}" ssenarisi ilə{" "}
+          <span className="font-semibold tabular-nums">{sold.toFixed(0)}</span> ədəd satılır,
+          action sonrası ziyan{" "}
+          <span className="font-semibold tabular-nums">G = {fmt(G)}</span>{" "}
+          ({G < 0 ? "mənfi → action qazanca çevrildi" : "yenə də ziyandır"}). Action net qazancı{" "}
+          <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
+            |G − K| = {fmt(actionNetGain)}
+          </span>
+          {" "}— bu, hər iki ssenari arasındakı maliyyə fərqidir.
         </div>
       </CardContent>
     </Card>
