@@ -14,7 +14,10 @@ interface ActionImpactAnimationProps {
   open: boolean;
   onClose: () => void;
   productName: string;
+  /** Action olmazsa itki (K) — starting value of the potential-loss counter */
   potentialLossBefore: number;
+  /** Action sonrası ziyan (G) — ending value of the potential-loss counter */
+  potentialLossAfter: number;
   recoveredValueAfter: number;
   riskBefore: number;
   riskAfter: number;
@@ -25,6 +28,7 @@ export function ActionImpactAnimation({
   onClose,
   productName,
   potentialLossBefore,
+  potentialLossAfter,
   recoveredValueAfter,
   riskBefore,
   riskAfter,
@@ -97,12 +101,12 @@ export function ActionImpactAnimation({
             </motion.div>
 
             <div className="grid grid-cols-2 gap-3">
-              {/* Potential loss → goes down */}
+              {/* Potential loss: K → G (Action olmazsa itki → Action sonrası ziyan) */}
               <ImpactMetric
                 icon={TrendingDown}
                 label="Potential loss"
                 from={potentialLossBefore}
-                to={0}
+                to={potentialLossAfter}
                 color="rose"
                 isCurrency
                 delay={0.4}
