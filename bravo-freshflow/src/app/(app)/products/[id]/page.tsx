@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { ArrowLeft, CheckCircle2, Info, ShieldOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ApproveDialog } from "@/components/modals/approve-dialog";
 import { RejectSheet } from "@/components/modals/reject-sheet";
@@ -19,13 +18,12 @@ import {
   type ProductDetailsBundle,
 } from "@/components/products/details/details-data";
 import { StickyHeader } from "@/components/products/details/sticky-header";
-import { ColumnOne } from "@/components/products/details/column-one";
-import { RiskBreakdownCard } from "@/components/products/details/risk-breakdown-card";
-import { ExpiryTimelineCard } from "@/components/products/details/expiry-timeline-card";
-import { DataConfidenceCard } from "@/components/products/details/data-confidence-card";
-import { AiRecommendationPanel } from "@/components/products/details/ai-recommendation-panel";
+import { DetailsAccordion } from "@/components/products/details/details-accordion";
 import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
+import { RescueModeModal } from "@/components/modals/rescue-mode-modal";
+import { ActionImpactAnimation } from "@/components/modals/action-impact-animation";
+import { computeScenarioImpact } from "@/lib/scenario-calculator";
 
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -40,6 +38,8 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
   const [approveOpen, setApproveOpen] = useState(false);
   const [rejectOpen, setRejectOpen] = useState(false);
   const [auditOpen, setAuditOpen] = useState(false);
+  const [rescueOpen, setRescueOpen] = useState(false);
+  const [impactOpen, setImpactOpen] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -94,6 +94,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         action: { label: "View tasks", onClick: () => router.push("/tasks") },
       });
       setApproveOpen(false);
+      setImpactOpen(true);
     },
     [approve, appendAudit, currentUser.id, router]
   );
@@ -127,11 +128,6 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
     [reject, appendAudit, currentUser.id]
   );
 
-  function scrollToWhatif() {
-    const el = document.getElementById("whatif");
-    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-
   if (loading) {
     return <LoadingState />;
   }
@@ -148,6 +144,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         product={bundle.product}
         prediction={bundle.prediction}
         onOpenAuditLog={() => setAuditOpen(true)}
+        onStartRescue={bundle.prediction ? () => setRescueOpen(true) : undefined}
       />
 
       {bundle.prediction ? (
@@ -176,66 +173,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         />
       ) : null}
 
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="lg:col-span-4">
-          <ColumnOne
-            product={bundle.product}
-            store={bundle.store}
-            category={bundle.category}
-            supplier={bundle.supplier}
-            prediction={bundle.prediction}
-            snapshots={bundle.snapshots}
-            batches={bundle.activeBatches}
-          />
-        </div>
-
-        <div className="space-y-4 lg:col-span-5">
-          {bundle.prediction ? (
-            <RiskBreakdownCard prediction={bundle.prediction} />
-          ) : (
-            <Card>
-              <CardContent className="flex items-center gap-2 p-4 text-sm text-muted-foreground">
-                <Info className="size-4" aria-hidden />
-                No active risk prediction.
-              </CardContent>
-            </Card>
-          )}
-          {bundle.prediction ? (
-            <ExpiryTimelineCard prediction={bundle.prediction} />
-          ) : null}
-          {bundle.prediction ? (
-            <DataConfidenceCard
-              prediction={bundle.prediction}
-              snapshots={bundle.snapshots}
-              batches={bundle.activeBatches}
-              sales={bundle.sales}
-            />
-          ) : null}
-        </div>
-
-        <div className="lg:col-span-3">
-          <div className="lg:sticky lg:top-32">
-            <AiRecommendationPanel
-              recommendation={bundle.recommendation}
-              onApproveClick={() => setApproveOpen(true)}
-              onRejectClick={() => setRejectOpen(true)}
-              onIgnoreClick={() => {
-                if (!bundle.recommendation) return;
-                reject({
-                  recommendation_id: bundle.recommendation.id,
-                  user_id: currentUser.id,
-                  note: "ignored",
-                  reason_codes: ["ignored"],
-                });
-                toast("Recommendation ignored", {
-                  description: bundle.product.name,
-                });
-              }}
-              onCompareClick={scrollToWhatif}
-            />
-          </div>
-        </div>
-      </div>
+      <DetailsAccordion bundle={bundle} />
 
       <ApproveDialog
         row={approveOpen ? row : null}
@@ -255,6 +193,41 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         users={bundle.users}
         recommendation={bundle.recommendation}
       />
+
+      <RescueModeModal
+        open={rescueOpen}
+        onClose={() => setRescueOpen(false)}
+        product={bundle.product}
+        store={bundle.store}
+        prediction={bundle.prediction ?? null}
+        recommendation={bundle.recommendation ?? null}
+      />
+
+      {bundle.prediction ? (
+        (() => {
+          const baseline = {
+            currentStock: bundle.prediction.current_stock,
+            avgDailySales: bundle.prediction.avg_daily_sales_7d,
+            daysToExpiry: bundle.prediction.days_to_expiry,
+            costPrice: bundle.product.cost_price,
+            salePrice: bundle.product.sale_price,
+            minimumMarginPct: bundle.product.minimum_margin_pct,
+            dataConfidence: bundle.prediction.data_confidence_score,
+          };
+          const impact = computeScenarioImpact(baseline, "combined");
+          return (
+            <ActionImpactAnimation
+              open={impactOpen}
+              onClose={() => setImpactOpen(false)}
+              productName={bundle.product.name}
+              potentialLossBefore={impact.K}
+              recoveredValueAfter={impact.lossReduction}
+              riskBefore={impact.riskBeforePct}
+              riskAfter={impact.riskAfterPct}
+            />
+          );
+        })()
+      ) : null}
 
       {bundle.recommendation ? (
         <MobileActionBar
@@ -299,20 +272,11 @@ function LoadingState() {
   return (
     <div className="space-y-4">
       <Skeleton className="h-16 w-full" />
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
-        <div className="space-y-4 lg:col-span-4">
-          <Skeleton className="h-[280px]" />
-          <Skeleton className="h-[180px]" />
-          <Skeleton className="h-[180px]" />
-        </div>
-        <div className="space-y-4 lg:col-span-5">
-          <Skeleton className="h-[280px]" />
-          <Skeleton className="h-[260px]" />
-          <Skeleton className="h-[240px]" />
-        </div>
-        <div className="lg:col-span-3">
-          <Skeleton className="h-[420px]" />
-        </div>
+      <Skeleton className="h-[260px] w-full" />
+      <div className="space-y-2">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <Skeleton key={i} className="h-12 w-full" />
+        ))}
       </div>
     </div>
   );

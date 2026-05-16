@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
+  ChevronRight,
   FlaskConical,
   Info,
   Layers,
@@ -16,6 +17,7 @@ import {
   Sparkles,
   Truck,
 } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import {
   Bar,
@@ -44,6 +46,7 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { ConfidenceBadge } from "@/components/badges/confidence-badge";
+import { BeforeAfterSimulation } from "./before-after-simulation";
 import { SCENARIO_TYPE_LABELS } from "@/lib/constants";
 import { formatAZN } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
@@ -53,6 +56,7 @@ import {
   calcDiscount,
   calcNoAction,
   calcTransfer,
+  computeScenarioImpact,
   type ScenarioBaseline,
   type ScenarioResult,
 } from "@/lib/scenario-calculator";
@@ -234,21 +238,37 @@ export function WhatIfSimulator({
     } as Record<ScenarioType, ScenarioResult>;
   }, [calcBaseline, discountPct, transferQty, target]);
 
+  // Unified impacts — same numbers as Detail Panel + Before/After + Approve
+  const impacts = useMemo(() => {
+    return {
+      discount: computeScenarioImpact(calcBaseline, "discount"),
+      transfer: computeScenarioImpact(calcBaseline, "transfer"),
+      combined: computeScenarioImpact(calcBaseline, "combined"),
+      no_action: computeScenarioImpact(calcBaseline, "no_action"),
+    } as Record<"discount" | "transfer" | "combined" | "no_action", ReturnType<typeof computeScenarioImpact>>;
+  }, [calcBaseline]);
+
   const recommendedType = useMemo<ScenarioType>(() => {
-    let best: ScenarioType = "no_action";
+    let best: ScenarioType = "combined";
     let bestVal = -Infinity;
-    for (const [type, r] of Object.entries(results) as [ScenarioType, ScenarioResult][]) {
-      if (r.notViable) continue;
-      if (type === "shelf_visibility" || type === "bundle") continue;
-      if (r.netSaved > bestVal) {
-        bestVal = r.netSaved;
-        best = type;
+    const types: Array<"discount" | "transfer" | "combined"> = ["discount", "transfer", "combined"];
+    const skipTransfer = calcBaseline.daysToExpiry <= 1;
+    for (const t of types) {
+      if (skipTransfer && (t === "transfer" || t === "combined")) continue;
+      const i = impacts[t];
+      if (i.lossReduction > bestVal) {
+        bestVal = i.lossReduction;
+        best = t;
       }
     }
     return best;
-  }, [results]);
+  }, [impacts, calcBaseline.daysToExpiry]);
 
   const selectedResult = results[selected];
+  const selectedImpact =
+    selected === "discount" || selected === "transfer" || selected === "combined" || selected === "no_action"
+      ? impacts[selected]
+      : impacts.no_action;
 
   function resetDefaults() {
     setDiscountPct(defaultDiscountPct);
@@ -305,13 +325,19 @@ export function WhatIfSimulator({
 
   const chartData = (Object.entries(results) as [ScenarioType, ScenarioResult][])
     .filter(([type]) => type !== "shelf_visibility" && type !== "bundle")
-    .map(([type, r]) => ({
-      type,
-      label: SCENARIO_TYPE_LABELS[type],
-      netSaved: r.netSaved,
-      isBest: type === recommendedType,
-      notViable: r.notViable ?? false,
-    }));
+    .map(([type, r]) => {
+      const impact =
+        type === "discount" || type === "transfer" || type === "combined" || type === "no_action"
+          ? impacts[type]
+          : null;
+      return {
+        type,
+        label: SCENARIO_TYPE_LABELS[type],
+        netSaved: impact?.lossReduction ?? r.netSaved,
+        isBest: type === recommendedType,
+        notViable: r.notViable ?? false,
+      };
+    });
 
   const confidenceLow = baseline.dataConfidence < 50;
 
@@ -355,6 +381,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="discount"
             result={results.discount}
+            impact={impacts.discount}
             isRecommended={recommendedType === "discount"}
             isSelected={selected === "discount"}
             onSelect={() => setSelected("discount")}
@@ -383,6 +410,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="transfer"
             result={results.transfer}
+            impact={impacts.transfer}
             isRecommended={recommendedType === "transfer"}
             isSelected={selected === "transfer"}
             onSelect={() => !results.transfer.notViable && setSelected("transfer")}
@@ -465,6 +493,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="combined"
             result={results.combined}
+            impact={impacts.combined}
             isRecommended={recommendedType === "combined"}
             isSelected={selected === "combined"}
             onSelect={() => !results.combined.notViable && setSelected("combined")}
@@ -480,6 +509,13 @@ export function WhatIfSimulator({
         </div>
       </div>
 
+      <BeforeAfterSimulation
+        scenario={selected}
+        result={selectedResult}
+        baseline={calcBaseline}
+        recommendedType={recommendedType}
+      />
+
       <div className="sticky bottom-0 z-10 -mx-1 flex flex-wrap items-center gap-2 rounded-md border bg-background/95 px-3 py-2 shadow-md backdrop-blur">
         <div className="flex min-w-0 flex-1 items-center gap-2 text-xs">
           <FlaskConical className="size-3.5 text-muted-foreground" aria-hidden />
@@ -489,12 +525,12 @@ export function WhatIfSimulator({
           <span
             className={cn(
               "font-semibold tabular-nums",
-              selectedResult.netSaved >= 0
+              selectedImpact.lossReduction >= 0
                 ? "text-emerald-700 dark:text-emerald-300"
                 : "text-rose-700 dark:text-rose-300",
             )}
           >
-            {formatAZN(selectedResult.netSaved, { compact: true, sign: true })}
+            {formatAZN(selectedImpact.lossReduction, { compact: true })}
           </span>
         </div>
         <Button variant="ghost" size="sm" className="h-8 gap-1.5 text-xs" onClick={resetDefaults}>
@@ -528,6 +564,7 @@ export function WhatIfSimulator({
 interface ScenarioCardProps {
   type: ScenarioType;
   result: ScenarioResult;
+  impact?: ReturnType<typeof computeScenarioImpact>;
   isRecommended: boolean;
   isSelected: boolean;
   onSelect: () => void;
@@ -539,6 +576,7 @@ interface ScenarioCardProps {
 function ScenarioCard({
   type,
   result,
+  impact,
   isRecommended,
   isSelected,
   onSelect,
@@ -547,7 +585,8 @@ function ScenarioCard({
   big,
 }: ScenarioCardProps) {
   const Icon = SCENARIO_ICON[type];
-  const netSaved = result.netSaved;
+  // Always prefer unified impact.lossReduction when provided
+  const netSaved = impact?.lossReduction ?? result.netSaved;
   const positive = netSaved >= 0;
 
   return (
@@ -602,10 +641,10 @@ function ScenarioCard({
         </div>
 
         <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-          <Mini label="Sold" value={result.expectedSold.toFixed(0)} />
+          <Mini label="Sold" value={(impact?.actionSold ?? result.expectedSold).toFixed(0)} />
           <Mini
             label="Recovered"
-            value={formatAZN(result.recoveredValue, { compact: true })}
+            value={formatAZN(impact?.actionRevenue ?? result.recoveredValue, { compact: true })}
             tone="text-emerald-700 dark:text-emerald-300"
           />
           <Mini
@@ -615,7 +654,7 @@ function ScenarioCard({
           />
           <Mini
             label="Transfer cost"
-            value={formatAZN(result.transferCost, { compact: true })}
+            value={formatAZN(impact?.actionCost ?? result.transferCost, { compact: true })}
             tone="text-sky-700 dark:text-sky-300"
           />
         </div>
@@ -629,7 +668,7 @@ function ScenarioCard({
           )}
         >
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
-            Net Saved
+            Action ziyan azaltması
           </div>
           <div
             className={cn(
@@ -637,7 +676,7 @@ function ScenarioCard({
               positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300",
             )}
           >
-            {formatAZN(netSaved, { compact: true, sign: true })}
+            {formatAZN(netSaved, { compact: true })}
           </div>
         </div>
 
@@ -655,13 +694,17 @@ function ScenarioCard({
         {children ? <div className="space-y-2 border-t pt-2">{children}</div> : null}
 
         <Button
-          variant={isSelected ? "default" : "outline"}
+          variant={isSelected ? "default" : "secondary"}
           size="sm"
-          className="h-8 w-full text-xs"
+          className={cn(
+            "h-9 w-full text-xs font-semibold",
+            isSelected && "shadow-sm",
+            !isSelected && !notViableReason && "border border-primary/30 bg-primary/5 hover:bg-primary/10"
+          )}
           onClick={onSelect}
           disabled={!!notViableReason}
         >
-          {isSelected ? "Selected" : "Select this scenario"}
+          {isSelected ? "✓ Selected" : "Select this scenario"}
         </Button>
       </CardContent>
     </Card>
@@ -802,35 +845,45 @@ function DetailPanel({
   const totalCostBasis = stock * baseline.costPrice;
   const totalSalePotential = stock * baseline.salePrice;
 
-  // No-action baseline
-  const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
-  const baselineUnsold = Math.max(0, stock - baselineSold);
-  const noActionLoss = baselineUnsold * baseline.costPrice;
-
-  // Action numbers
-  const sold = result.expectedSold;
-  const unsoldAfterAction = Math.max(0, stock - sold);
-  const residualLoss = unsoldAfterAction * baseline.costPrice;
-  const actionCost = result.transferCost; // only transfer counts as real cost per spec
-  const actionRevenue = result.recoveredValue;
-
-  // G = ziyan (loss) after action: action_cost + residual_loss − action_revenue
-  //     - positive = still net loss; negative = action turned a profit
-  const G = actionCost + residualLoss - actionRevenue;
-  // K = ziyan if no action: no-action loss − baseline revenue
-  const baselineRevenue = baselineSold * baseline.salePrice;
-  const K = noActionLoss - baselineRevenue;
-  // Action net qazancı = ABS(G − K) — magnitude of improvement
-  const actionNetGain = Math.abs(G - K);
+  // Unified scenario impact — same numbers as Before/After + Approve + Animation
+  const impact = computeScenarioImpact(baseline, scenario);
+  const baselineUnsold = impact.baselineUnsold;
+  const noActionLoss = impact.K;
+  const sold = impact.actionSold;
+  const unsoldAfterAction = impact.actionUnsold;
+  const residualLoss = impact.G;
+  const actionCost = impact.actionCost;
+  const actionRevenue = impact.actionRevenue;
+  const K = impact.K;
+  const G = impact.G;
+  const lossReduction = impact.lossReduction;
+  const transferQty = impact.transferQty;
+  const localSoldDiscount = impact.localSoldDiscount;
+  const discountedPrice = impact.discountedPrice;
+  const discountPctLabel = (impact.effectiveDiscountPct * 100).toFixed(0);
 
   const actionCostFormula =
     actionCost > 0
-      ? `Transfer: 8 + 0.05 × ${sold.toFixed(0)}`
+      ? `Transfer: 8 + 0.05 × ${transferQty}`
       : scenario === "discount"
         ? "Yoxdur (endirim gəlirə təsir edir)"
-        : scenario === "no_action"
-          ? "Yoxdur"
-          : "Yoxdur";
+        : "Yoxdur";
+
+  // Action satış məbləği formula text — per scenario
+  const revenueFormula =
+    scenario === "discount"
+      ? `${sold} × ${formatAZN(baseline.salePrice)} × (1 − ${discountPctLabel}%)`
+      : scenario === "transfer"
+        ? `${sold} × ${formatAZN(baseline.salePrice)}`
+        : scenario === "combined"
+          ? `${transferQty} × ${formatAZN(baseline.salePrice)} + ${localSoldDiscount} × ${formatAZN(discountedPrice)}`
+          : `${sold} × ${formatAZN(baseline.salePrice)}`;
+
+  // Action sonrası ziyan (G) formula text — per scenario
+  const gFormula =
+    scenario === "transfer" || scenario === "combined"
+      ? `(${baselineUnsold} − ${transferQty}) × ${formatAZN(baseline.costPrice)}`
+      : `${unsoldAfterAction} × ${formatAZN(baseline.costPrice)}`;
 
   const rows: Array<{
     label: string;
@@ -853,7 +906,7 @@ function DetailPanel({
     },
     {
       label: "Action olmazsa itki (K)",
-      formula: `${baselineUnsold.toFixed(0)} satılmaz × ${formatAZN(baseline.costPrice)}`,
+      formula: `${baselineUnsold} satılmaz × ${formatAZN(baseline.costPrice)}`,
       value: fmt(noActionLoss),
       tone: "loss",
     },
@@ -865,47 +918,89 @@ function DetailPanel({
     },
     {
       label: "Action satış məbləği",
-      formula: `${sold.toFixed(0)} satılır${scenario === "discount" || scenario === "combined" ? " (endirimli)" : ""}`,
+      formula: revenueFormula,
       value: fmt(actionRevenue),
       tone: "revenue",
     },
     {
-      label: "Action sonrası ziyan",
-      formula: `${unsoldAfterAction.toFixed(0)} × ${formatAZN(baseline.costPrice)}`,
+      label: "Action sonrası ziyan (G)",
+      formula: gFormula,
       value: fmt(residualLoss),
       tone: "loss",
     },
     {
-      label: "Action net qazancı",
-      formula: `|G − K|  =  |${fmt(G)} − ${fmt(K)}|`,
-      value: fmt(actionNetGain),
+      label: "Action ziyan azaltması",
+      formula: `K − (G + xərc)  =  ${fmt(K)} − (${fmt(G)} + ${fmt(actionCost)})`,
+      value: fmt(lossReduction),
       tone: "profit",
       big: true,
     },
   ];
 
-  return (
-    <Card>
-      <CardContent className="space-y-2 p-3">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide">
-            Detail · {SCENARIO_TYPE_LABELS[scenario]}
-          </h3>
-          <span className="text-[10px] text-muted-foreground">
-            Net qazanc:{" "}
-            <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
-              {formatAZN(actionNetGain, { compact: true })}
-            </span>
-          </span>
-        </div>
+  return <CollapsibleDetailPanel scenario={scenario} lossReduction={lossReduction} rows={rows} />;
+}
 
-        <div className="space-y-1.5">
-          {rows.slice(0, 6).map((r) => (
-            <BreakdownRow key={r.label} {...r} />
-          ))}
-          <BreakdownRow {...rows[6]} />
-        </div>
-      </CardContent>
+function CollapsibleDetailPanel({
+  scenario,
+  lossReduction,
+  rows,
+}: {
+  scenario: ScenarioType;
+  lossReduction: number;
+  rows: Array<{
+    label: string;
+    formula: string;
+    value: string;
+    tone: BreakdownTone;
+    big?: boolean;
+  }>;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Card className="overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left hover:bg-muted/40"
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-2">
+          <ChevronRight
+            className={cn(
+              "size-3.5 text-muted-foreground transition-transform",
+              open && "rotate-90"
+            )}
+            aria-hidden
+          />
+          <span className="text-xs font-semibold uppercase tracking-wide">
+            Detail · {SCENARIO_TYPE_LABELS[scenario]}
+          </span>
+        </span>
+        <span className="text-[10px] text-muted-foreground">
+          Ziyan azaltması:{" "}
+          <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
+            {formatAZN(lossReduction, { compact: true })}
+          </span>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="space-y-1.5 border-t p-3">
+              {rows.slice(0, 6).map((r) => (
+                <BreakdownRow key={r.label} {...r} />
+              ))}
+              <BreakdownRow {...rows[6]} />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </Card>
   );
 }

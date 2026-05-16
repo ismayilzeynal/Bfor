@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +16,12 @@ import { ActionBadge } from "@/components/badges/action-badge";
 import { ConfidenceBadge } from "@/components/badges/confidence-badge";
 import { formatAZN } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
+import {
+  computeScenarioImpact,
+  type ScenarioBaseline,
+  type ScenarioImpact,
+} from "@/lib/scenario-calculator";
+import type { ScenarioType } from "@/types";
 import type { RiskyRow } from "@/components/products/types";
 
 interface ApproveDialogProps {
@@ -24,8 +30,32 @@ interface ApproveDialogProps {
   onConfirm: (row: RiskyRow, note: string | null) => void;
 }
 
+function impactFor(row: RiskyRow): ScenarioImpact | null {
+  const rec = row.recommendation;
+  const pred = row.prediction;
+  if (!rec || !pred) return null;
+
+  const baseline: ScenarioBaseline = {
+    currentStock: pred.current_stock,
+    avgDailySales: pred.avg_daily_sales_7d,
+    daysToExpiry: pred.days_to_expiry,
+    costPrice: row.product.cost_price,
+    salePrice: row.product.sale_price,
+    minimumMarginPct: row.product.minimum_margin_pct,
+    dataConfidence: pred.data_confidence_score,
+  };
+
+  const allowedTypes = new Set<ScenarioType>(["discount", "transfer", "combined"]);
+  const type: ScenarioType = allowedTypes.has(rec.recommendation_type as ScenarioType)
+    ? (rec.recommendation_type as ScenarioType)
+    : "combined";
+
+  return computeScenarioImpact(baseline, type);
+}
+
 export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) {
   const [note, setNote] = useState("");
+  const impact = useMemo(() => (row ? impactFor(row) : null), [row]);
 
   if (!row || !row.recommendation) {
     return (
@@ -71,15 +101,35 @@ export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) 
           <p className="text-xs leading-relaxed text-muted-foreground">
             {rec.recommendation_text}
           </p>
-          <div className="grid grid-cols-3 gap-2 text-xs">
-            <Metric label="Recovered" value={formatAZN(rec.expected_recovered_value, { compact: true })} />
-            <Metric label="Cost" value={formatAZN(rec.expected_cost, { compact: true })} />
-            <Metric
-              label="Net saved"
-              value={formatAZN(rec.net_saved_value, { compact: true, sign: true })}
-              tone={rec.net_saved_value >= 0 ? "text-emerald-700" : "text-rose-700"}
-            />
-          </div>
+          {impact ? (
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <Metric
+                label="Action olmazsa itki (K)"
+                value={formatAZN(impact.K, { compact: true })}
+                tone="text-rose-700"
+              />
+              <Metric
+                label="Action sonrası ziyan (G)"
+                value={formatAZN(impact.G, { compact: true })}
+                tone="text-rose-700"
+              />
+              <Metric
+                label="Ziyan azaltması"
+                value={formatAZN(impact.lossReduction, { compact: true })}
+                tone="text-emerald-700"
+              />
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-2 text-xs">
+              <Metric label="Recovered" value={formatAZN(rec.expected_recovered_value, { compact: true })} />
+              <Metric label="Cost" value={formatAZN(rec.expected_cost, { compact: true })} />
+              <Metric
+                label="Net saved"
+                value={formatAZN(rec.net_saved_value, { compact: true, sign: true })}
+                tone={rec.net_saved_value >= 0 ? "text-emerald-700" : "text-rose-700"}
+              />
+            </div>
+          )}
           <div>
             <p className="mb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
               Tasks to create

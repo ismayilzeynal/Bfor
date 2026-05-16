@@ -17,6 +17,7 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  LifeBuoy,
   MoreHorizontal,
   ScrollText,
   ShieldOff,
@@ -52,6 +53,7 @@ interface RiskyProductsTableProps {
   onPreview: (row: RiskyRow) => void;
   onApprove: (row: RiskyRow) => void;
   onReject: (row: RiskyRow) => void;
+  onStartRescue?: (row: RiskyRow) => void;
 }
 
 const PAGE_SIZES = [25, 50, 100, 200];
@@ -70,6 +72,7 @@ export function RiskyProductsTable({
   onPreview,
   onApprove,
   onReject,
+  onStartRescue,
 }: RiskyProductsTableProps) {
   const router = useRouter();
   const [sorting, setSorting] = useState<SortingState>([{ id: "risk", desc: true }]);
@@ -278,6 +281,12 @@ export function RiskyProductsTable({
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-44">
+                {onStartRescue ? (
+                  <DropdownMenuItem onClick={() => onStartRescue(r)}>
+                    <LifeBuoy className="size-3.5 text-rose-600" aria-hidden />
+                    Start Rescue
+                  </DropdownMenuItem>
+                ) : null}
                 <DropdownMenuItem onClick={() => router.push(`/products/${r.product.id}`)}>
                   <ScrollText className="size-3.5" aria-hidden />
                   View details
@@ -310,7 +319,7 @@ export function RiskyProductsTable({
         },
       },
     ],
-    [onApprove, onReject, router]
+    [onApprove, onReject, onStartRescue, router]
   );
 
   const table = useReactTable({

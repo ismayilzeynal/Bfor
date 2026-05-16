@@ -11,6 +11,7 @@ import type { RiskLevel, RiskPrediction } from "@/types";
 
 interface Props {
   prediction: RiskPrediction;
+  headless?: boolean;
 }
 
 const LEVEL_COLOR: Record<RiskLevel, string> = {
@@ -28,23 +29,15 @@ const FACTOR_META: { key: keyof RiskPrediction["reason_factors"]; label: string;
   { key: "supplier_risk_score", label: "Supplier risk", weightKey: "supplier_risk" },
 ];
 
-export function RiskBreakdownCard({ prediction }: Props) {
+export function RiskBreakdownCard({ prediction, headless }: Props) {
   const color = LEVEL_COLOR[prediction.risk_level];
   const radialData = useMemo(
     () => [{ name: "score", value: prediction.risk_score, fill: color }],
     [prediction.risk_score, color]
   );
 
-  return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
-          <Brain className="size-4 text-muted-foreground" aria-hidden />
-          Risk Score Breakdown
-        </CardTitle>
-        <RiskBadge level={prediction.risk_level} />
-      </CardHeader>
-      <CardContent className="space-y-4">
+  const body = (
+    <div className="space-y-4">
         <div className="grid grid-cols-1 gap-4 md:grid-cols-5">
           <div className="relative flex items-center justify-center md:col-span-2">
             <div className="h-[180px] w-full">
@@ -104,7 +97,21 @@ export function RiskBreakdownCard({ prediction }: Props) {
         <p className="rounded-md border bg-muted/30 p-3 text-xs leading-relaxed text-muted-foreground">
           {prediction.main_reason}
         </p>
-      </CardContent>
+    </div>
+  );
+
+  if (headless) return body;
+
+  return (
+    <Card>
+      <CardHeader className="flex flex-row items-center justify-between pb-2">
+        <CardTitle className="flex items-center gap-2 text-sm font-semibold">
+          <Brain className="size-4 text-muted-foreground" aria-hidden />
+          Risk Score Breakdown
+        </CardTitle>
+        <RiskBadge level={prediction.risk_level} />
+      </CardHeader>
+      <CardContent>{body}</CardContent>
     </Card>
   );
 }

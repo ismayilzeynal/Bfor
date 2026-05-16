@@ -29,6 +29,203 @@ function baselineRevenue(b: ScenarioBaseline): number {
   return b.avgDailySales * b.daysToExpiry * b.salePrice;
 }
 
+/**
+ * Single source of truth for all displayed numbers across the app:
+ *
+ *  K = Action olmazsa itki  = baselineUnsold × costPrice
+ *  G = Action sonrası ziyan = actionUnsold × costPrice
+ *  Action ziyan azaltması   = K − (G + actionCost)
+ *
+ * Per-scenario formulas (integer counts → formula text matches values exactly):
+ *  - discount:
+ *      actionSold     = floor(min(stock, liftedVelocity × days))
+ *      actionUnsold   = stock − actionSold
+ *      actionRevenue  = actionSold × salePrice × (1 − discountPct)
+ *  - transfer:
+ *      actionUnsold   = max(0, baselineUnsold − transferQty)
+ *      actionSold     = stock − actionUnsold          (= baselineSold + transferQty, capped)
+ *      actionRevenue  = actionSold × salePrice
+ *  - combined:
+ *      actionUnsold   = max(0, baselineUnsold − transferQty)
+ *      actionSold     = transferQty + localSoldDiscount
+ *      actionRevenue  = transferQty × salePrice + localSoldDiscount × discountedPrice
+ *  - no_action:
+ *      actionSold     = baselineSold
+ *      actionRevenue  = baselineSold × salePrice
+ */
+export interface ScenarioImpact {
+  scenario: ScenarioType;
+  // Stock-level
+  stock: number;
+  baselineSold: number;
+  baselineUnsold: number;
+  actionSold: number;
+  actionUnsold: number;
+  productsSaved: number; // actionSold − baselineSold (units we rescued)
+  // Per-scenario breakdown (for revenue formula display)
+  transferQty: number;        // 0 for discount / no_action
+  localSoldDiscount: number;  // 0 for transfer / no_action; for combined = local units sold with discount
+  discountedPrice: number;    // salePrice × (1 − effectiveDiscountPct)
+  // Money
+  K: number; // Action olmazsa itki = baselineUnsold × costPrice
+  G: number; // Action sonrası ziyan = actionUnsold × costPrice
+  /**
+   * Action ziyan azaltması (loss reduction) = K − (G + actionCost)
+   * — money we keep by acting, net of any hard action cost like transfer fees.
+   */
+  lossReduction: number;
+  actionRevenue: number;
+  actionCost: number; // hard cost of action (transfer fees etc.)
+  effectiveDiscountPct: number; // discount applied (0 for pure transfer / no_action)
+  // Risk %
+  riskBeforePct: number;
+  riskAfterPct: number;
+  riskReductionPct: number;
+}
+
+export interface ScenarioParams {
+  discountPct?: number; // 0..1
+  transferQty?: number;
+  targetVelocity?: number;
+}
+
+const DEFAULT_DISCOUNT_PCT = 0.2;
+const TRANSFER_TARGET_MULTIPLIER = 1.5;
+
+export function defaultParams(baseline: ScenarioBaseline): Required<ScenarioParams> {
+  const targetVelocity = baseline.avgDailySales * TRANSFER_TARGET_MULTIPLIER;
+  const optimalQty = Math.max(
+    1,
+    Math.min(
+      baseline.currentStock,
+      Math.round(targetVelocity * baseline.daysToExpiry)
+    )
+  );
+  return {
+    discountPct: DEFAULT_DISCOUNT_PCT,
+    transferQty: optimalQty,
+    targetVelocity,
+  };
+}
+
+export function computeScenarioImpact(
+  baseline: ScenarioBaseline,
+  scenario: ScenarioType,
+  paramsIn?: ScenarioParams
+): ScenarioImpact {
+  const p = { ...defaultParams(baseline), ...paramsIn };
+  const stock = baseline.currentStock;
+  // Integer counts so the displayed formula matches the computed value exactly.
+  const baselineSold = Math.min(stock, Math.floor(baseline.avgDailySales * baseline.daysToExpiry));
+  const baselineUnsold = Math.max(0, stock - baselineSold);
+
+  let actionSold: number;
+  let actionUnsold: number;
+  let actionRevenue = 0;
+  let actionCost = 0;
+  let effectiveDiscountPct = 0;
+  let transferQtyOut = 0;
+  let localSoldDiscount = 0;
+
+  if (scenario === "discount") {
+    const lift = liftFor(p.discountPct);
+    const liftedVelocity = baseline.avgDailySales * lift;
+    actionSold = Math.min(stock, Math.floor(liftedVelocity * baseline.daysToExpiry));
+    actionUnsold = Math.max(0, stock - actionSold);
+    actionRevenue = actionSold * baseline.salePrice * (1 - p.discountPct);
+    actionCost = 0;
+    effectiveDiscountPct = p.discountPct;
+  } else if (scenario === "transfer") {
+    const transferQty = Math.min(p.transferQty, stock);
+    // User formula: G uses (baselineUnsold − transferQty) × cost
+    actionUnsold = Math.max(0, baselineUnsold - transferQty);
+    actionSold = stock - actionUnsold; // = baselineSold + transferQty when transferQty ≤ baselineUnsold
+    actionRevenue = actionSold * baseline.salePrice; // no discount in pure transfer
+    actionCost = 8 + 0.05 * transferQty;
+    effectiveDiscountPct = 0;
+    transferQtyOut = transferQty;
+  } else if (scenario === "combined") {
+    const transferQty = Math.min(p.transferQty, stock);
+    const localRemain = Math.max(0, stock - transferQty);
+    const lift = liftFor(p.discountPct);
+    const liftedVelocity = baseline.avgDailySales * lift;
+    localSoldDiscount = Math.min(localRemain, Math.floor(liftedVelocity * baseline.daysToExpiry));
+    // User formula: G uses (baselineUnsold − transferQty) × cost (transfer is the unsold-saver)
+    actionUnsold = Math.max(0, baselineUnsold - transferQty);
+    // Total sold displayed = transferred + locally sold under discount
+    actionSold = transferQty + localSoldDiscount;
+    // User revenue formula: transferQty × salePrice + localSoldDiscount × discountedPrice
+    const discountedPrice = baseline.salePrice * (1 - p.discountPct);
+    actionRevenue = transferQty * baseline.salePrice + localSoldDiscount * discountedPrice;
+    actionCost = 8 + 0.05 * transferQty;
+    effectiveDiscountPct = p.discountPct;
+    transferQtyOut = transferQty;
+  } else {
+    actionSold = baselineSold;
+    actionUnsold = baselineUnsold;
+    actionRevenue = baselineSold * baseline.salePrice;
+    actionCost = 0;
+    effectiveDiscountPct = 0;
+  }
+
+  const discountedPrice = baseline.salePrice * (1 - effectiveDiscountPct);
+  const K = baselineUnsold * baseline.costPrice;
+  const G = actionUnsold * baseline.costPrice;
+  // Action ziyan azaltması = K − (G + actionCost)
+  const lossReduction = K - (G + actionCost);
+  const productsSaved = Math.max(0, actionSold - baselineSold);
+  const riskBeforePct = stock > 0 ? (baselineUnsold / stock) * 100 : 0;
+  const riskAfterPct = stock > 0 ? (actionUnsold / stock) * 100 : 0;
+  const riskReductionPct = Math.max(0, riskBeforePct - riskAfterPct);
+
+  return {
+    scenario,
+    stock,
+    baselineSold,
+    baselineUnsold,
+    actionSold,
+    actionUnsold,
+    productsSaved,
+    transferQty: transferQtyOut,
+    localSoldDiscount,
+    discountedPrice,
+    K,
+    G,
+    lossReduction,
+    actionRevenue,
+    actionCost,
+    effectiveDiscountPct,
+    riskBeforePct,
+    riskAfterPct,
+    riskReductionPct,
+  };
+}
+
+/** Pick the scenario with the highest net gain across discount/transfer/combined. */
+export function recommendedScenarioFor(
+  baseline: ScenarioBaseline,
+  paramsIn?: ScenarioParams
+): "discount" | "transfer" | "combined" {
+  const types: Array<"discount" | "transfer" | "combined"> = [
+    "discount",
+    "transfer",
+    "combined",
+  ];
+  let best: "discount" | "transfer" | "combined" = "combined";
+  let bestVal = -Infinity;
+  // Transfer not viable if days_to_expiry <= 1 — skip
+  const skipTransfer = baseline.daysToExpiry <= 1;
+  for (const t of types) {
+    if (skipTransfer && (t === "transfer" || t === "combined")) continue;
+    const i = computeScenarioImpact(baseline, t, paramsIn);
+    if (i.lossReduction > bestVal) {
+      bestVal = i.lossReduction;
+      best = t;
+    }
+  }
+  return best;
+}
+
 function confidence(scenario: ScenarioType, dataConfidence: number): number {
   const success = HISTORICAL_ACTION_SUCCESS_RATE[scenario];
   return Math.round((0.6 * (dataConfidence / 100) + 0.4 * success) * 100);

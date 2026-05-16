@@ -52,6 +52,7 @@ import { RowPreviewSheet } from "@/components/products/row-preview-sheet";
 import { ApproveDialog } from "@/components/modals/approve-dialog";
 import { RejectSheet } from "@/components/modals/reject-sheet";
 import { BulkActionModal } from "@/components/modals/bulk-action-modal";
+import { RescueModeModal } from "@/components/modals/rescue-mode-modal";
 
 interface ProductsData {
   predictions: RiskPrediction[];
@@ -100,6 +101,7 @@ function ProductsView() {
   const [previewRow, setPreviewRow] = useState<RiskyRow | null>(null);
   const [approveTarget, setApproveTarget] = useState<RiskyRow | null>(null);
   const [rejectTarget, setRejectTarget] = useState<RiskyRow | null>(null);
+  const [rescueRow, setRescueRow] = useState<RiskyRow | null>(null);
   const [bulkOpen, setBulkOpen] = useState(false);
   const [bulkDecision, setBulkDecision] = useState<"approve" | "reject">("approve");
   const [userSavedViews, setUserSavedViews] = useState<SavedViewItem[]>([]);
@@ -456,6 +458,7 @@ function ProductsView() {
               onPreview={(r) => setPreviewRow(r)}
               onApprove={(r) => setApproveTarget(r)}
               onReject={(r) => setRejectTarget(r)}
+              onStartRescue={(r) => setRescueRow(r)}
             />
           ) : view === "grid" ? (
             <ProductsGrid
@@ -529,6 +532,15 @@ function ProductsView() {
         decision={bulkDecision}
         onCancel={() => setBulkOpen(false)}
         onConfirm={handleBulkConfirm}
+      />
+
+      <RescueModeModal
+        open={rescueRow !== null}
+        onClose={() => setRescueRow(null)}
+        product={rescueRow?.product ?? null}
+        store={rescueRow?.store ?? null}
+        prediction={rescueRow?.prediction ?? null}
+        recommendation={rescueRow?.recommendation ?? null}
       />
     </div>
   );
