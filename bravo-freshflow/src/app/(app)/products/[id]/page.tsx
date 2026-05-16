@@ -21,8 +21,6 @@ import {
 import { StickyHeader } from "@/components/products/details/sticky-header";
 import { ColumnOne } from "@/components/products/details/column-one";
 import { RiskBreakdownCard } from "@/components/products/details/risk-breakdown-card";
-import { SalesTrendCard } from "@/components/products/details/sales-trend-card";
-import { InventoryTrendCard } from "@/components/products/details/inventory-trend-card";
 import { ExpiryTimelineCard } from "@/components/products/details/expiry-timeline-card";
 import { DataConfidenceCard } from "@/components/products/details/data-confidence-card";
 import { AiRecommendationPanel } from "@/components/products/details/ai-recommendation-panel";
@@ -152,6 +150,32 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
         onOpenAuditLog={() => setAuditOpen(true)}
       />
 
+      {bundle.prediction ? (
+        <WhatIfSimulator
+          product={bundle.product}
+          store={bundle.store}
+          baseline={{
+            currentStock: bundle.prediction.current_stock,
+            avgDailySales7d: bundle.prediction.avg_daily_sales_7d,
+            daysToExpiry: bundle.prediction.days_to_expiry,
+            costPrice: bundle.product.cost_price,
+            salePrice: bundle.product.sale_price,
+            minimumMarginPct: bundle.product.minimum_margin_pct,
+            dataConfidence: bundle.prediction.data_confidence_score,
+          }}
+          candidateTargetStores={bundle.candidateTargetStores}
+          candidateCompanions={bundle.candidateCompanions}
+          onApply={(_scenario, _result) => {
+            if (bundle.recommendation) setApproveOpen(true);
+          }}
+          approveDisabled={!bundle.recommendation}
+          approveDisabledReason={
+            bundle.recommendation ? undefined : "No active recommendation to approve."
+          }
+          variant="embedded"
+        />
+      ) : null}
+
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <ColumnOne
@@ -176,12 +200,6 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
               </CardContent>
             </Card>
           )}
-          <SalesTrendCard sales={bundle.sales} />
-          <InventoryTrendCard
-            snapshots={bundle.snapshots}
-            sales={bundle.sales}
-            batches={bundle.activeBatches}
-          />
           {bundle.prediction ? (
             <ExpiryTimelineCard prediction={bundle.prediction} />
           ) : null}
@@ -218,32 +236,6 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
           </div>
         </div>
       </div>
-
-      {bundle.prediction ? (
-        <WhatIfSimulator
-          product={bundle.product}
-          store={bundle.store}
-          baseline={{
-            currentStock: bundle.prediction.current_stock,
-            avgDailySales7d: bundle.prediction.avg_daily_sales_7d,
-            daysToExpiry: bundle.prediction.days_to_expiry,
-            costPrice: bundle.product.cost_price,
-            salePrice: bundle.product.sale_price,
-            minimumMarginPct: bundle.product.minimum_margin_pct,
-            dataConfidence: bundle.prediction.data_confidence_score,
-          }}
-          candidateTargetStores={bundle.candidateTargetStores}
-          candidateCompanions={bundle.candidateCompanions}
-          onApply={(_scenario, _result) => {
-            if (bundle.recommendation) setApproveOpen(true);
-          }}
-          approveDisabled={!bundle.recommendation}
-          approveDisabledReason={
-            bundle.recommendation ? undefined : "No active recommendation to approve."
-          }
-          variant="embedded"
-        />
-      ) : null}
 
       <ApproveDialog
         row={approveOpen ? row : null}
