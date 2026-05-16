@@ -28,6 +28,10 @@ import { WhatIfSimulator } from "@/components/whatif/whatif-simulator";
 import { AuditLogDrawer } from "@/components/products/details/audit-log-drawer";
 import { RescueModeModal } from "@/components/modals/rescue-mode-modal";
 import { ActionImpactAnimation } from "@/components/modals/action-impact-animation";
+import {
+  computeImpactView,
+  defaultCombinedResult,
+} from "@/lib/scenario-calculator";
 
 export default function ProductDetailsPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -272,15 +276,30 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
       />
 
       {bundle.prediction ? (
-        <ActionImpactAnimation
-          open={impactOpen}
-          onClose={() => setImpactOpen(false)}
-          productName={bundle.product.name}
-          potentialLossBefore={bundle.prediction.predicted_loss_value}
-          recoveredValueAfter={bundle.recommendation?.expected_recovered_value ?? 0}
-          riskBefore={bundle.prediction.risk_score}
-          riskAfter={Math.max(5, Math.round(bundle.prediction.risk_score * 0.18))}
-        />
+        (() => {
+          const baseline = {
+            currentStock: bundle.prediction.current_stock,
+            avgDailySales: bundle.prediction.avg_daily_sales_7d,
+            daysToExpiry: bundle.prediction.days_to_expiry,
+            costPrice: bundle.product.cost_price,
+            salePrice: bundle.product.sale_price,
+            minimumMarginPct: bundle.product.minimum_margin_pct,
+            dataConfidence: bundle.prediction.data_confidence_score,
+          };
+          const result = defaultCombinedResult(baseline);
+          const impact = computeImpactView(baseline, result);
+          return (
+            <ActionImpactAnimation
+              open={impactOpen}
+              onClose={() => setImpactOpen(false)}
+              productName={bundle.product.name}
+              potentialLossBefore={impact.potentialLoss}
+              recoveredValueAfter={impact.recoveredValue}
+              riskBefore={impact.riskBeforePct}
+              riskAfter={impact.riskAfterPct}
+            />
+          );
+        })()
       ) : null}
 
       {bundle.recommendation ? (

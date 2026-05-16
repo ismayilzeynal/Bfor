@@ -27,6 +27,11 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { ActionImpactAnimation } from "./action-impact-animation";
 import { formatAZN, formatDaysToExpiry } from "@/lib/formatters";
+import {
+  computeImpactView,
+  defaultCombinedResult,
+  type ScenarioBaseline,
+} from "@/lib/scenario-calculator";
 import { useActionsStore } from "@/store/actions-store";
 import { useAuthStore } from "@/store/auth-store";
 import { cn } from "@/lib/utils";
@@ -347,18 +352,33 @@ export function RescueModeModal({
         </DialogContent>
       </Dialog>
 
-      <ActionImpactAnimation
-        open={impactOpen}
-        onClose={() => {
-          setImpactOpen(false);
-          onClose();
-        }}
-        productName={product.name}
-        potentialLossBefore={prediction.predicted_loss_value}
-        recoveredValueAfter={recoveredEstimate}
-        riskBefore={prediction.risk_score}
-        riskAfter={Math.max(5, Math.round(prediction.risk_score * 0.18))}
-      />
+      {(() => {
+        const baseline: ScenarioBaseline = {
+          currentStock: prediction.current_stock,
+          avgDailySales: prediction.avg_daily_sales_7d,
+          daysToExpiry: prediction.days_to_expiry,
+          costPrice: product.cost_price,
+          salePrice: product.sale_price,
+          minimumMarginPct: product.minimum_margin_pct,
+          dataConfidence: prediction.data_confidence_score,
+        };
+        const result = defaultCombinedResult(baseline);
+        const impact = computeImpactView(baseline, result);
+        return (
+          <ActionImpactAnimation
+            open={impactOpen}
+            onClose={() => {
+              setImpactOpen(false);
+              onClose();
+            }}
+            productName={product.name}
+            potentialLossBefore={impact.potentialLoss}
+            recoveredValueAfter={impact.recoveredValue}
+            riskBefore={impact.riskBeforePct}
+            riskAfter={impact.riskAfterPct}
+          />
+        );
+      })()}
     </>
   );
 }

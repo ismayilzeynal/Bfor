@@ -29,6 +29,57 @@ function baselineRevenue(b: ScenarioBaseline): number {
   return b.avgDailySales * b.daysToExpiry * b.salePrice;
 }
 
+export interface ImpactView {
+  potentialLoss: number;
+  recoveredValue: number;
+  riskBeforePct: number;
+  riskAfterPct: number;
+}
+
+/**
+ * Computes the same impact numbers shown in the What-If Before/After panel.
+ * Used by Action Impact Animation + Rescue Mode so all surfaces are aligned.
+ */
+export function computeImpactView(
+  baseline: ScenarioBaseline,
+  result: ScenarioResult
+): ImpactView {
+  const stock = baseline.currentStock;
+  const baselineSold = Math.min(stock, baseline.avgDailySales * baseline.daysToExpiry);
+  const baselineUnsold = Math.max(0, stock - baselineSold);
+  const potentialLoss = baselineUnsold * baseline.costPrice;
+
+  const sold = result.expectedSold;
+  const unsoldAfter = Math.max(0, stock - sold);
+
+  const riskBeforePct = stock > 0 ? (baselineUnsold / stock) * 100 : 0;
+  const riskAfterPct = stock > 0 ? (unsoldAfter / stock) * 100 : 0;
+
+  return {
+    potentialLoss,
+    recoveredValue: result.recoveredValue,
+    riskBeforePct,
+    riskAfterPct,
+  };
+}
+
+/**
+ * Default combined scenario result mirroring What-If's defaults
+ * (20% discount + optimal transfer qty + target velocity = local × 1.5).
+ */
+export function defaultCombinedResult(baseline: ScenarioBaseline): ScenarioResult {
+  const targetVelocity = baseline.avgDailySales * 1.5;
+  const optimalQty = Math.max(
+    1,
+    Math.min(baseline.currentStock, Math.round(targetVelocity * baseline.daysToExpiry))
+  );
+  return calcCombined(baseline, {
+    discountPct: 0.2,
+    transferQty: optimalQty,
+    targetStoreAvgDailySales: targetVelocity,
+  });
+}
+
 function confidence(scenario: ScenarioType, dataConfidence: number): number {
   const success = HISTORICAL_ACTION_SUCCESS_RATE[scenario];
   return Math.round((0.6 * (dataConfidence / 100) + 0.4 * success) * 100);
