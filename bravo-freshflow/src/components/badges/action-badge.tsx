@@ -4,6 +4,7 @@ import type { RecommendationType } from "@/types";
 import {
   Activity,
   AlertOctagon,
+  Combine,
   Eye,
   Layers,
   Megaphone,
@@ -23,6 +24,7 @@ const ACTION_ICON: Record<RecommendationType, typeof Activity> = {
   shelf_visibility: Layers,
   discount: Percent,
   transfer: Truck,
+  combined: Combine,
   bundle: Layers,
   reorder_reduce: TrendingDown,
   reorder_increase: TrendingUp,
@@ -38,6 +40,7 @@ const ACTION_TONE: Record<RecommendationType, string> = {
   shelf_visibility: "bg-amber-100 text-amber-800",
   discount: "bg-rose-100 text-rose-700",
   transfer: "bg-blue-100 text-blue-700",
+  combined: "bg-purple-100 text-purple-700",
   bundle: "bg-indigo-100 text-indigo-700",
   reorder_reduce: "bg-orange-100 text-orange-700",
   reorder_increase: "bg-emerald-100 text-emerald-700",

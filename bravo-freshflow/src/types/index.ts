@@ -45,6 +45,7 @@ export type RecommendationType =
   | "shelf_visibility"
   | "discount"
   | "transfer"
+  | "combined"
   | "bundle"
   | "reorder_reduce"
   | "reorder_increase"

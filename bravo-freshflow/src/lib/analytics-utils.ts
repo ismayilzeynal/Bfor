@@ -180,6 +180,7 @@ export const ACTION_LABELS: Record<string, string> = {
   shelf_visibility: "Shelf Visibility",
   discount: "Discount",
   transfer: "Transfer",
+  combined: "Discount + Transfer",
   bundle: "Bundle",
   reorder_reduce: "Reorder Reduce",
   reorder_increase: "Reorder Increase",

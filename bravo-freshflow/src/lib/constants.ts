@@ -179,6 +179,7 @@ export const RECOMMENDATION_TYPE_LABELS: Record<RecommendationType, string> = {
   shelf_visibility: "Shelf Visibility",
   discount: "Discount",
   transfer: "Transfer",
+  combined: "Discount + Transfer",
   bundle: "Bundle",
   reorder_reduce: "Reduce Reorder",
   reorder_increase: "Increase Reorder",
