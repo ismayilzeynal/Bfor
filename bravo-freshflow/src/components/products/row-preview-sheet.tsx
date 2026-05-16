@@ -81,8 +81,8 @@ export function RowPreviewSheet({
     let best: PickableScenario = "discount";
     let bestVal = -Infinity;
     for (const [type, i] of entries) {
-      if (i.actionNetGain > bestVal) {
-        bestVal = i.actionNetGain;
+      if (i.lossReduction > bestVal) {
+        bestVal = i.lossReduction;
         best = type;
       }
     }
@@ -232,7 +232,7 @@ function ScenarioRow({
   onSelect: () => void;
   notViableReason?: string;
 }) {
-  const positive = impact.actionNetGain >= 0;
+  const positive = impact.lossReduction >= 0;
   const disabled = !!notViableReason;
   return (
     <button
@@ -272,14 +272,14 @@ function ScenarioRow({
         </div>
       </div>
       <div className="shrink-0 text-right">
-        <div className="text-[9px] uppercase tracking-wide text-muted-foreground">Net qazanc (K−G)</div>
+        <div className="text-[9px] uppercase tracking-wide text-muted-foreground">Ziyan azaltması</div>
         <div
           className={cn(
             "text-sm font-semibold tabular-nums",
             positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300"
           )}
         >
-          {formatAZN(impact.actionNetGain, { compact: true })}
+          {formatAZN(impact.lossReduction, { compact: true })}
         </div>
       </div>
     </button>

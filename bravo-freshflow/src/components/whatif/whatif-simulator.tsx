@@ -828,7 +828,7 @@ function DetailPanel({
   const actionRevenue = impact.actionRevenue;
   const K = impact.K;
   const G = impact.G;
-  const actionNetGain = impact.actionNetGain;
+  const lossReduction = impact.lossReduction;
 
   const actionCostFormula =
     actionCost > 0
@@ -872,7 +872,10 @@ function DetailPanel({
     },
     {
       label: "Action satış məbləği",
-      formula: `${sold.toFixed(0)} satılır${scenario === "discount" || scenario === "combined" ? " (endirimli)" : ""}`,
+      formula:
+        scenario === "discount" || scenario === "combined"
+          ? `${sold.toFixed(0)} × ${formatAZN(baseline.salePrice)} × (1 − 20%)`
+          : `${sold.toFixed(0)} × ${formatAZN(baseline.salePrice)}`,
       value: fmt(actionRevenue),
       tone: "revenue",
     },
@@ -883,24 +886,24 @@ function DetailPanel({
       tone: "loss",
     },
     {
-      label: "Action net qazancı",
-      formula: `K − G  =  ${fmt(K)} − ${fmt(G)}`,
-      value: fmt(actionNetGain),
+      label: "Action ziyan azaltması",
+      formula: `K − (G + xərc)  =  ${fmt(K)} − (${fmt(G)} + ${fmt(actionCost)})`,
+      value: fmt(lossReduction),
       tone: "profit",
       big: true,
     },
   ];
 
-  return <CollapsibleDetailPanel scenario={scenario} actionNetGain={actionNetGain} rows={rows} />;
+  return <CollapsibleDetailPanel scenario={scenario} lossReduction={lossReduction} rows={rows} />;
 }
 
 function CollapsibleDetailPanel({
   scenario,
-  actionNetGain,
+  lossReduction,
   rows,
 }: {
   scenario: ScenarioType;
-  actionNetGain: number;
+  lossReduction: number;
   rows: Array<{
     label: string;
     formula: string;
@@ -931,9 +934,9 @@ function CollapsibleDetailPanel({
           </span>
         </span>
         <span className="text-[10px] text-muted-foreground">
-          Net qazanc:{" "}
+          Ziyan azaltması:{" "}
           <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
-            {formatAZN(actionNetGain, { compact: true })}
+            {formatAZN(lossReduction, { compact: true })}
           </span>
         </span>
       </button>

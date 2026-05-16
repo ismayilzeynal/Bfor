@@ -290,7 +290,7 @@ export default function ProductDetailsPage({ params }: { params: { id: string } 
               onClose={() => setImpactOpen(false)}
               productName={bundle.product.name}
               potentialLossBefore={impact.K}
-              recoveredValueAfter={impact.actionNetGain}
+              recoveredValueAfter={impact.lossReduction}
               riskBefore={impact.riskBeforePct}
               riskAfter={impact.riskAfterPct}
             />

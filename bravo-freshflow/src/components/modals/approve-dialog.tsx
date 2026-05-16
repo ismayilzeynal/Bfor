@@ -114,8 +114,8 @@ export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) 
                 tone="text-rose-700"
               />
               <Metric
-                label="Net qazanc (K − G)"
-                value={formatAZN(impact.actionNetGain, { compact: true })}
+                label="Ziyan azaltması"
+                value={formatAZN(impact.lossReduction, { compact: true })}
                 tone="text-emerald-700"
               />
             </div>

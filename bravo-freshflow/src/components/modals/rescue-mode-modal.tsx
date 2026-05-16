@@ -371,7 +371,7 @@ export function RescueModeModal({
             }}
             productName={product.name}
             potentialLossBefore={impact.K}
-            recoveredValueAfter={impact.actionNetGain}
+            recoveredValueAfter={impact.lossReduction}
             riskBefore={impact.riskBeforePct}
             riskAfter={impact.riskAfterPct}
           />
