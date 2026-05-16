@@ -150,11 +150,9 @@ export function WhatIfSimulator({
   variant = "embedded",
 }: WhatIfSimulatorProps) {
   const initialTarget = candidateTargetStores[0]?.id ?? null;
-  const initialTransferQty = Math.max(1, Math.round(baseline.currentStock * (defaultTransferPct / 100)));
   const initialCompanion = candidateCompanions[0]?.id ?? null;
 
   const [discountPct, setDiscountPct] = useState(defaultDiscountPct);
-  const [transferQty, setTransferQty] = useState(initialTransferQty);
   const [transferTargetId, setTransferTargetId] = useState<string | null>(initialTarget);
   const [bundleDiscountPct, setBundleDiscountPct] = useState(defaultBundlePct);
   const [bundleCompanionId, setBundleCompanionId] = useState<string | null>(initialCompanion);
@@ -165,6 +163,25 @@ export function WhatIfSimulator({
     () => candidateTargetStores.find((c) => c.id === transferTargetId) ?? candidateTargetStores[0],
     [candidateTargetStores, transferTargetId],
   );
+
+  // Optimal transfer qty = target_velocity × days_to_expiry (capped to currentStock).
+  // At this point, additional qty no longer increases revenue (target saturates)
+  // but still adds 0.05 cost per unit → net gain decreases beyond this.
+  const optimalTransferQty = useMemo(() => {
+    if (!target) return 1;
+    const targetMax = Math.round(target.avg_daily_sales * baseline.daysToExpiry);
+    return Math.max(1, Math.min(baseline.currentStock, targetMax));
+  }, [target, baseline.currentStock, baseline.daysToExpiry]);
+
+  const [transferQty, setTransferQty] = useState(optimalTransferQty);
+  const [userTouchedQty, setUserTouchedQty] = useState(false);
+
+  // Reset transferQty to optimal when target/baseline changes — unless user manually edited.
+  useEffect(() => {
+    if (!userTouchedQty) {
+      setTransferQty(optimalTransferQty);
+    }
+  }, [optimalTransferQty, userTouchedQty]);
 
   useEffect(() => {
     const t = setTimeout(() => setDebouncedTick((n) => n + 1), 100);
@@ -235,7 +252,8 @@ export function WhatIfSimulator({
 
   function resetDefaults() {
     setDiscountPct(defaultDiscountPct);
-    setTransferQty(initialTransferQty);
+    setUserTouchedQty(false);
+    setTransferQty(optimalTransferQty);
     setTransferTargetId(initialTarget);
     setBundleDiscountPct(defaultBundlePct);
     setBundleCompanionId(initialCompanion);
@@ -402,7 +420,10 @@ export function WhatIfSimulator({
               <SliderRow
                 label="Transfer qty"
                 value={transferQty}
-                onChange={(v) => setTransferQty(v)}
+                onChange={(v) => {
+                  setUserTouchedQty(true);
+                  setTransferQty(v);
+                }}
                 min={1}
                 max={Math.max(1, baseline.currentStock)}
                 step={1}
@@ -410,6 +431,22 @@ export function WhatIfSimulator({
               />
               <div className="flex items-center justify-between text-[10px] text-muted-foreground">
                 <span>Cost ≈ {formatAZN(8 + 0.05 * transferQty, { compact: true })}</span>
+                {transferQty !== optimalTransferQty ? (
+                  <button
+                    type="button"
+                    className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300"
+                    onClick={() => {
+                      setUserTouchedQty(false);
+                      setTransferQty(optimalTransferQty);
+                    }}
+                  >
+                    Optimal: {optimalTransferQty}
+                  </button>
+                ) : (
+                  <span className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+                    ✓ Optimal
+                  </span>
+                )}
                 {baseline.daysToExpiry <= 1 ? (
                   <span className="text-rose-600">⚠ ≤ 1 day to expiry</span>
                 ) : null}
