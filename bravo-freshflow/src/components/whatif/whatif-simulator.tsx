@@ -238,21 +238,37 @@ export function WhatIfSimulator({
     } as Record<ScenarioType, ScenarioResult>;
   }, [calcBaseline, discountPct, transferQty, target]);
 
+  // Unified impacts — same numbers as Detail Panel + Before/After + Approve
+  const impacts = useMemo(() => {
+    return {
+      discount: computeScenarioImpact(calcBaseline, "discount"),
+      transfer: computeScenarioImpact(calcBaseline, "transfer"),
+      combined: computeScenarioImpact(calcBaseline, "combined"),
+      no_action: computeScenarioImpact(calcBaseline, "no_action"),
+    } as Record<"discount" | "transfer" | "combined" | "no_action", ReturnType<typeof computeScenarioImpact>>;
+  }, [calcBaseline]);
+
   const recommendedType = useMemo<ScenarioType>(() => {
-    let best: ScenarioType = "no_action";
+    let best: ScenarioType = "combined";
     let bestVal = -Infinity;
-    for (const [type, r] of Object.entries(results) as [ScenarioType, ScenarioResult][]) {
-      if (r.notViable) continue;
-      if (type === "shelf_visibility" || type === "bundle") continue;
-      if (r.netSaved > bestVal) {
-        bestVal = r.netSaved;
-        best = type;
+    const types: Array<"discount" | "transfer" | "combined"> = ["discount", "transfer", "combined"];
+    const skipTransfer = calcBaseline.daysToExpiry <= 1;
+    for (const t of types) {
+      if (skipTransfer && (t === "transfer" || t === "combined")) continue;
+      const i = impacts[t];
+      if (i.lossReduction > bestVal) {
+        bestVal = i.lossReduction;
+        best = t;
       }
     }
     return best;
-  }, [results]);
+  }, [impacts, calcBaseline.daysToExpiry]);
 
   const selectedResult = results[selected];
+  const selectedImpact =
+    selected === "discount" || selected === "transfer" || selected === "combined" || selected === "no_action"
+      ? impacts[selected]
+      : impacts.no_action;
 
   function resetDefaults() {
     setDiscountPct(defaultDiscountPct);
@@ -309,13 +325,19 @@ export function WhatIfSimulator({
 
   const chartData = (Object.entries(results) as [ScenarioType, ScenarioResult][])
     .filter(([type]) => type !== "shelf_visibility" && type !== "bundle")
-    .map(([type, r]) => ({
-      type,
-      label: SCENARIO_TYPE_LABELS[type],
-      netSaved: r.netSaved,
-      isBest: type === recommendedType,
-      notViable: r.notViable ?? false,
-    }));
+    .map(([type, r]) => {
+      const impact =
+        type === "discount" || type === "transfer" || type === "combined" || type === "no_action"
+          ? impacts[type]
+          : null;
+      return {
+        type,
+        label: SCENARIO_TYPE_LABELS[type],
+        netSaved: impact?.lossReduction ?? r.netSaved,
+        isBest: type === recommendedType,
+        notViable: r.notViable ?? false,
+      };
+    });
 
   const confidenceLow = baseline.dataConfidence < 50;
 
@@ -359,6 +381,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="discount"
             result={results.discount}
+            impact={impacts.discount}
             isRecommended={recommendedType === "discount"}
             isSelected={selected === "discount"}
             onSelect={() => setSelected("discount")}
@@ -387,6 +410,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="transfer"
             result={results.transfer}
+            impact={impacts.transfer}
             isRecommended={recommendedType === "transfer"}
             isSelected={selected === "transfer"}
             onSelect={() => !results.transfer.notViable && setSelected("transfer")}
@@ -469,6 +493,7 @@ export function WhatIfSimulator({
           <ScenarioCard
             type="combined"
             result={results.combined}
+            impact={impacts.combined}
             isRecommended={recommendedType === "combined"}
             isSelected={selected === "combined"}
             onSelect={() => !results.combined.notViable && setSelected("combined")}
@@ -500,12 +525,12 @@ export function WhatIfSimulator({
           <span
             className={cn(
               "font-semibold tabular-nums",
-              selectedResult.netSaved >= 0
+              selectedImpact.lossReduction >= 0
                 ? "text-emerald-700 dark:text-emerald-300"
                 : "text-rose-700 dark:text-rose-300",
             )}
           >
-            {formatAZN(selectedResult.netSaved, { compact: true, sign: true })}
+            {formatAZN(selectedImpact.lossReduction, { compact: true })}
           </span>
         </div>
         <Button variant="ghost" size="sm" className="h-8 gap-1.5 text-xs" onClick={resetDefaults}>
@@ -539,6 +564,7 @@ export function WhatIfSimulator({
 interface ScenarioCardProps {
   type: ScenarioType;
   result: ScenarioResult;
+  impact?: ReturnType<typeof computeScenarioImpact>;
   isRecommended: boolean;
   isSelected: boolean;
   onSelect: () => void;
@@ -550,6 +576,7 @@ interface ScenarioCardProps {
 function ScenarioCard({
   type,
   result,
+  impact,
   isRecommended,
   isSelected,
   onSelect,
@@ -558,7 +585,8 @@ function ScenarioCard({
   big,
 }: ScenarioCardProps) {
   const Icon = SCENARIO_ICON[type];
-  const netSaved = result.netSaved;
+  // Always prefer unified impact.lossReduction when provided
+  const netSaved = impact?.lossReduction ?? result.netSaved;
   const positive = netSaved >= 0;
 
   return (
@@ -613,10 +641,10 @@ function ScenarioCard({
         </div>
 
         <div className="grid grid-cols-2 gap-1.5 text-[11px]">
-          <Mini label="Sold" value={result.expectedSold.toFixed(0)} />
+          <Mini label="Sold" value={(impact?.actionSold ?? result.expectedSold).toFixed(0)} />
           <Mini
             label="Recovered"
-            value={formatAZN(result.recoveredValue, { compact: true })}
+            value={formatAZN(impact?.actionRevenue ?? result.recoveredValue, { compact: true })}
             tone="text-emerald-700 dark:text-emerald-300"
           />
           <Mini
@@ -626,7 +654,7 @@ function ScenarioCard({
           />
           <Mini
             label="Transfer cost"
-            value={formatAZN(result.transferCost, { compact: true })}
+            value={formatAZN(impact?.actionCost ?? result.transferCost, { compact: true })}
             tone="text-sky-700 dark:text-sky-300"
           />
         </div>
@@ -640,7 +668,7 @@ function ScenarioCard({
           )}
         >
           <div className="text-[10px] uppercase tracking-wide text-muted-foreground">
-            Net Saved
+            Action ziyan azaltması
           </div>
           <div
             className={cn(
@@ -648,7 +676,7 @@ function ScenarioCard({
               positive ? "text-emerald-700 dark:text-emerald-300" : "text-rose-700 dark:text-rose-300",
             )}
           >
-            {formatAZN(netSaved, { compact: true, sign: true })}
+            {formatAZN(netSaved, { compact: true })}
           </div>
         </div>
 
