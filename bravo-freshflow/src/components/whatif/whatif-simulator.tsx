@@ -796,12 +796,25 @@ function SliderRow({ label, value, onChange, min, max, step, unit, ticks }: Slid
         className="py-1"
       />
       {ticks ? (
-        <div className="flex justify-between px-0.5 text-[9px] text-muted-foreground">
-          {ticks.map((t) => (
-            <span key={t} className={cn(t === value && "font-semibold text-foreground")}>
-              {t}
-            </span>
-          ))}
+        // Tick labels positioned by true %-of-range so they line up with the thumb.
+        // (justify-between would space them evenly even though the values aren't, which
+        //  is why 20% appeared near the 25 label.)
+        <div className="relative h-3 text-[9px] text-muted-foreground">
+          {ticks.map((t) => {
+            const pct = ((t - min) / (max - min)) * 100;
+            return (
+              <span
+                key={t}
+                className={cn(
+                  "absolute top-0 -translate-x-1/2 tabular-nums",
+                  t === value && "font-semibold text-foreground"
+                )}
+                style={{ left: `${pct}%` }}
+              >
+                {t}
+              </span>
+            );
+          })}
         </div>
       ) : null}
     </div>
