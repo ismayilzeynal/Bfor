@@ -104,7 +104,7 @@ export interface SimParams {
   bundleCompanionId: string | null;
 }
 
-const DISCOUNT_STEPS = [5, 10, 15, 20, 25, 30, 40, 50];
+const DISCOUNT_STEPS = [5, 10, 15, 20, 25, 30, 35, 40, 45, 50];
 const BUNDLE_STEPS = [5, 10, 15, 20, 25];
 
 const SCENARIO_ICON: Record<ScenarioType, typeof Activity> = {

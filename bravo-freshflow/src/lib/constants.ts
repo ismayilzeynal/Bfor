@@ -344,7 +344,9 @@ export const DISCOUNT_UPLIFT_MAP: Record<number, number> = {
   0.2: 1.9,
   0.25: 2.1,
   0.3: 2.4,
+  0.35: 2.6,
   0.4: 2.8,
+  0.45: 3.0,
   0.5: 3.2,
 };
 
