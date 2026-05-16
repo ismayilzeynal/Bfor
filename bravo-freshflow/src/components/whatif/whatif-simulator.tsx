@@ -349,172 +349,136 @@ export function WhatIfSimulator({
         </div>
       ) : null}
 
-      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        <ScenarioCard
-          type="no_action"
-          result={results.no_action}
-          isRecommended={recommendedType === "no_action"}
-          isSelected={selected === "no_action"}
-          onSelect={() => setSelected("no_action")}
-        />
-        <ScenarioCard
-          type="discount"
-          result={results.discount}
-          isRecommended={recommendedType === "discount"}
-          isSelected={selected === "discount"}
-          onSelect={() => setSelected("discount")}
-        >
-          <SliderRow
-            label="Discount %"
-            value={discountPct}
-            onChange={setDiscountPct}
-            min={5}
-            max={50}
-            step={5}
-            unit="%"
-            ticks={DISCOUNT_STEPS}
-          />
-          {results.discount.marginBreached ? (
-            <Banner tone="rose" icon={AlertTriangle}>
-              Margin breached vs minimum {(baseline.minimumMarginPct * 100).toFixed(0)}%
-            </Banner>
-          ) : null}
-        </ScenarioCard>
-        <ScenarioCard
-          type="transfer"
-          result={results.transfer}
-          isRecommended={recommendedType === "transfer"}
-          isSelected={selected === "transfer"}
-          onSelect={() => !results.transfer.notViable && setSelected("transfer")}
-          notViableReason={
-            baseline.daysToExpiry <= 1
-              ? "Expiry too close for transfer"
-              : results.transfer.notViable
-                ? results.transfer.notViableReason
-                : undefined
-          }
-        >
-          {candidateTargetStores.length > 0 ? (
-            <>
-              <div className="space-y-1">
-                <label className="text-[10px] uppercase tracking-wide text-muted-foreground">Target store</label>
-                <Select
-                  value={transferTargetId ?? undefined}
-                  onValueChange={(v) => setTransferTargetId(v)}
-                >
-                  <SelectTrigger className="h-7 text-xs">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {candidateTargetStores.map((s) => (
-                      <SelectItem key={s.id} value={s.id}>
-                        <span className="font-medium">{s.code}</span>
-                        <span className="ml-1.5 text-muted-foreground">
-                          stock {s.current_stock} • velocity {s.avg_daily_sales.toFixed(1)}/d
-                        </span>
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <SliderRow
-                label="Transfer qty"
-                value={transferQty}
-                onChange={(v) => {
-                  setUserTouchedQty(true);
-                  setTransferQty(v);
-                }}
-                min={1}
-                max={Math.max(1, baseline.currentStock)}
-                step={1}
-                unit=""
-              />
-              <div className="flex items-center justify-between text-[10px] text-muted-foreground">
-                <span>Cost ≈ {formatAZN(8 + 0.05 * transferQty, { compact: true })}</span>
-                {transferQty !== optimalTransferQty ? (
-                  <button
-                    type="button"
-                    className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300"
-                    onClick={() => {
-                      setUserTouchedQty(false);
-                      setTransferQty(optimalTransferQty);
-                    }}
-                  >
-                    Optimal: {optimalTransferQty}
-                  </button>
-                ) : (
-                  <span className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
-                    ✓ Optimal
-                  </span>
-                )}
-                {baseline.daysToExpiry <= 1 ? (
-                  <span className="text-rose-600">⚠ ≤ 1 day to expiry</span>
-                ) : null}
-              </div>
-            </>
-          ) : (
-            <Banner tone="muted" icon={Info}>
-              No alternative target stores available.
-            </Banner>
-          )}
-        </ScenarioCard>
-      </div>
-
-      <ScenarioCard
-        type="combined"
-        result={results.combined}
-        isRecommended={recommendedType === "combined"}
-        isSelected={selected === "combined"}
-        onSelect={() => !results.combined.notViable && setSelected("combined")}
-        notViableReason={results.combined.notViable ? results.combined.notViableReason : undefined}
-        big
-      >
-        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
-          <SliderRow
-            label="Discount % (local)"
-            value={discountPct}
-            onChange={setDiscountPct}
-            min={5}
-            max={50}
-            step={5}
-            unit="%"
-            ticks={DISCOUNT_STEPS}
-          />
-          <SliderRow
-            label="Transfer qty"
-            value={transferQty}
-            onChange={(v) => setTransferQty(v)}
-            min={1}
-            max={Math.max(1, baseline.currentStock)}
-            step={1}
-            unit=""
-          />
+      <div className="grid grid-cols-1 gap-3 lg:grid-cols-3">
+        {/* Discount */}
+        <div className="space-y-2">
+          <ScenarioCard
+            type="discount"
+            result={results.discount}
+            isRecommended={recommendedType === "discount"}
+            isSelected={selected === "discount"}
+            onSelect={() => setSelected("discount")}
+          >
+            <SliderRow
+              label="Discount %"
+              value={discountPct}
+              onChange={setDiscountPct}
+              min={5}
+              max={50}
+              step={5}
+              unit="%"
+              ticks={DISCOUNT_STEPS}
+            />
+            {results.discount.marginBreached ? (
+              <Banner tone="rose" icon={AlertTriangle}>
+                Margin breached vs minimum {(baseline.minimumMarginPct * 100).toFixed(0)}%
+              </Banner>
+            ) : null}
+          </ScenarioCard>
+          <DetailPanel scenario="discount" result={results.discount} baseline={calcBaseline} />
         </div>
-        {candidateTargetStores.length > 0 ? (
-          <div className="space-y-1">
-            <label className="text-[10px] uppercase tracking-wide text-muted-foreground">
-              Combined target store
-            </label>
-            <Select
-              value={transferTargetId ?? undefined}
-              onValueChange={(v) => setTransferTargetId(v)}
-            >
-              <SelectTrigger className="h-7 text-xs">
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent>
-                {candidateTargetStores.map((s) => (
-                  <SelectItem key={s.id} value={s.id}>
-                    {s.code} — stock {s.current_stock} • {s.avg_daily_sales.toFixed(1)}/d
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        ) : null}
-      </ScenarioCard>
 
-      <DetailPanel scenario={selected} result={selectedResult} baseline={calcBaseline} />
+        {/* Transfer */}
+        <div className="space-y-2">
+          <ScenarioCard
+            type="transfer"
+            result={results.transfer}
+            isRecommended={recommendedType === "transfer"}
+            isSelected={selected === "transfer"}
+            onSelect={() => !results.transfer.notViable && setSelected("transfer")}
+            notViableReason={
+              baseline.daysToExpiry <= 1
+                ? "Expiry too close for transfer"
+                : results.transfer.notViable
+                  ? results.transfer.notViableReason
+                  : undefined
+            }
+          >
+            {candidateTargetStores.length > 0 ? (
+              <>
+                <div className="space-y-1">
+                  <label className="text-[10px] uppercase tracking-wide text-muted-foreground">
+                    Target store
+                  </label>
+                  <Select
+                    value={transferTargetId ?? undefined}
+                    onValueChange={(v) => setTransferTargetId(v)}
+                  >
+                    <SelectTrigger className="h-7 text-xs">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {candidateTargetStores.map((s) => (
+                        <SelectItem key={s.id} value={s.id}>
+                          <span className="font-medium">{s.code}</span>
+                          <span className="ml-1.5 text-muted-foreground">
+                            stock {s.current_stock} • velocity {s.avg_daily_sales.toFixed(1)}/d
+                          </span>
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <SliderRow
+                  label="Transfer qty"
+                  value={transferQty}
+                  onChange={(v) => {
+                    setUserTouchedQty(true);
+                    setTransferQty(v);
+                  }}
+                  min={1}
+                  max={Math.max(1, baseline.currentStock)}
+                  step={1}
+                  unit=""
+                />
+                <div className="flex items-center justify-between text-[10px] text-muted-foreground">
+                  <span>Cost ≈ {formatAZN(8 + 0.05 * transferQty, { compact: true })}</span>
+                  {transferQty !== optimalTransferQty ? (
+                    <button
+                      type="button"
+                      className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 hover:bg-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300"
+                      onClick={() => {
+                        setUserTouchedQty(false);
+                        setTransferQty(optimalTransferQty);
+                      }}
+                    >
+                      Optimal: {optimalTransferQty}
+                    </button>
+                  ) : (
+                    <span className="rounded border border-emerald-400/60 bg-emerald-50 px-1.5 py-0.5 text-[10px] font-medium text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300">
+                      ✓ Optimal
+                    </span>
+                  )}
+                </div>
+              </>
+            ) : (
+              <Banner tone="muted" icon={Info}>
+                No alternative target stores available.
+              </Banner>
+            )}
+          </ScenarioCard>
+          <DetailPanel scenario="transfer" result={results.transfer} baseline={calcBaseline} />
+        </div>
+
+        {/* Combined */}
+        <div className="space-y-2">
+          <ScenarioCard
+            type="combined"
+            result={results.combined}
+            isRecommended={recommendedType === "combined"}
+            isSelected={selected === "combined"}
+            onSelect={() => !results.combined.notViable && setSelected("combined")}
+            notViableReason={
+              baseline.daysToExpiry <= 1
+                ? "Expiry too close for transfer"
+                : results.combined.notViable
+                  ? results.combined.notViableReason
+                  : undefined
+            }
+          />
+          <DetailPanel scenario="combined" result={results.combined} baseline={calcBaseline} />
+        </div>
+      </div>
 
       <div className="sticky bottom-0 z-10 -mx-1 flex flex-wrap items-center gap-2 rounded-md border bg-background/95 px-3 py-2 shadow-md backdrop-blur">
         <div className="flex min-w-0 flex-1 items-center gap-2 text-xs">
@@ -935,12 +899,12 @@ function DetailPanel({
           </span>
         </div>
 
-        <div className="grid grid-cols-1 gap-1.5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="space-y-1.5">
           {rows.slice(0, 6).map((r) => (
             <BreakdownRow key={r.label} {...r} />
           ))}
+          <BreakdownRow {...rows[6]} />
         </div>
-        <BreakdownRow {...rows[6]} />
       </CardContent>
     </Card>
   );

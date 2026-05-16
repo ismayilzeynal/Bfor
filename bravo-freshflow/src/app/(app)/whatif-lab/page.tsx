@@ -211,12 +211,6 @@ export default function WhatIfLabPage() {
       <PageHeader
         title="What-If Lab"
         description="Stand-alone sandbox for scenario simulation. Hydrate from a real product or override the baseline manually."
-        actions={
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-amber-500/40 bg-amber-50/70 px-2.5 py-1 text-[11px] text-amber-700 dark:bg-amber-950/30 dark:text-amber-300">
-            <FlaskConical className="size-3" aria-hidden />
-            Sandbox — no production approvals are sent
-          </span>
-        }
       />
 
       <div className="grid grid-cols-1 gap-4">
