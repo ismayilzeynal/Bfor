@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +16,12 @@ import { ActionBadge } from "@/components/badges/action-badge";
 import { ConfidenceBadge } from "@/components/badges/confidence-badge";
 import { formatAZN } from "@/lib/formatters";
 import { cn } from "@/lib/utils";
+import {
+  calcCombined,
+  calcDiscount,
+  calcTransfer,
+  type ScenarioBaseline,
+} from "@/lib/scenario-calculator";
 import type { RiskyRow } from "@/components/products/types";
 
 interface ApproveDialogProps {
@@ -24,8 +30,50 @@ interface ApproveDialogProps {
   onConfirm: (row: RiskyRow, note: string | null) => void;
 }
 
+function computeLiveResult(row: RiskyRow) {
+  const rec = row.recommendation;
+  const pred = row.prediction;
+  if (!rec || !pred) return null;
+
+  const baseline: ScenarioBaseline = {
+    currentStock: pred.current_stock,
+    avgDailySales: pred.avg_daily_sales_7d,
+    daysToExpiry: pred.days_to_expiry,
+    costPrice: row.product.cost_price,
+    salePrice: row.product.sale_price,
+    minimumMarginPct: row.product.minimum_margin_pct,
+    dataConfidence: pred.data_confidence_score,
+  };
+
+  // Mirror What-If defaults: 20% discount, target velocity = local × 1.5
+  const targetVelocity = pred.avg_daily_sales_7d * 1.5;
+  const optimalQty = Math.max(
+    1,
+    Math.min(pred.current_stock, Math.round(targetVelocity * pred.days_to_expiry))
+  );
+
+  switch (rec.recommendation_type) {
+    case "combined":
+      return calcCombined(baseline, {
+        discountPct: 0.2,
+        transferQty: optimalQty,
+        targetStoreAvgDailySales: targetVelocity,
+      });
+    case "transfer":
+      return calcTransfer(baseline, {
+        transferQty: optimalQty,
+        targetStoreAvgDailySales: targetVelocity,
+      });
+    case "discount":
+      return calcDiscount(baseline, { discountPct: 0.2 });
+    default:
+      return null;
+  }
+}
+
 export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) {
   const [note, setNote] = useState("");
+  const liveResult = useMemo(() => (row ? computeLiveResult(row) : null), [row]);
 
   if (!row || !row.recommendation) {
     return (
@@ -71,15 +119,25 @@ export function ApproveDialog({ row, onCancel, onConfirm }: ApproveDialogProps) 
           <p className="text-xs leading-relaxed text-muted-foreground">
             {rec.recommendation_text}
           </p>
-          <div className="grid grid-cols-3 gap-2 text-xs">
-            <Metric label="Recovered" value={formatAZN(rec.expected_recovered_value, { compact: true })} />
-            <Metric label="Cost" value={formatAZN(rec.expected_cost, { compact: true })} />
-            <Metric
-              label="Net saved"
-              value={formatAZN(rec.net_saved_value, { compact: true, sign: true })}
-              tone={rec.net_saved_value >= 0 ? "text-emerald-700" : "text-rose-700"}
-            />
-          </div>
+          {(() => {
+            const recovered = liveResult?.recoveredValue ?? rec.expected_recovered_value;
+            const cost =
+              liveResult != null
+                ? liveResult.transferCost + liveResult.discountCost + liveResult.operationalCost
+                : rec.expected_cost;
+            const netSaved = liveResult?.netSaved ?? rec.net_saved_value;
+            return (
+              <div className="grid grid-cols-3 gap-2 text-xs">
+                <Metric label="Recovered" value={formatAZN(recovered, { compact: true })} />
+                <Metric label="Cost" value={formatAZN(cost, { compact: true })} />
+                <Metric
+                  label="Net saved"
+                  value={formatAZN(netSaved, { compact: true, sign: true })}
+                  tone={netSaved >= 0 ? "text-emerald-700" : "text-rose-700"}
+                />
+              </div>
+            );
+          })()}
           <div>
             <p className="mb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground">
               Tasks to create

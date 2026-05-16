@@ -6,6 +6,7 @@ import {
   AlertTriangle,
   ArrowRight,
   CheckCircle2,
+  ChevronRight,
   FlaskConical,
   Info,
   Layers,
@@ -16,6 +17,7 @@ import {
   Sparkles,
   Truck,
 } from "lucide-react";
+import { AnimatePresence, motion } from "framer-motion";
 import { toast } from "sonner";
 import {
   Bar,
@@ -663,13 +665,17 @@ function ScenarioCard({
         {children ? <div className="space-y-2 border-t pt-2">{children}</div> : null}
 
         <Button
-          variant={isSelected ? "default" : "outline"}
+          variant={isSelected ? "default" : "secondary"}
           size="sm"
-          className="h-8 w-full text-xs"
+          className={cn(
+            "h-9 w-full text-xs font-semibold",
+            isSelected && "shadow-sm",
+            !isSelected && !notViableReason && "border border-primary/30 bg-primary/5 hover:bg-primary/10"
+          )}
           onClick={onSelect}
           disabled={!!notViableReason}
         >
-          {isSelected ? "Selected" : "Select this scenario"}
+          {isSelected ? "✓ Selected" : "Select this scenario"}
         </Button>
       </CardContent>
     </Card>
@@ -892,28 +898,70 @@ function DetailPanel({
     },
   ];
 
-  return (
-    <Card>
-      <CardContent className="space-y-2 p-3">
-        <div className="flex items-center justify-between gap-2">
-          <h3 className="text-xs font-semibold uppercase tracking-wide">
-            Detail · {SCENARIO_TYPE_LABELS[scenario]}
-          </h3>
-          <span className="text-[10px] text-muted-foreground">
-            Net qazanc:{" "}
-            <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
-              {formatAZN(actionNetGain, { compact: true })}
-            </span>
-          </span>
-        </div>
+  return <CollapsibleDetailPanel scenario={scenario} actionNetGain={actionNetGain} rows={rows} />;
+}
 
-        <div className="space-y-1.5">
-          {rows.slice(0, 6).map((r) => (
-            <BreakdownRow key={r.label} {...r} />
-          ))}
-          <BreakdownRow {...rows[6]} />
-        </div>
-      </CardContent>
+function CollapsibleDetailPanel({
+  scenario,
+  actionNetGain,
+  rows,
+}: {
+  scenario: ScenarioType;
+  actionNetGain: number;
+  rows: Array<{
+    label: string;
+    formula: string;
+    value: string;
+    tone: BreakdownTone;
+    big?: boolean;
+  }>;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Card className="overflow-hidden">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-2 px-3 py-2 text-left hover:bg-muted/40"
+        aria-expanded={open}
+      >
+        <span className="flex items-center gap-2">
+          <ChevronRight
+            className={cn(
+              "size-3.5 text-muted-foreground transition-transform",
+              open && "rotate-90"
+            )}
+            aria-hidden
+          />
+          <span className="text-xs font-semibold uppercase tracking-wide">
+            Detail · {SCENARIO_TYPE_LABELS[scenario]}
+          </span>
+        </span>
+        <span className="text-[10px] text-muted-foreground">
+          Net qazanc:{" "}
+          <span className="font-semibold tabular-nums text-emerald-700 dark:text-emerald-300">
+            {formatAZN(actionNetGain, { compact: true })}
+          </span>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {open ? (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="space-y-1.5 border-t p-3">
+              {rows.slice(0, 6).map((r) => (
+                <BreakdownRow key={r.label} {...r} />
+              ))}
+              <BreakdownRow {...rows[6]} />
+            </div>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </Card>
   );
 }
